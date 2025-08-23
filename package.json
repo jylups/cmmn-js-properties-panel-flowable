@@ -21,12 +21,12 @@
     "properties-panel"
   ],
   "author": {
-    "name": "Roman Smirnov",
-    "url": "https://github.com/romansmirnov"
+    "name": "Jorge Carvallo",
+    "url": "https://github.com/jylups"
   },
   "license": "MIT",
   "devDependencies": {
-    "camunda-cmmn-moddle": "^1.0.0",
+    "flowable-cmmn-moddle": "^1.0.0",
     "chai": "^4.1.2",
     "cmmn-js": "^0.20.0",
     "diagram-js": "^5.1.1",
