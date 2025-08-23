@@ -12,8 +12,8 @@ var propertiesPanelModule = require('lib'),
     coreModule = require('cmmn-js/lib/core'),
     selectionModule = require('diagram-js/lib/features/selection').default,
     modelingModule = require('cmmn-js/lib/features/modeling'),
-    propertiesProviderModule = require('lib/provider/camunda'),
-    camundaModdlePackage = require('camunda-cmmn-moddle/resources/camunda'),
+    propertiesProviderModule = require('lib/provider/flowable'),
+    flowableModdlePackage = require('flowable-cmmn-moddle/resources/flowable'),
     getBusinessObject = require('cmmn-js/lib/util/ModelUtil').getBusinessObject;
 
 var extensionElementsHelper = require('lib/helper/ExtensionElementsHelper');
@@ -36,7 +36,7 @@ describe('listener-fieldInjection - properties', function() {
 
   beforeEach(bootstrapModeler(diagramXML, {
     modules: testModules,
-    moddleExtensions: { camunda: camundaModdlePackage }
+    moddleExtensions: { flowable: flowableModdlePackage }
   }));
 
 
@@ -90,9 +90,9 @@ describe('listener-fieldInjection - properties', function() {
     TestHelper.triggerEvent(select, 'change');
   }
 
-  var CASE_EXECUTION_LISTENER_TYPE = 'camunda:CaseExecutionListener',
-      TASK_LISTENER_TYPE = 'camunda:TaskListener',
-      VARIABLE_LISTENER_TYPE = 'camunda:VariableListener';
+  var CASE_EXECUTION_LISTENER_TYPE = 'flowable:CaseExecutionListener',
+      TASK_LISTENER_TYPE = 'flowable:TaskListener',
+      VARIABLE_LISTENER_TYPE = 'flowable:VariableListener';
 
   var FIELD_NAME_ELEMENT = { dataEntry: 'listener-field-name', name: 'fieldName' },
       FIELD_TYPE_ELEMENT = { dataEntry: 'listener-field-type', name: 'fieldType' },

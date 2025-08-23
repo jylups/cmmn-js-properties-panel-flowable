@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<cmmn:definitions xmlns:dc="http://www.omg.org/spec/CMMN/20151109/DC" xmlns:di="http://www.omg.org/spec/CMMN/20151109/DI" xmlns:cmmndi="http://www.omg.org/spec/CMMN/20151109/CMMNDI" xmlns:cmmn="http://www.omg.org/spec/CMMN/20151109/MODEL" xmlns:camunda="http://camunda.org/schema/1.0/cmmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Test" targetNamespace="http://bpmn.io/schema/cmmn">
+<cmmn:definitions xmlns:dc="http://www.omg.org/spec/CMMN/20151109/DC" xmlns:di="http://www.omg.org/spec/CMMN/20151109/DI" xmlns:cmmndi="http://www.omg.org/spec/CMMN/20151109/CMMNDI" xmlns:cmmn="http://www.omg.org/spec/CMMN/20151109/MODEL" xmlns:flowable="http://flowable.org/schema/1.0/cmmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Test" targetNamespace="http://bpmn.io/schema/cmmn">
   <cmmn:case id="Case_1">
     <cmmn:casePlanModel id="CasePlanModel_1" name="A CasePlanModel">
       <cmmn:planItem id="PlanItem_WITH_PROPERTIES" definitionRef="HumanTask_WITH_PROPERTIES" />
       <cmmn:planItem id="PlanItem_WITHOUT_PROPERTIES" definitionRef="HumanTask_WITHOUT_PROPERTIES" />
-      <cmmn:humanTask id="HumanTask_WITH_PROPERTIES" name="With Properties" camunda:formKey="someForm.html" camunda:assignee="demo" camunda:candidateUsers="users" 
-        camunda:candidateGroups="groups" camunda:dueDate="${dueDateVar}" camunda:followUpDate="${followUpDateVar}" camunda:priority="${priority}"/>
+      <cmmn:humanTask id="HumanTask_WITH_PROPERTIES" name="With Properties" flowable:formKey="someForm.html" flowable:assignee="demo" flowable:candidateUsers="users" 
+        flowable:candidateGroups="groups" flowable:dueDate="${dueDateVar}" flowable:followUpDate="${followUpDateVar}" flowable:priority="${priority}"/>
       <cmmn:humanTask id="HumanTask_WITHOUT_PROPERTIES" name="Without Properties" />
     </cmmn:casePlanModel>
   </cmmn:case>

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<cmmn:definitions xmlns:dc="http://www.omg.org/spec/CMMN/20151109/DC" xmlns:di="http://www.omg.org/spec/CMMN/20151109/DI" xmlns:cmmndi="http://www.omg.org/spec/CMMN/20151109/CMMNDI" xmlns:cmmn="http://www.omg.org/spec/CMMN/20151109/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camunda="http://camunda.org/schema/1.0/cmmn" id="Test" targetNamespace="http://bpmn.io/schema/cmmn">
+<cmmn:definitions xmlns:dc="http://www.omg.org/spec/CMMN/20151109/DC" xmlns:di="http://www.omg.org/spec/CMMN/20151109/DI" xmlns:cmmndi="http://www.omg.org/spec/CMMN/20151109/CMMNDI" xmlns:cmmn="http://www.omg.org/spec/CMMN/20151109/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:flowable="http://flowable.org/schema/1.0/cmmn" id="Test" targetNamespace="http://bpmn.io/schema/cmmn">
   <cmmn:case id="Case_1">
     <cmmn:casePlanModel id="CasePlanModel_1" name="A CasePlanModel">
       <cmmn:extensionElements>
-        <camunda:variableListener event="update" class="myClass">
-          <camunda:field name="myListenerOne">          <camunda:string>myListenerValueOne</camunda:string>
-</camunda:field>
-          <camunda:field name="myListenerTwo" expression="myListenerValueTwo" />
-        </camunda:variableListener>
+        <flowable:variableListener event="update" class="myClass">
+          <flowable:field name="myListenerOne">          <flowable:string>myListenerValueOne</flowable:string>
+</flowable:field>
+          <flowable:field name="myListenerTwo" expression="myListenerValueTwo" />
+        </flowable:variableListener>
       </cmmn:extensionElements>
       <cmmn:planItem id="PlanItem_Task" name="PlanItem_Task" definitionRef="Task_1" />
       <cmmn:planItem id="PlanItem_HumanTask" name="PlanItem_HumanTask" definitionRef="HumanTask_0vgxb8j" />
@@ -16,38 +16,38 @@
       <cmmn:planItem id="PlanItem_HumanTask_Expression" name="PlanItem_HumanTask_Expression" definitionRef="HumanTask_1opdmw4" />
       <cmmn:task id="Task_1">
         <cmmn:extensionElements>
-          <camunda:caseExecutionListener event="complete" class="myClass">
-            <camunda:field name="myListener" expression="myListenerValue" />
-          </camunda:caseExecutionListener>
+          <flowable:caseExecutionListener event="complete" class="myClass">
+            <flowable:field name="myListener" expression="myListenerValue" />
+          </flowable:caseExecutionListener>
         </cmmn:extensionElements>
       </cmmn:task>
       <cmmn:humanTask id="HumanTask_0vgxb8j">
         <cmmn:extensionElements>
-          <camunda:taskListener event="create" class="myClass">
-            <camunda:field name="myListener" expression="myListenerValue" />
-          </camunda:taskListener>
+          <flowable:taskListener event="create" class="myClass">
+            <flowable:field name="myListener" expression="myListenerValue" />
+          </flowable:taskListener>
         </cmmn:extensionElements>
       </cmmn:humanTask>
       <cmmn:task id="Task_17mfnxw">
         <cmmn:extensionElements>
-          <camunda:caseExecutionListener event="complete" class="myClass">
-            <camunda:field name="">            <camunda:string></camunda:string>
-</camunda:field>
-          </camunda:caseExecutionListener>
+          <flowable:caseExecutionListener event="complete" class="myClass">
+            <flowable:field name="">            <flowable:string></flowable:string>
+</flowable:field>
+          </flowable:caseExecutionListener>
         </cmmn:extensionElements>
       </cmmn:task>
       <cmmn:task id="Task_1xnj0nl">
         <cmmn:extensionElements>
-          <camunda:caseExecutionListener event="complete" class="myClass">
-            <camunda:field name="myListener" stringValue="myListenerValue" />
-          </camunda:caseExecutionListener>
+          <flowable:caseExecutionListener event="complete" class="myClass">
+            <flowable:field name="myListener" stringValue="myListenerValue" />
+          </flowable:caseExecutionListener>
         </cmmn:extensionElements>
       </cmmn:task>
       <cmmn:humanTask id="HumanTask_1opdmw4">
         <cmmn:extensionElements>
-          <camunda:taskListener event="create" class="myClass">
-            <camunda:field name="myListener"> <camunda:expression>myListenerValue</camunda:expression></camunda:field>
-          </camunda:taskListener>
+          <flowable:taskListener event="create" class="myClass">
+            <flowable:field name="myListener"> <flowable:expression>myListenerValue</flowable:expression></flowable:field>
+          </flowable:taskListener>
         </cmmn:extensionElements>
       </cmmn:humanTask>
     </cmmn:casePlanModel>

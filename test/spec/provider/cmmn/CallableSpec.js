@@ -12,7 +12,7 @@ var propertiesPanelModule = require('lib'),
     coreModule = require('cmmn-js/lib/core'),
     selectionModule = require('diagram-js/lib/features/selection').default,
     modelingModule = require('cmmn-js/lib/features/modeling'),
-    propertiesProviderModule = require('lib/provider/camunda'),
+    propertiesProviderModule = require('lib/provider/flowable'),
     camundaModdlePackage = require('camunda-cmmn-moddle/resources/camunda');
 
 

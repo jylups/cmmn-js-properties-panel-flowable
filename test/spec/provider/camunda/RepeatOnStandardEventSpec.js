@@ -12,7 +12,7 @@ var propertiesPanelModule = require('lib'),
     coreModule = require('cmmn-js/lib/core'),
     selectionModule = require('diagram-js/lib/features/selection').default,
     modelingModule = require('cmmn-js/lib/features/modeling'),
-    propertiesProviderModule = require('lib/provider/camunda'),
+    propertiesProviderModule = require('lib/provider/flowable'),
     getBusinessObject = require('cmmn-js/lib/util/ModelUtil').getBusinessObject,
     getDefinition = require('cmmn-js/lib/util/ModelUtil').getDefinition;
 
@@ -114,7 +114,7 @@ describe('repeat-on-standard-event-properties', function() {
         // then
         rule = getItemControlRepetitionRule(shape);
         field = getItemControlRepeatOnStandardEvent(propertiesPanel._container);
-        expect(field.value).to.equal(rule.get('camunda:repeatOnStandardEvent'));
+        expect(field.value).to.equal(rule.get('flowable:repeatOnStandardEvent'));
 
       }));
 
@@ -150,7 +150,7 @@ describe('repeat-on-standard-event-properties', function() {
         // then
         rule = getDefaultControlRepetitionRule(shape);
         field = getDefaultControlRepeatOnStandardEvent(propertiesPanel._container);
-        expect(field.value).to.equal(rule.get('camunda:repeatOnStandardEvent'));
+        expect(field.value).to.equal(rule.get('flowable:repeatOnStandardEvent'));
 
       }));
 
@@ -238,7 +238,7 @@ describe('repeat-on-standard-event-properties', function() {
 
           it('should execute', function() {
             // then
-            expect(rule.get('camunda:repeatOnStandardEvent')).to.equal('exit');
+            expect(rule.get('flowable:repeatOnStandardEvent')).to.equal('exit');
           });
 
 
@@ -247,7 +247,7 @@ describe('repeat-on-standard-event-properties', function() {
             commandStack.undo();
 
             // then
-            expect(rule.get('camunda:repeatOnStandardEvent')).to.equal('complete');
+            expect(rule.get('flowable:repeatOnStandardEvent')).to.equal('complete');
           }));
 
 
@@ -257,7 +257,7 @@ describe('repeat-on-standard-event-properties', function() {
             commandStack.redo();
 
             // then
-            expect(rule.get('camunda:repeatOnStandardEvent')).to.equal('exit');
+            expect(rule.get('flowable:repeatOnStandardEvent')).to.equal('exit');
           }));
 
         });
@@ -311,7 +311,7 @@ describe('repeat-on-standard-event-properties', function() {
 
           it('should execute', function() {
             // then
-            expect(rule.get('camunda:repeatOnStandardEvent')).to.equal('exit');
+            expect(rule.get('flowable:repeatOnStandardEvent')).to.equal('exit');
           });
 
 
@@ -320,7 +320,7 @@ describe('repeat-on-standard-event-properties', function() {
             commandStack.undo();
 
             // then
-            expect(rule.get('camunda:repeatOnStandardEvent')).to.equal('complete');
+            expect(rule.get('flowable:repeatOnStandardEvent')).to.equal('complete');
           }));
 
 
@@ -330,7 +330,7 @@ describe('repeat-on-standard-event-properties', function() {
             commandStack.redo();
 
             // then
-            expect(rule.get('camunda:repeatOnStandardEvent')).to.equal('exit');
+            expect(rule.get('flowable:repeatOnStandardEvent')).to.equal('exit');
           }));
 
         });
@@ -395,7 +395,7 @@ describe('repeat-on-standard-event-properties', function() {
 
           it('should execute', function() {
             // then
-            expect(rule.get('camunda:repeatOnStandardEvent')).not.to.exist;
+            expect(rule.get('flowable:repeatOnStandardEvent')).not.to.exist;
           });
 
 
@@ -404,7 +404,7 @@ describe('repeat-on-standard-event-properties', function() {
             commandStack.undo();
 
             // then
-            expect(rule.get('camunda:repeatOnStandardEvent')).to.equal('complete');
+            expect(rule.get('flowable:repeatOnStandardEvent')).to.equal('complete');
           }));
 
 
@@ -414,7 +414,7 @@ describe('repeat-on-standard-event-properties', function() {
             commandStack.redo();
 
             // then
-            expect(rule.get('camunda:repeatOnStandardEvent')).not.to.exist;
+            expect(rule.get('flowable:repeatOnStandardEvent')).not.to.exist;
           }));
 
         });
@@ -468,7 +468,7 @@ describe('repeat-on-standard-event-properties', function() {
 
           it('should execute', function() {
             // then
-            expect(rule.get('camunda:repeatOnStandardEvent')).not.to.exist;
+            expect(rule.get('flowable:repeatOnStandardEvent')).not.to.exist;
           });
 
 
@@ -477,7 +477,7 @@ describe('repeat-on-standard-event-properties', function() {
             commandStack.undo();
 
             // then
-            expect(rule.get('camunda:repeatOnStandardEvent')).to.equal('complete');
+            expect(rule.get('flowable:repeatOnStandardEvent')).to.equal('complete');
           }));
 
 
@@ -487,7 +487,7 @@ describe('repeat-on-standard-event-properties', function() {
             commandStack.redo();
 
             // then
-            expect(rule.get('camunda:repeatOnStandardEvent')).not.to.exist;
+            expect(rule.get('flowable:repeatOnStandardEvent')).not.to.exist;
           }));
 
         });
@@ -553,7 +553,7 @@ describe('repeat-on-standard-event-properties', function() {
 
           it('should execute', function() {
             // then
-            expect(rule.get('camunda:repeatOnStandardEvent')).to.equal('exit');
+            expect(rule.get('flowable:repeatOnStandardEvent')).to.equal('exit');
           });
 
 
@@ -562,7 +562,7 @@ describe('repeat-on-standard-event-properties', function() {
             commandStack.undo();
 
             // then
-            expect(rule.get('camunda:repeatOnStandardEvent')).not.to.exist;
+            expect(rule.get('flowable:repeatOnStandardEvent')).not.to.exist;
           }));
 
 
@@ -572,7 +572,7 @@ describe('repeat-on-standard-event-properties', function() {
             commandStack.redo();
 
             // then
-            expect(rule.get('camunda:repeatOnStandardEvent')).to.equal('exit');
+            expect(rule.get('flowable:repeatOnStandardEvent')).to.equal('exit');
           }));
 
         });
@@ -626,7 +626,7 @@ describe('repeat-on-standard-event-properties', function() {
 
           it('should execute', function() {
             // then
-            expect(rule.get('camunda:repeatOnStandardEvent')).to.equal('exit');
+            expect(rule.get('flowable:repeatOnStandardEvent')).to.equal('exit');
           });
 
 
@@ -635,7 +635,7 @@ describe('repeat-on-standard-event-properties', function() {
             commandStack.undo();
 
             // then
-            expect(rule.get('camunda:repeatOnStandardEvent')).not.to.exist;
+            expect(rule.get('flowable:repeatOnStandardEvent')).not.to.exist;
           }));
 
 
@@ -645,7 +645,7 @@ describe('repeat-on-standard-event-properties', function() {
             commandStack.redo();
 
             // then
-            expect(rule.get('camunda:repeatOnStandardEvent')).to.equal('exit');
+            expect(rule.get('flowable:repeatOnStandardEvent')).to.equal('exit');
           }));
 
         });

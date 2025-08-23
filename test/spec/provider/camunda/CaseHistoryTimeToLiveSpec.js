@@ -11,8 +11,8 @@ var propertiesPanelModule = require('lib'),
     coreModule = require('cmmn-js/lib/core'),
     selectionModule = require('diagram-js/lib/features/selection').default,
     modelingModule = require('cmmn-js/lib/features/modeling'),
-    propertiesProviderModule = require('lib/provider/camunda'),
-    camundaModdlePackage = require('camunda-cmmn-moddle/resources/camunda');
+    propertiesProviderModule = require('lib/provider/flowable'),
+    flowableModdlePackage = require('flowable-cmmn-moddle/resources/flowable');
 
 function getInput(container) {
   return domQuery('input[name=historyTimeToLive]', container);
@@ -37,7 +37,7 @@ describe('case-history-time-to-live-property', function() {
 
   beforeEach(bootstrapModeler(diagramXML, {
     modules: testModules,
-    moddleExtensions: { camunda: camundaModdlePackage }
+    moddleExtensions: { flowable: flowableModdlePackage }
   }));
 
 

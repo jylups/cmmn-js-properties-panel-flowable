@@ -14,8 +14,8 @@ var propertiesPanelModule = require('lib'),
     coreModule = require('cmmn-js/lib/core'),
     selectionModule = require('diagram-js/lib/features/selection').default,
     modelingModule = require('cmmn-js/lib/features/modeling'),
-    propertiesProviderModule = require('lib/provider/camunda'),
-    camundaModdlePackage = require('camunda-cmmn-moddle/resources/camunda');
+    propertiesProviderModule = require('lib/provider/flowable'),
+    flowableModdlePackage = require('flowable-cmmn-moddle/resources/flowable');
 
 
 function getInput(container, selector) {
@@ -39,7 +39,7 @@ function getTaskListeners(extensionElements) {
 
   if (extensionElements && extensionElements.values) {
     forEach(extensionElements.values, function(value) {
-      if (is(value, 'camunda:TaskListener')) {
+      if (is(value, 'flowable:TaskListener')) {
         mappings.push(value);
       }
     });
@@ -73,7 +73,7 @@ describe('task-listener-properties', function() {
 
   beforeEach(bootstrapModeler(diagramXML, {
     modules: testModules,
-    moddleExtensions: { camunda: camundaModdlePackage }
+    moddleExtensions: { flowable: flowableModdlePackage }
   }));
 
 

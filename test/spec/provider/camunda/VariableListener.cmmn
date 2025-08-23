@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<cmmn:definitions xmlns:dc="http://www.omg.org/spec/CMMN/20151109/DC" xmlns:di="http://www.omg.org/spec/CMMN/20151109/DI" xmlns:cmmndi="http://www.omg.org/spec/CMMN/20151109/CMMNDI" xmlns:cmmn="http://www.omg.org/spec/CMMN/20151109/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camunda="http://camunda.org/schema/1.0/cmmn" id="Test" targetNamespace="http://bpmn.io/schema/cmmn">
+<cmmn:definitions xmlns:dc="http://www.omg.org/spec/CMMN/20151109/DC" xmlns:di="http://www.omg.org/spec/CMMN/20151109/DI" xmlns:cmmndi="http://www.omg.org/spec/CMMN/20151109/CMMNDI" xmlns:cmmn="http://www.omg.org/spec/CMMN/20151109/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:flowable="http://flowable.org/schema/1.0/cmmn" id="Test" targetNamespace="http://bpmn.io/schema/cmmn">
   <cmmn:case id="Case_1">
     <cmmn:casePlanModel id="myCasePlanModel" name="myCasePlanModel">
       <cmmn:planItem id="PlanItem_ProcessTask_Class_Invalid" name="PlanItem_ProcessTask_Class_Invalid" definitionRef="ProcessTask_Class_Invalid" />
@@ -11,32 +11,32 @@
       <cmmn:planItem id="PlanItem_Stage_Empty" name="PlanItem_Stage_Empty" definitionRef="Stage_Empty" />
       <cmmn:processTask id="ProcessTask_Class_Invalid" name="ProcessTask_Class_Invalid">
         <cmmn:extensionElements>
-          <camunda:variableListener />
+          <flowable:variableListener />
         </cmmn:extensionElements>
       </cmmn:processTask>
       <cmmn:processTask id="ProcessTask_Class" name="ProcessTask_Class">
         <cmmn:extensionElements>
-          <camunda:variableListener event="create" class="myClass" />
+          <flowable:variableListener event="create" class="myClass" />
         </cmmn:extensionElements>
       </cmmn:processTask>
       <cmmn:processTask id="ProcessTask_Expression_INVALID" name="ProcessTask_Expression_INVALID">
         <cmmn:extensionElements>
-          <camunda:variableListener expression="" />
+          <flowable:variableListener expression="" />
         </cmmn:extensionElements>
       </cmmn:processTask>
       <cmmn:processTask id="ProcessTask_Expression" name="ProcessTask_Expression">
         <cmmn:extensionElements>
-          <camunda:variableListener event="create" expression="${myExpression}" />
+          <flowable:variableListener event="create" expression="${myExpression}" />
         </cmmn:extensionElements>
       </cmmn:processTask>
       <cmmn:caseTask id="CaseTask_DelegateExpression_Invalid" name="CaseTask_DelegateExpression_Invalid">
         <cmmn:extensionElements>
-          <camunda:variableListener delegateExpression="" />
+          <flowable:variableListener delegateExpression="" />
         </cmmn:extensionElements>
       </cmmn:caseTask>
       <cmmn:caseTask id="CaseTask_DelegateExpression" name="CaseTask_DelegateExpression">
         <cmmn:extensionElements>
-          <camunda:variableListener event="create" delegateExpression="${myDelegateExpression}" />
+          <flowable:variableListener event="create" delegateExpression="${myDelegateExpression}" />
         </cmmn:extensionElements>
       </cmmn:caseTask>
       <cmmn:stage id="Stage_Empty" name="Stage_Empty" />

@@ -14,8 +14,8 @@ var propertiesPanelModule = require('lib'),
     coreModule = require('cmmn-js/lib/core'),
     selectionModule = require('diagram-js/lib/features/selection').default,
     modelingModule = require('cmmn-js/lib/features/modeling'),
-    propertiesProviderModule = require('lib/provider/camunda'),
-    camundaModdlePackage = require('camunda-cmmn-moddle/resources/camunda');
+    propertiesProviderModule = require('lib/provider/flowable'),
+    flowableModdlePackage = require('flowable-cmmn-moddle/resources/flowable');
 
 
 function getInput(container, selector) {
@@ -54,7 +54,7 @@ function getCamundaInWithBusinessKey(extensionElements) {
   var camundaIn = [];
   if (extensionElements && extensionElements.values) {
     forEach(extensionElements.values, function(value) {
-      if (is(value, 'camunda:In') && value.businessKey) {
+      if (is(value, 'flowable:In') && value.businessKey) {
         camundaIn.push(value);
       }
     });
@@ -69,8 +69,8 @@ function selectVariableMapping(propertiesPanel, selectorId) {
   TestHelper.triggerEvent(inMappings, 'change');
 }
 
-var CAMUNDA_IN_EXTENSION_ELEMENT = 'camunda:In',
-    CAMUNDA_OUT_EXTENSION_ELEMENT = 'camunda:Out';
+var CAMUNDA_IN_EXTENSION_ELEMENT = 'flowable:In',
+    CAMUNDA_OUT_EXTENSION_ELEMENT = 'flowable:Out';
 
 var BUSINESS_KEY_VALUE = '#{caseExecution.caseBusinessKey}';
 
@@ -93,7 +93,7 @@ describe('variable-mapping-properties', function() {
 
   beforeEach(bootstrapModeler(diagramXML, {
     modules: testModules,
-    moddleExtensions: { camunda: camundaModdlePackage }
+    moddleExtensions: { flowable: flowableModdlePackage }
   }));
 
 
