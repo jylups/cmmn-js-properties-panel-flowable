@@ -12,37 +12,37 @@
       <cmmn:planItem id="PlanItem_CaseTask_Empty" name="CaseTask_Empty" definitionRef="CaseTask_Empty" />
       <cmmn:caseTask id="CaseTask_Invalid" name="CaseTask_Invalid">
         <cmmn:extensionElements>
-          <camunda:in source="" />
+          <flowable:in source="" />
         </cmmn:extensionElements>
       </cmmn:caseTask>
       <cmmn:caseTask id="CaseTask_Source" name="CaseTask_Source">
         <cmmn:extensionElements>
-          <camunda:in source="mySource" target="myTarget" local="true" />
+          <flowable:in source="mySource" target="myTarget" local="true" />
         </cmmn:extensionElements>
       </cmmn:caseTask>
       <cmmn:processTask id="ProcessTask_Invalid" name="ProcessTask_Invalid">
         <cmmn:extensionElements>
-          <camunda:in sourceExpression="" />
+          <flowable:in sourceExpression="" />
         </cmmn:extensionElements>
       </cmmn:processTask>
       <cmmn:processTask id="ProcessTask_SourceExpression" name="ProcessTask_SourceExpression">
         <cmmn:extensionElements>
-          <camunda:in sourceExpression="${mySourceExpression}" target="myTarget" local="true" />
+          <flowable:in sourceExpression="${mySourceExpression}" target="myTarget" local="true" />
         </cmmn:extensionElements>
       </cmmn:processTask>
       <cmmn:processTask id="ProcessTask_In_ALL" name="ProcessTask_In_ALL">
         <cmmn:extensionElements>
-          <camunda:in variables="all" />
+          <flowable:in variables="all" />
         </cmmn:extensionElements>
       </cmmn:processTask>
       <cmmn:caseTask id="CaseTask_Out_All" name="CaseTask_Out_All">
         <cmmn:extensionElements>
-          <camunda:out variables="all" />
+          <flowable:out variables="all" />
         </cmmn:extensionElements>
       </cmmn:caseTask>
       <cmmn:processTask id="ProcessTask_BusinessKey" name="ProcessTask_BusinessKey">
         <cmmn:extensionElements>
-          <camunda:in businessKey="#{caseExecution.caseBusinessKey}" />
+          <flowable:in businessKey="#{caseExecution.caseBusinessKey}" />
         </cmmn:extensionElements>
       </cmmn:processTask>
       <cmmn:caseTask id="CaseTask_Empty" name="CaseTask_Empty" />

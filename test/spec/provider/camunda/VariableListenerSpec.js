@@ -39,7 +39,7 @@ function getVariableListeners(extensionElements) {
 
   if (extensionElements && extensionElements.values) {
     forEach(extensionElements.values, function(value) {
-      if (is(value, 'camunda:VariableListener')) {
+      if (is(value, 'flowable:VariableListener')) {
         mappings.push(value);
       }
     });
@@ -73,7 +73,7 @@ describe('variable-listener-properties', function() {
 
   beforeEach(bootstrapModeler(diagramXML, {
     modules: testModules,
-    moddleExtensions: { camunda: camundaModdlePackage }
+    moddleExtensions: { flowable: camundaModdlePackage }
   }));
 
 

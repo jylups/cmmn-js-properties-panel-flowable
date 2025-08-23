@@ -81,7 +81,7 @@ var cmmnJS = new CmmnJS({
   },
   // make camunda prefix known for import, editing and export
   moddleExtensions: {
-    camunda: camundaModdleDescriptor
+    flowable: camundaModdleDescriptor
   }
 });
 

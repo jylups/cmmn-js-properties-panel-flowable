@@ -7,23 +7,23 @@
       <cmmn:planItem id="PlanItem_HumanTask_Script_EXTERNAL" name="PlanItem_HumanTask_Script_EXTERNAL" definitionRef="HumanTask_Script_EXTERNAL" />
       <cmmn:humanTask id="HumanTask_Script_Invalid" name="HumanTask_Script_Invalid">
         <cmmn:extensionElements>
-          <camunda:taskListener>
-            <camunda:script />
-          </camunda:taskListener>
+          <flowable:taskListener>
+            <flowable:script />
+          </flowable:taskListener>
         </cmmn:extensionElements>
       </cmmn:humanTask>
       <cmmn:humanTask id="HumanTask_Script" name="HumanTask_Script">
         <cmmn:extensionElements>
-          <camunda:taskListener event="create">
-            <camunda:script scriptFormat="groovy">myScript</camunda:script>
-          </camunda:taskListener>
+          <flowable:taskListener event="create">
+            <flowable:script scriptFormat="groovy">myScript</flowable:script>
+          </flowable:taskListener>
         </cmmn:extensionElements>
       </cmmn:humanTask>
       <cmmn:humanTask id="HumanTask_Script_EXTERNAL" name="HumanTask_Script_EXTERNAL">
         <cmmn:extensionElements>
-          <camunda:taskListener event="create">
-            <camunda:script scriptFormat="groovy" resource="myScript.js" />
-          </camunda:taskListener>
+          <flowable:taskListener event="create">
+            <flowable:script scriptFormat="groovy" resource="myScript.js" />
+          </flowable:taskListener>
         </cmmn:extensionElements>
       </cmmn:humanTask>
     </cmmn:casePlanModel>

@@ -35,7 +35,7 @@ function getTaskListeners(extensionElements) {
 
   if (extensionElements && extensionElements.values) {
     forEach(extensionElements.values, function(value) {
-      if (is(value, 'camunda:TaskListener')) {
+      if (is(value, 'flowable:TaskListener')) {
         mappings.push(value);
       }
     });
@@ -69,7 +69,7 @@ describe('script-properties', function() {
 
   beforeEach(bootstrapModeler(diagramXML, {
     modules: testModules,
-    moddleExtensions: { camunda: camundaModdlePackage }
+    moddleExtensions: { flowable: camundaModdlePackage }
   }));
 
 

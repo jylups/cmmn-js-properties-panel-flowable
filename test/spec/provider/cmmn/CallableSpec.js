@@ -43,7 +43,7 @@ describe('callable-properties', function() {
 
   beforeEach(bootstrapModeler(diagramXML, {
     modules: testModules,
-    moddleExtensions: { camunda: camundaModdlePackage }
+    moddleExtensions: { flowable: camundaModdlePackage }
   }));
 
 

@@ -4,8 +4,8 @@
     <cmmn:casePlanModel id="CasePlanModel_1" name="A CasePlanModel">
       <cmmn:planItem id="PlanItem_WITH_PROPERTIES" definitionRef="HumanTask_WITH_PROPERTIES" />
       <cmmn:planItem id="PlanItem_WITHOUT_PROPERTIES" definitionRef="HumanTask_WITHOUT_PROPERTIES" />
-      <cmmn:humanTask id="HumanTask_WITH_PROPERTIES" name="With Properties" camunda:formKey="someForm.html" camunda:assignee="demo" camunda:candidateUsers="users" 
-        camunda:candidateGroups="groups" camunda:dueDate="${dueDateVar}" camunda:followUpDate="${followUpDateVar}" camunda:priority="${priority}"/>
+      <cmmn:humanTask id="HumanTask_WITH_PROPERTIES" name="With Properties" flowable:formKey="someForm.html" flowable:assignee="demo" flowable:candidateUsers="users" 
+        flowable:candidateGroups="groups" flowable:dueDate="${dueDateVar}" flowable:followUpDate="${followUpDateVar}" flowable:priority="${priority}"/>
       <cmmn:humanTask id="HumanTask_WITHOUT_PROPERTIES" name="Without Properties" />
     </cmmn:casePlanModel>
   </cmmn:case>

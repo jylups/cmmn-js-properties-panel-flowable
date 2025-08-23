@@ -39,7 +39,7 @@ function getCaseExecutionListeners(extensionElements) {
 
   if (extensionElements && extensionElements.values) {
     forEach(extensionElements.values, function(value) {
-      if (is(value, 'camunda:CaseExecutionListener')) {
+      if (is(value, 'flowable:CaseExecutionListener')) {
         mappings.push(value);
       }
     });
@@ -73,7 +73,7 @@ describe('case-execution-listener-properties', function() {
 
   beforeEach(bootstrapModeler(diagramXML, {
     modules: testModules,
-    moddleExtensions: { camunda: camundaModdlePackage }
+    moddleExtensions: { flowable: camundaModdlePackage }
   }));
 
 

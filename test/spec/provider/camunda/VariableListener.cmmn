@@ -11,32 +11,32 @@
       <cmmn:planItem id="PlanItem_Stage_Empty" name="PlanItem_Stage_Empty" definitionRef="Stage_Empty" />
       <cmmn:processTask id="ProcessTask_Class_Invalid" name="ProcessTask_Class_Invalid">
         <cmmn:extensionElements>
-          <camunda:variableListener />
+          <flowable:variableListener />
         </cmmn:extensionElements>
       </cmmn:processTask>
       <cmmn:processTask id="ProcessTask_Class" name="ProcessTask_Class">
         <cmmn:extensionElements>
-          <camunda:variableListener event="create" class="myClass" />
+          <flowable:variableListener event="create" class="myClass" />
         </cmmn:extensionElements>
       </cmmn:processTask>
       <cmmn:processTask id="ProcessTask_Expression_INVALID" name="ProcessTask_Expression_INVALID">
         <cmmn:extensionElements>
-          <camunda:variableListener expression="" />
+          <flowable:variableListener expression="" />
         </cmmn:extensionElements>
       </cmmn:processTask>
       <cmmn:processTask id="ProcessTask_Expression" name="ProcessTask_Expression">
         <cmmn:extensionElements>
-          <camunda:variableListener event="create" expression="${myExpression}" />
+          <flowable:variableListener event="create" expression="${myExpression}" />
         </cmmn:extensionElements>
       </cmmn:processTask>
       <cmmn:caseTask id="CaseTask_DelegateExpression_Invalid" name="CaseTask_DelegateExpression_Invalid">
         <cmmn:extensionElements>
-          <camunda:variableListener delegateExpression="" />
+          <flowable:variableListener delegateExpression="" />
         </cmmn:extensionElements>
       </cmmn:caseTask>
       <cmmn:caseTask id="CaseTask_DelegateExpression" name="CaseTask_DelegateExpression">
         <cmmn:extensionElements>
-          <camunda:variableListener event="create" delegateExpression="${myDelegateExpression}" />
+          <flowable:variableListener event="create" delegateExpression="${myDelegateExpression}" />
         </cmmn:extensionElements>
       </cmmn:caseTask>
       <cmmn:stage id="Stage_Empty" name="Stage_Empty" />

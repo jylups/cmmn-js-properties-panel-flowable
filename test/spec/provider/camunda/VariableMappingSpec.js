@@ -54,7 +54,7 @@ function getCamundaInWithBusinessKey(extensionElements) {
   var camundaIn = [];
   if (extensionElements && extensionElements.values) {
     forEach(extensionElements.values, function(value) {
-      if (is(value, 'camunda:In') && value.businessKey) {
+      if (is(value, 'flowable:In') && value.businessKey) {
         camundaIn.push(value);
       }
     });
@@ -69,8 +69,8 @@ function selectVariableMapping(propertiesPanel, selectorId) {
   TestHelper.triggerEvent(inMappings, 'change');
 }
 
-var CAMUNDA_IN_EXTENSION_ELEMENT = 'camunda:In',
-    CAMUNDA_OUT_EXTENSION_ELEMENT = 'camunda:Out';
+var CAMUNDA_IN_EXTENSION_ELEMENT = 'flowable:In',
+    CAMUNDA_OUT_EXTENSION_ELEMENT = 'flowable:Out';
 
 var BUSINESS_KEY_VALUE = '#{caseExecution.caseBusinessKey}';
 
@@ -93,7 +93,7 @@ describe('variable-mapping-properties', function() {
 
   beforeEach(bootstrapModeler(diagramXML, {
     modules: testModules,
-    moddleExtensions: { camunda: camundaModdlePackage }
+    moddleExtensions: { flowable: camundaModdlePackage }
   }));
 
 
@@ -116,7 +116,7 @@ describe('variable-mapping-properties', function() {
 
     describe('# Case Task', function() {
 
-      describe('# camunda:in', function() {
+      describe('# flowable:in', function() {
 
         var variableMappings;
 
@@ -172,7 +172,7 @@ describe('variable-mapping-properties', function() {
 
       });
 
-      describe('# camunda:out variables', function() {
+      describe('# flowable:out variables', function() {
 
         var variableMappings;
 
@@ -211,7 +211,7 @@ describe('variable-mapping-properties', function() {
 
       var variableMappings;
 
-      describe('# camunda:in', function() {
+      describe('# flowable:in', function() {
 
         beforeEach(inject(function(elementRegistry, selection, propertiesPanel) {
 
@@ -265,7 +265,7 @@ describe('variable-mapping-properties', function() {
 
       });
 
-      describe('# camunda:in businessKey', function() {
+      describe('# flowable:in businessKey', function() {
 
         var variableMappings;
 
@@ -945,7 +945,7 @@ describe('variable-mapping-properties', function() {
 
   describe('add', function() {
 
-    describe('# camunda:in', function() {
+    describe('# flowable:in', function() {
 
       var bo, field;
 
@@ -1022,7 +1022,7 @@ describe('variable-mapping-properties', function() {
 
     });
 
-    describe('# camunda:out', function() {
+    describe('# flowable:out', function() {
 
       var bo, field;
 
@@ -1104,7 +1104,7 @@ describe('variable-mapping-properties', function() {
 
   describe('remove', function() {
 
-    describe('# camunda:in', function() {
+    describe('# flowable:in', function() {
 
       var bo, field;
 
@@ -1183,7 +1183,7 @@ describe('variable-mapping-properties', function() {
 
     });
 
-    describe('# camunda:out', function() {
+    describe('# flowable:out', function() {
 
       var bo, field;
 

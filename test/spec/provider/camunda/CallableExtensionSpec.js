@@ -43,7 +43,7 @@ describe('callable-extension-properties', function() {
 
   beforeEach(bootstrapModeler(diagramXML, {
     modules: testModules,
-    moddleExtensions: { camunda: camundaModdlePackage }
+    moddleExtensions: { flowable: camundaModdlePackage }
   }));
 
 
@@ -86,7 +86,7 @@ describe('callable-extension-properties', function() {
         // when selecting element
 
         // then
-        expect(field.value).to.equal(bo.get('camunda:decisionBinding'));
+        expect(field.value).to.equal(bo.get('flowable:decisionBinding'));
 
       }));
 
@@ -98,7 +98,7 @@ describe('callable-extension-properties', function() {
         // when selecting element
 
         // then
-        expect(field.value).to.equal(bo.get('camunda:decisionVersion'));
+        expect(field.value).to.equal(bo.get('flowable:decisionVersion'));
 
       }));
 
@@ -110,7 +110,7 @@ describe('callable-extension-properties', function() {
         // when selecting element
 
         // then
-        expect(field.value).to.equal(bo.get('camunda:decisionTenantId'));
+        expect(field.value).to.equal(bo.get('flowable:decisionTenantId'));
 
       }));
 
@@ -122,7 +122,7 @@ describe('callable-extension-properties', function() {
         // when selecting element
 
         // then
-        expect(field.value).to.equal(bo.get('camunda:resultVariable'));
+        expect(field.value).to.equal(bo.get('flowable:resultVariable'));
 
       }));
 
@@ -134,7 +134,7 @@ describe('callable-extension-properties', function() {
         // when selecting element
 
         // then
-        expect(field.value).to.equal(bo.get('camunda:mapDecisionResult'));
+        expect(field.value).to.equal(bo.get('flowable:mapDecisionResult'));
 
       }));
 
@@ -162,7 +162,7 @@ describe('callable-extension-properties', function() {
         // when selecting element
 
         // then
-        expect(field.value).to.equal(bo.get('camunda:caseBinding'));
+        expect(field.value).to.equal(bo.get('flowable:caseBinding'));
 
       }));
 
@@ -174,7 +174,7 @@ describe('callable-extension-properties', function() {
         // when selecting element
 
         // then
-        expect(field.value).to.equal(bo.get('camunda:caseTenantId'));
+        expect(field.value).to.equal(bo.get('flowable:caseTenantId'));
 
       }));
 
@@ -202,7 +202,7 @@ describe('callable-extension-properties', function() {
         // when selecting element
 
         // then
-        expect(field.value).to.equal(bo.get('camunda:processBinding'));
+        expect(field.value).to.equal(bo.get('flowable:processBinding'));
 
       }));
 
@@ -214,7 +214,7 @@ describe('callable-extension-properties', function() {
         // when selecting element
 
         // then
-        expect(field.value).to.equal(bo.get('camunda:processTenantId'));
+        expect(field.value).to.equal(bo.get('flowable:processTenantId'));
 
       }));
 
@@ -246,7 +246,7 @@ describe('callable-extension-properties', function() {
       // when selecting element
 
       // then
-      expect(binding.value).to.equal(bo.get('camunda:caseBinding'));
+      expect(binding.value).to.equal(bo.get('flowable:caseBinding'));
       expect(domClasses(version).has('invalid')).to.be.true;
 
     }));
@@ -312,8 +312,8 @@ describe('callable-extension-properties', function() {
       describe('on the business object', function() {
 
         it('should execute', function() {
-          expect(bo.get('camunda:decisionBinding')).to.equal('latest');
-          expect(bo.get('camunda:decisionVersion')).to.be.undefined;
+          expect(bo.get('flowable:decisionBinding')).to.equal('latest');
+          expect(bo.get('flowable:decisionVersion')).to.be.undefined;
         });
 
         it('should undo', inject(function(commandStack) {
@@ -321,8 +321,8 @@ describe('callable-extension-properties', function() {
           commandStack.undo();
 
           // then
-          expect(bo.get('camunda:decisionBinding')).to.equal('version');
-          expect(bo.get('camunda:decisionVersion')).to.be.defined;
+          expect(bo.get('flowable:decisionBinding')).to.equal('version');
+          expect(bo.get('flowable:decisionVersion')).to.be.defined;
         }));
 
 
@@ -332,8 +332,8 @@ describe('callable-extension-properties', function() {
           commandStack.redo();
 
           // then
-          expect(bo.get('camunda:decisionBinding')).to.equal('latest');
-          expect(bo.get('camunda:decisionVersion')).to.be.undefined;
+          expect(bo.get('flowable:decisionBinding')).to.equal('latest');
+          expect(bo.get('flowable:decisionVersion')).to.be.undefined;
         }));
 
       });
@@ -390,7 +390,7 @@ describe('callable-extension-properties', function() {
       describe('on the business object', function() {
 
         it('should execute', function() {
-          expect(bo.get('camunda:decisionVersion')).to.equal('1');
+          expect(bo.get('flowable:decisionVersion')).to.equal('1');
         });
 
         it('should undo', inject(function(commandStack) {
@@ -398,7 +398,7 @@ describe('callable-extension-properties', function() {
           commandStack.undo();
 
           // then
-          expect(bo.get('camunda:decisionVersion')).to.equal('2');
+          expect(bo.get('flowable:decisionVersion')).to.equal('2');
         }));
 
 
@@ -408,7 +408,7 @@ describe('callable-extension-properties', function() {
           commandStack.redo();
 
           // then
-          expect(bo.get('camunda:decisionVersion')).to.equal('1');
+          expect(bo.get('flowable:decisionVersion')).to.equal('1');
         }));
 
       });
@@ -467,7 +467,7 @@ describe('callable-extension-properties', function() {
 
         it('should execute', function() {
           // then
-          expect(bo.get('camunda:decisionTenantId')).to.equal('TENANT_TWO');
+          expect(bo.get('flowable:decisionTenantId')).to.equal('TENANT_TWO');
         });
 
         it('should undo', inject(function(commandStack) {
@@ -475,7 +475,7 @@ describe('callable-extension-properties', function() {
           commandStack.undo();
 
           // then
-          expect(bo.get('camunda:decisionTenantId')).to.equal('tenantOne');
+          expect(bo.get('flowable:decisionTenantId')).to.equal('tenantOne');
         }));
 
 
@@ -485,7 +485,7 @@ describe('callable-extension-properties', function() {
           commandStack.redo();
 
           // then
-          expect(bo.get('camunda:decisionTenantId')).to.equal('TENANT_TWO');
+          expect(bo.get('flowable:decisionTenantId')).to.equal('TENANT_TWO');
         }));
 
       });
@@ -548,9 +548,9 @@ describe('callable-extension-properties', function() {
 
         it('should execute', function() {
           // then
-          expect(bo.get('camunda:resultVariable')).to.be.undefined;
+          expect(bo.get('flowable:resultVariable')).to.be.undefined;
           // default value 'resultList'
-          expect(bo.get('camunda:mapDecisionResult')).to.be.defined;
+          expect(bo.get('flowable:mapDecisionResult')).to.be.defined;
         });
 
         it('should undo', inject(function(commandStack) {
@@ -558,8 +558,8 @@ describe('callable-extension-properties', function() {
           commandStack.undo();
 
           // then
-          expect(bo.get('camunda:resultVariable')).to.equal('myResVar');
-          expect(bo.get('camunda:mapDecisionResult')).to.be.defined;
+          expect(bo.get('flowable:resultVariable')).to.equal('myResVar');
+          expect(bo.get('flowable:mapDecisionResult')).to.be.defined;
         }));
 
 
@@ -569,9 +569,9 @@ describe('callable-extension-properties', function() {
           commandStack.redo();
 
           // then
-          expect(bo.get('camunda:resultVariable')).to.be.undefined;
+          expect(bo.get('flowable:resultVariable')).to.be.undefined;
           // default value 'resultList'
-          expect(bo.get('camunda:mapDecisionResult')).to.be.defined;
+          expect(bo.get('flowable:mapDecisionResult')).to.be.defined;
         }));
 
       });
@@ -632,7 +632,7 @@ describe('callable-extension-properties', function() {
 
         it('should execute', function() {
           // then
-          expect(bo.get('camunda:mapDecisionResult')).to.equal('resultList');
+          expect(bo.get('flowable:mapDecisionResult')).to.equal('resultList');
         });
 
         it('should undo', inject(function(commandStack) {
@@ -640,7 +640,7 @@ describe('callable-extension-properties', function() {
           commandStack.undo();
 
           // then
-          expect(bo.get('camunda:mapDecisionResult')).to.equal('singleResult');
+          expect(bo.get('flowable:mapDecisionResult')).to.equal('singleResult');
         }));
 
 
@@ -650,7 +650,7 @@ describe('callable-extension-properties', function() {
           commandStack.redo();
 
           // then
-          expect(bo.get('camunda:mapDecisionResult')).to.equal('resultList');
+          expect(bo.get('flowable:mapDecisionResult')).to.equal('resultList');
         }));
 
       });

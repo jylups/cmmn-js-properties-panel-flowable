@@ -36,7 +36,7 @@ describe('listener-fieldInjection - properties', function() {
 
   beforeEach(bootstrapModeler(diagramXML, {
     modules: testModules,
-    moddleExtensions: { camunda: camundaModdlePackage }
+    moddleExtensions: { flowable: camundaModdlePackage }
   }));
 
 
@@ -90,9 +90,9 @@ describe('listener-fieldInjection - properties', function() {
     TestHelper.triggerEvent(select, 'change');
   }
 
-  var CASE_EXECUTION_LISTENER_TYPE = 'camunda:CaseExecutionListener',
-      TASK_LISTENER_TYPE = 'camunda:TaskListener',
-      VARIABLE_LISTENER_TYPE = 'camunda:VariableListener';
+  var CASE_EXECUTION_LISTENER_TYPE = 'flowable:CaseExecutionListener',
+      TASK_LISTENER_TYPE = 'flowable:TaskListener',
+      VARIABLE_LISTENER_TYPE = 'flowable:VariableListener';
 
   var FIELD_NAME_ELEMENT = { dataEntry: 'listener-field-name', name: 'fieldName' },
       FIELD_TYPE_ELEMENT = { dataEntry: 'listener-field-type', name: 'fieldType' },
@@ -1050,7 +1050,7 @@ describe('listener-fieldInjection - properties', function() {
   });
 
 
-  describe('add camunda:field', function() {
+  describe('add flowable:field', function() {
 
     describe('#taskListener', function() {
 
@@ -1215,7 +1215,7 @@ describe('listener-fieldInjection - properties', function() {
         // select listener
         selectOption(propertiesPanel._container, CASE_EXECUTION_LISTENER_SELECT_ELEMENT);
 
-        // add camunda:field
+        // add flowable:field
         var button = getAddButton(propertiesPanel._container, 'listener-fields');
 
         TestHelper.triggerEvent(button, 'click');
@@ -1281,7 +1281,7 @@ describe('listener-fieldInjection - properties', function() {
   });
 
 
-  describe('remove camunda:field', function() {
+  describe('remove flowable:field', function() {
 
     describe('#variableListener', function() {
 
@@ -1519,7 +1519,7 @@ describe('listener-fieldInjection - properties', function() {
   });
 
 
-  describe('remove camunda:listener', function() {
+  describe('remove flowable:listener', function() {
 
     describe('#variableListener', function() {
 
