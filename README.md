@@ -1,6 +1,6 @@
-# cmmn-js-properties-panel
+# cmmn-js-properties-panel-flowable
 
-[![CI](https://github.com/bpmn-io/cmmn-js-properties-panel/workflows/CI/badge.svg)](https://github.com/bpmn-io/cmmn-js-properties-panel/actions?query=workflow%3ACI)
+[![CI](https://github.com/bpmn-io/cmmn-js-properties-panel-flowable/workflows/CI/badge.svg)](https://github.com/bpmn-io/cmmn-js-properties-panel-flowable/actions?query=workflow%3ACI)
 
 This is properties panel extension for [cmmn-js](https://github.com/bpmn-io/cmmn-js).
 
@@ -21,12 +21,12 @@ Provide two HTML elements, one for the properties panel and one for the CMMN dia
 </div>
 ```
 
-Bootstrap [cmmn-js](https://github.com/bpmn-io/cmmn-js) with the properties panel and a [properties provider](https://github.com/bpmn-io/cmmn-js-properties-panel/tree/master/lib/provider):
+Bootstrap [cmmn-js](https://github.com/bpmn-io/cmmn-js) with the properties panel and a [properties provider](https://github.com/bpmn-io/cmmn-js-properties-panel-flowable/tree/master/lib/provider):
 
 ```javascript
 var CmmnJS = require('cmmn-js/lib/Modeler'),
-    propertiesPanelModule = require('cmmn-js-properties-panel'),
-    propertiesProviderModule = require('cmmn-js-properties-panel/lib/provider/cmmn');
+    propertiesPanelModule = require('cmmn-js-properties-panel-flowable'),
+    propertiesProviderModule = require('cmmn-js-properties-panel-flowable/lib/provider/cmmn');
 
 var cmmnJS = new CmmnJS({
   additionalModules: [
@@ -58,14 +58,14 @@ propertiesPanel.attachTo('#other-properties');
 
 ### Use with Camunda properties
 
-In order to be able to edit [Camunda](https://camunda.org) related properties, use the [camunda properties provider](https://github.com/bpmn-io/cmmn-js-properties-panel/tree/master/lib/provider/camunda).
+In order to be able to edit [Camunda](https://camunda.org) related properties, use the [camunda properties provider](https://github.com/bpmn-io/cmmn-js-properties-panel-flowable/tree/master/lib/provider/camunda).
 In addition, you need to define the `camunda` namespace via [camunda-cmmn-moddle](https://github.com/camunda/camunda-cmmn-moddle).
 
 ```javascript
 var CmmnJS = require('cmmn-js/lib/Modeler'),
-    propertiesPanelModule = require('cmmn-js-properties-panel'),
+    propertiesPanelModule = require('cmmn-js-properties-panel-flowable'),
     // use Camunda properties provider
-    propertiesProviderModule = require('cmmn-js-properties-panel/lib/provider/camunda');
+    propertiesProviderModule = require('cmmn-js-properties-panel-flowable/lib/provider/camunda');
 
 // a descriptor that defines Camunda related CMMN 1.1 XML extensions
 var camundaModdleDescriptor = require('camunda-cmmn-moddle/resources/camunda');
@@ -91,7 +91,7 @@ var cmmnJS = new CmmnJS({
 
 ## Additional Resources
 
-* [Issue tracker](https://github.com/bpmn-io/cmmn-js-properties-panel/issues)
+* [Issue tracker](https://github.com/bpmn-io/cmmn-js-properties-panel-flowable/issues)
 * [Forum](https://forum.bpmn.io)
 
 
