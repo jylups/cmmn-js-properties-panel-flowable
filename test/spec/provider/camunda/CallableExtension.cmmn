@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<cmmn:definitions xmlns:dc="http://www.omg.org/spec/CMMN/20151109/DC" xmlns:di="http://www.omg.org/spec/CMMN/20151109/DI" xmlns:cmmndi="http://www.omg.org/spec/CMMN/20151109/CMMNDI" xmlns:cmmn="http://www.omg.org/spec/CMMN/20151109/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camunda="http://camunda.org/schema/1.0/cmmn" id="Test" targetNamespace="http://bpmn.io/schema/cmmn">
+<cmmn:definitions xmlns:dc="http://www.omg.org/spec/CMMN/20151109/DC" xmlns:di="http://www.omg.org/spec/CMMN/20151109/DI" xmlns:cmmndi="http://www.omg.org/spec/CMMN/20151109/CMMNDI" xmlns:cmmn="http://www.omg.org/spec/CMMN/20151109/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:flowable="http://flowable.org/schema/1.0/cmmn" id="Test" targetNamespace="http://bpmn.io/schema/cmmn">
   <cmmn:case id="Case_1">
     <cmmn:casePlanModel id="CasePlanModel_1" name="A CasePlanModel">
       <cmmn:planItem id="PlanItem_CaseTask_Valid" definitionRef="CaseTask_Valid" />
@@ -7,13 +7,13 @@
       <cmmn:planItem id="PlanItem_DecisionTask_Valid" definitionRef="DecisionTask_Valid" />
       <cmmn:planItem id="PlanItem_CaseTask_Invalid" definitionRef="CaseTask_Invalid" />
       <cmmn:planItem id="PlanItem_DecisionTask_Version" definitionRef="DecisionTask_Version" />
-      <cmmn:caseTask id="CaseTask_Valid" name="CaseTask_Valid" caseRef="myCase" camunda:caseTenantId="tenantOne" />
-      <cmmn:processTask id="ProcessTask_Valid" name="ProcessTask_Valid" camunda:processBinding="deployment" camunda:processTenantId="tenantOne">
+      <cmmn:caseTask id="CaseTask_Valid" name="CaseTask_Valid" caseRef="myCase" flowable:caseTenantId="tenantOne" />
+      <cmmn:processTask id="ProcessTask_Valid" name="ProcessTask_Valid" flowable:processBinding="deployment" flowable:processTenantId="tenantOne">
         <cmmn:processRefExpression id="Expression_0dwtw7n">myProcess</cmmn:processRefExpression>
       </cmmn:processTask>
-      <cmmn:decisionTask id="DecisionTask_Valid" name="DecisionTask_Valid" decisionRef="myDecision" camunda:decisionTenantId="tenantOne" camunda:mapDecisionResult="singleResult" camunda:resultVariable="myResVar" />
-      <cmmn:caseTask id="CaseTask_Invalid" name="CaseTask_Invalid" caseRef="myCase" camunda:caseBinding="version" camunda:caseTenantId="tenantOne" />
-      <cmmn:decisionTask id="DecisionTask_Version" name="DecisionTask_Version" decisionRef="myDecision" camunda:decisionBinding="version" camunda:decisionTenantId="tenantOne" camunda:decisionVersion="2" camunda:mapDecisionResult="singleResult" camunda:resultVariable="myResVar"/>
+      <cmmn:decisionTask id="DecisionTask_Valid" name="DecisionTask_Valid" decisionRef="myDecision" flowable:decisionTenantId="tenantOne" flowable:mapDecisionResult="singleResult" flowable:resultVariable="myResVar" />
+      <cmmn:caseTask id="CaseTask_Invalid" name="CaseTask_Invalid" caseRef="myCase" flowable:caseBinding="version" flowable:caseTenantId="tenantOne" />
+      <cmmn:decisionTask id="DecisionTask_Version" name="DecisionTask_Version" decisionRef="myDecision" flowable:decisionBinding="version" flowable:decisionTenantId="tenantOne" flowable:decisionVersion="2" flowable:mapDecisionResult="singleResult" flowable:resultVariable="myResVar"/>
     </cmmn:casePlanModel>
   </cmmn:case>
   <cmmndi:CMMNDI>

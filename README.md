@@ -56,19 +56,19 @@ propertiesPanel.attachTo('#other-properties');
 ```
 
 
-### Use with Camunda properties
+### Use with Flowable properties
 
-In order to be able to edit [Camunda](https://camunda.org) related properties, use the [camunda properties provider](https://github.com/bpmn-io/cmmn-js-properties-panel/tree/master/lib/provider/camunda).
-In addition, you need to define the `camunda` namespace via [camunda-cmmn-moddle](https://github.com/camunda/camunda-cmmn-moddle).
+In order to be able to edit [Flowable](https://flowable.org) related properties, use the [flowable properties provider](https://github.com/bpmn-io/cmmn-js-properties-panel/tree/master/lib/provider/flowable).
+In addition, you need to define the `flowable` namespace via [flowable-cmmn-moddle](https://github.com/flowable/flowable-cmmn-moddle).
 
 ```javascript
 var CmmnJS = require('cmmn-js/lib/Modeler'),
     propertiesPanelModule = require('cmmn-js-properties-panel'),
-    // use Camunda properties provider
-    propertiesProviderModule = require('cmmn-js-properties-panel/lib/provider/camunda');
+    // use Flowable properties provider
+    propertiesProviderModule = require('cmmn-js-properties-panel/lib/provider/flowable');
 
-// a descriptor that defines Camunda related CMMN 1.1 XML extensions
-var camundaModdleDescriptor = require('camunda-cmmn-moddle/resources/camunda');
+// a descriptor that defines Flowable related CMMN 1.1 XML extensions
+var flowableModdleDescriptor = require('flowable-cmmn-moddle/resources/flowable');
 
 var cmmnJS = new CmmnJS({
   additionalModules: [
@@ -79,9 +79,9 @@ var cmmnJS = new CmmnJS({
   propertiesPanel: {
     parent: '#properties'
   },
-  // make camunda prefix known for import, editing and export
+  // make flowable prefix known for import, editing and export
   moddleExtensions: {
-    camunda: camundaModdleDescriptor
+    flowable: flowableModdleDescriptor
   }
 });
 

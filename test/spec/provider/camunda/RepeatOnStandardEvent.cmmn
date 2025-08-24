@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<cmmn:definitions xmlns:dc="http://www.omg.org/spec/CMMN/20151109/DC" xmlns:di="http://www.omg.org/spec/CMMN/20151109/DI" xmlns:cmmndi="http://www.omg.org/spec/CMMN/20151109/CMMNDI" xmlns:cmmn="http://www.omg.org/spec/CMMN/20151109/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camunda="http://camunda.org/schema/1.0/cmmn" id="Test" targetNamespace="http://bpmn.io/schema/cmmn">
+<cmmn:definitions xmlns:dc="http://www.omg.org/spec/CMMN/20151109/DC" xmlns:di="http://www.omg.org/spec/CMMN/20151109/DI" xmlns:cmmndi="http://www.omg.org/spec/CMMN/20151109/CMMNDI" xmlns:cmmn="http://www.omg.org/spec/CMMN/20151109/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:flowable="http://flowable.org/schema/1.0/cmmn" id="Test" targetNamespace="http://bpmn.io/schema/cmmn">
   <cmmn:case id="Case_1">
     <cmmn:casePlanModel id="CasePlanModel_1" name="A CasePlanModel">
       <cmmn:planItem id="PI_Task_1" definitionRef="Task_1">
         <cmmn:itemControl id="PlanItemControl_17x4qs2">
-          <cmmn:repetitionRule id="RepetitionRule_0sojihk" camunda:repeatOnStandardEvent="complete">
+          <cmmn:repetitionRule id="RepetitionRule_0sojihk" flowable:repeatOnStandardEvent="complete">
             <cmmn:condition id="Expression_1roz0cd">ITEM_REPETITION</cmmn:condition>
           </cmmn:repetitionRule>
         </cmmn:itemControl>
@@ -18,7 +18,7 @@
       </cmmn:planItem>
       <cmmn:planItem id="PI_Task_3" definitionRef="Task_3">
         <cmmn:itemControl id="PlanItemControl_1dxs948">
-          <cmmn:repetitionRule id="RepetitionRule_14prk36" camunda:repeatOnStandardEvent="complete">
+          <cmmn:repetitionRule id="RepetitionRule_14prk36" flowable:repeatOnStandardEvent="complete">
             <cmmn:condition id="Expression_075zrxj">REPETITION</cmmn:condition>
           </cmmn:repetitionRule>
         </cmmn:itemControl>
@@ -32,7 +32,7 @@
       <cmmn:sentry id="Sentry_1wnfn3k" />
       <cmmn:task id="Task_1">
         <cmmn:defaultControl id="PlanItemControl_1ulxbit">
-          <cmmn:repetitionRule id="RepetitionRule_1rvmgd2" camunda:repeatOnStandardEvent="complete">
+          <cmmn:repetitionRule id="RepetitionRule_1rvmgd2" flowable:repeatOnStandardEvent="complete">
             <cmmn:condition id="Expression_008wtmq">DEF_REPETITION</cmmn:condition>
           </cmmn:repetitionRule>
         </cmmn:defaultControl>
@@ -47,14 +47,14 @@
       <cmmn:task id="Task_3" />
       <cmmn:task id="Task_4">
         <cmmn:defaultControl id="PlanItemControl_096x2kd">
-          <cmmn:repetitionRule id="RepetitionRule_1tqftn2" camunda:repeatOnStandardEvent="complete">
+          <cmmn:repetitionRule id="RepetitionRule_1tqftn2" flowable:repeatOnStandardEvent="complete">
             <cmmn:condition id="Expression_009021p">REPETITION</cmmn:condition>
           </cmmn:repetitionRule>
         </cmmn:defaultControl>
       </cmmn:task>
       <cmmn:task id="Task_5">
         <cmmn:defaultControl id="PlanItemControl_0r6wxa2">
-          <cmmn:repetitionRule id="RepetitionRule_0jjrj08" camunda:repeatOnStandardEvent="complete">
+          <cmmn:repetitionRule id="RepetitionRule_0jjrj08" flowable:repeatOnStandardEvent="complete">
             <cmmn:condition id="Expression_0c25mmb">REPETITION</cmmn:condition>
           </cmmn:repetitionRule>
         </cmmn:defaultControl>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<cmmn:definitions xmlns:dc="http://www.omg.org/spec/CMMN/20151109/DC" xmlns:di="http://www.omg.org/spec/CMMN/20151109/DI" xmlns:cmmndi="http://www.omg.org/spec/CMMN/20151109/CMMNDI" xmlns:cmmn="http://www.omg.org/spec/CMMN/20151109/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camunda="http://camunda.org/schema/1.0/cmmn" id="Test" targetNamespace="http://bpmn.io/schema/cmmn">
+<cmmn:definitions xmlns:dc="http://www.omg.org/spec/CMMN/20151109/DC" xmlns:di="http://www.omg.org/spec/CMMN/20151109/DI" xmlns:cmmndi="http://www.omg.org/spec/CMMN/20151109/CMMNDI" xmlns:cmmn="http://www.omg.org/spec/CMMN/20151109/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:flowable="http://flowable.org/schema/1.0/cmmn" id="Test" targetNamespace="http://bpmn.io/schema/cmmn">
   <cmmn:case id="Case_1">
     <cmmn:casePlanModel id="CasePlanModel_1" name="A CasePlanModel">
       <cmmn:planItem id="PlanItem_HumanTask_Class_Invalid" name="PlanItem_HumanTask_Class_Invalid" definitionRef="HumanTask_Class_Invalid" />
@@ -11,32 +11,32 @@
       <cmmn:planItem id="PlanItem_HumanTask_Empty" name="PlanItem_HumanTask_Empty" definitionRef="HumanTask_Empty" />
       <cmmn:humanTask id="HumanTask_Class_Invalid" name="HumanTask_Class_Invalid">
         <cmmn:extensionElements>
-          <camunda:taskListener />
+          <flowable:taskListener />
         </cmmn:extensionElements>
       </cmmn:humanTask>
       <cmmn:humanTask id="HumanTask_Class" name="HumanTask_Class">
         <cmmn:extensionElements>
-          <camunda:taskListener event="create" class="myClass" />
+          <flowable:taskListener event="create" class="myClass" />
         </cmmn:extensionElements>
       </cmmn:humanTask>
       <cmmn:humanTask id="HumanTask_Expression_Invalid" name="HumanTask_Expression_Invalid">
         <cmmn:extensionElements>
-          <camunda:taskListener expression="" />
+          <flowable:taskListener expression="" />
         </cmmn:extensionElements>
       </cmmn:humanTask>
       <cmmn:humanTask id="HumanTask_Expression" name="HumanTask_Expression">
         <cmmn:extensionElements>
-          <camunda:taskListener event="create" expression="${myExpression}" />
+          <flowable:taskListener event="create" expression="${myExpression}" />
         </cmmn:extensionElements>
       </cmmn:humanTask>
       <cmmn:humanTask id="HumanTask_DelegateExpression_Invalid" name="HumanTask_DelegateExpression_Invalid">
         <cmmn:extensionElements>
-          <camunda:taskListener delegateExpression="" />
+          <flowable:taskListener delegateExpression="" />
         </cmmn:extensionElements>
       </cmmn:humanTask>
       <cmmn:humanTask id="HumanTask_DelegateExpression" name="HumanTask_DelegateExpression">
         <cmmn:extensionElements>
-          <camunda:taskListener event="create" delegateExpression="${myDelegateExpression}" />
+          <flowable:taskListener event="create" delegateExpression="${myDelegateExpression}" />
         </cmmn:extensionElements>
       </cmmn:humanTask>
       <cmmn:humanTask id="HumanTask_Empty" name="HumanTask_Empty" />

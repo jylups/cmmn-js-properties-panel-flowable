@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<cmmn:definitions xmlns:dc="http://www.omg.org/spec/CMMN/20151109/DC" xmlns:di="http://www.omg.org/spec/CMMN/20151109/DI" xmlns:cmmndi="http://www.omg.org/spec/CMMN/20151109/CMMNDI" xmlns:cmmn="http://www.omg.org/spec/CMMN/20151109/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camunda="http://camunda.org/schema/1.0/cmmn" id="Test" targetNamespace="http://bpmn.io/schema/cmmn">
+<cmmn:definitions xmlns:dc="http://www.omg.org/spec/CMMN/20151109/DC" xmlns:di="http://www.omg.org/spec/CMMN/20151109/DI" xmlns:cmmndi="http://www.omg.org/spec/CMMN/20151109/CMMNDI" xmlns:cmmn="http://www.omg.org/spec/CMMN/20151109/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:flowable="http://flowable.org/schema/1.0/cmmn" id="Test" targetNamespace="http://bpmn.io/schema/cmmn">
   <cmmn:case id="Case_1">
     <cmmn:casePlanModel id="CasePlanModel_1" name="A CasePlanModel">
       <cmmn:planItem id="PlanItem_HumanTask_Script_Invalid" name="PlanItem_HumanTask_Script_Invalid" definitionRef="HumanTask_Script_Invalid" />
@@ -7,23 +7,23 @@
       <cmmn:planItem id="PlanItem_HumanTask_Script_EXTERNAL" name="PlanItem_HumanTask_Script_EXTERNAL" definitionRef="HumanTask_Script_EXTERNAL" />
       <cmmn:humanTask id="HumanTask_Script_Invalid" name="HumanTask_Script_Invalid">
         <cmmn:extensionElements>
-          <camunda:taskListener>
-            <camunda:script />
-          </camunda:taskListener>
+          <flowable:taskListener>
+            <flowable:script />
+          </flowable:taskListener>
         </cmmn:extensionElements>
       </cmmn:humanTask>
       <cmmn:humanTask id="HumanTask_Script" name="HumanTask_Script">
         <cmmn:extensionElements>
-          <camunda:taskListener event="create">
-            <camunda:script scriptFormat="groovy">myScript</camunda:script>
-          </camunda:taskListener>
+          <flowable:taskListener event="create">
+            <flowable:script scriptFormat="groovy">myScript</flowable:script>
+          </flowable:taskListener>
         </cmmn:extensionElements>
       </cmmn:humanTask>
       <cmmn:humanTask id="HumanTask_Script_EXTERNAL" name="HumanTask_Script_EXTERNAL">
         <cmmn:extensionElements>
-          <camunda:taskListener event="create">
-            <camunda:script scriptFormat="groovy" resource="myScript.js" />
-          </camunda:taskListener>
+          <flowable:taskListener event="create">
+            <flowable:script scriptFormat="groovy" resource="myScript.js" />
+          </flowable:taskListener>
         </cmmn:extensionElements>
       </cmmn:humanTask>
     </cmmn:casePlanModel>

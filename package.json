@@ -6,8 +6,10 @@
     "lint": "eslint .",
     "all": "run-s lint test build",
     "dev": "npm test -- --no-single-run --auto-watch",
-    "build": "run-s build:*",
+    "build": "run-s build:less",
     "build:less": "lessc --include-path=node_modules styles/properties.less dist/assets/cmmn-js-properties-panel.css",
+    "build:watch": "./watch.sh",
+    "watch": "npm run build:watch",
     "test": "karma start",
     "prepublishOnly": "run-s build"
   },
@@ -21,17 +23,18 @@
     "properties-panel"
   ],
   "author": {
-    "name": "Roman Smirnov",
-    "url": "https://github.com/romansmirnov"
+    "name": "Jorge Carvallo",
+    "url": "https://github.com/jylups"
   },
   "license": "MIT",
   "devDependencies": {
-    "camunda-cmmn-moddle": "^1.0.0",
+    "babel-preset-env": "^1.7.0",
     "chai": "^4.1.2",
     "cmmn-js": "^0.20.0",
     "diagram-js": "^5.1.1",
     "eslint": "^5.2.0",
     "eslint-plugin-bpmn-io": "^0.5.3",
+    "flowable-cmmn-moddle": "^1.0.0",
     "karma": "^4.1.0",
     "karma-chrome-launcher": "^2.2.0",
     "karma-firefox-launcher": "^1.0.1",
