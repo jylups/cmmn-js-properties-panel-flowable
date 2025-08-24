@@ -6,8 +6,10 @@
     "lint": "eslint .",
     "all": "run-s lint test build",
     "dev": "npm test -- --no-single-run --auto-watch",
-    "build": "run-s build:*",
+    "build": "run-s build:less",
     "build:less": "lessc --include-path=node_modules styles/properties.less dist/assets/cmmn-js-properties-panel.css",
+    "build:watch": "./watch.sh",
+    "watch": "npm run build:watch",
     "test": "karma start",
     "prepublishOnly": "run-s build"
   },
@@ -26,7 +28,7 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "flowable-cmmn-moddle": "^1.0.0",
+    "flowable-cmmn-moddle": "file:../flowable-cmmn-moddle",
     "chai": "^4.1.2",
     "cmmn-js": "^0.20.0",
     "diagram-js": "^5.1.1",
