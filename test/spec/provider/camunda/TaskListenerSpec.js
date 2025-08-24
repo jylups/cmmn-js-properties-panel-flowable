@@ -48,9 +48,9 @@ function getTaskListeners(extensionElements) {
 }
 
 function selectFirstListener(propertiesPanel) {
-  var listeners = getSelect(propertiesPanel._container, 'cam-extensionElements-taskListeners');
+  var listeners = getSelect(propertiesPanel._container, 'flowable-extensionElements-taskListeners');
 
-  listeners.options[0].selected = 'selected';
+  listeners.selectedIndex = 0;
   TestHelper.triggerEvent(listeners, 'change');
 }
 
@@ -115,7 +115,7 @@ describe('task-listener-properties', function() {
 
       it('should fetch the eventType of a task listener', inject(function(propertiesPanel) {
 
-        var field = getSelect(propertiesPanel._container, 'camunda-taskListenerEventType-select');
+        var field = getSelect(propertiesPanel._container, 'flowable-taskListenerEventType-select');
 
         // when selecting element
 
@@ -127,7 +127,7 @@ describe('task-listener-properties', function() {
 
       it('should fetch the listenerType of a task listener', inject(function(propertiesPanel) {
 
-        var field = getSelect(propertiesPanel._container, 'camunda-listenerType-select');
+        var field = getSelect(propertiesPanel._container, 'flowable-listenerType-select');
 
         // when selecting element
 
@@ -171,7 +171,7 @@ describe('task-listener-properties', function() {
 
       it('should fetch the eventType of a task listener', inject(function(propertiesPanel) {
 
-        var field = getSelect(propertiesPanel._container, 'camunda-taskListenerEventType-select');
+        var field = getSelect(propertiesPanel._container, 'flowable-taskListenerEventType-select');
 
         // when selecting element
 
@@ -183,7 +183,7 @@ describe('task-listener-properties', function() {
 
       it('should fetch the listenerType of a task listener', inject(function(propertiesPanel) {
 
-        var field = getSelect(propertiesPanel._container, 'camunda-listenerType-select');
+        var field = getSelect(propertiesPanel._container, 'flowable-listenerType-select');
 
         // when selecting element
 
@@ -227,7 +227,7 @@ describe('task-listener-properties', function() {
 
       it('should fetch the eventType of a task listener', inject(function(propertiesPanel) {
 
-        var field = getSelect(propertiesPanel._container, 'camunda-taskListenerEventType-select');
+        var field = getSelect(propertiesPanel._container, 'flowable-taskListenerEventType-select');
 
         // when selecting element
 
@@ -239,7 +239,7 @@ describe('task-listener-properties', function() {
 
       it('should fetch the listenerType of a task listener', inject(function(propertiesPanel) {
 
-        var field = getSelect(propertiesPanel._container, 'camunda-listenerType-select');
+        var field = getSelect(propertiesPanel._container, 'flowable-listenerType-select');
 
         // when selecting element
 
@@ -285,7 +285,7 @@ describe('task-listener-properties', function() {
 
         it('should be shown if listenerType is selected and class is empty', inject(function(propertiesPanel) {
 
-          var listenerType = getSelect(propertiesPanel._container, 'camunda-listenerType-select');
+          var listenerType = getSelect(propertiesPanel._container, 'flowable-listenerType-select');
           var field = getInput(propertiesPanel._container, 'class');
 
           // when selecting element
@@ -313,7 +313,7 @@ describe('task-listener-properties', function() {
 
         it('should be shown if listenerType is selected and expression is empty', inject(function(propertiesPanel) {
 
-          var listenerType = getSelect(propertiesPanel._container, 'camunda-listenerType-select');
+          var listenerType = getSelect(propertiesPanel._container, 'flowable-listenerType-select');
           var field = getInput(propertiesPanel._container, 'expression');
 
           // when selecting element
@@ -341,7 +341,7 @@ describe('task-listener-properties', function() {
 
         it('should be shown if listenerType is selected and delegateExpression is empty', inject(function(propertiesPanel) {
 
-          var listenerType = getSelect(propertiesPanel._container, 'camunda-listenerType-select');
+          var listenerType = getSelect(propertiesPanel._container, 'flowable-listenerType-select');
           var field = getInput(propertiesPanel._container, 'delegateExpression');
 
           // when selecting element
@@ -373,7 +373,7 @@ describe('task-listener-properties', function() {
 
         it('should be shown if eventType is empty', inject(function(propertiesPanel) {
 
-          var eventType = getSelect(propertiesPanel._container, 'camunda-taskListenerEventType-select');
+          var eventType = getSelect(propertiesPanel._container, 'flowable-taskListenerEventType-select');
 
           // when selecting element
 
@@ -405,14 +405,14 @@ describe('task-listener-properties', function() {
         var bo = item.businessObject.definitionRef;
         listeners = getTaskListeners(bo.get('extensionElements'));
 
-        field = getSelect(propertiesPanel._container, 'camunda-taskListenerEventType-select');
+        field = getSelect(propertiesPanel._container, 'flowable-taskListenerEventType-select');
 
         // select existing task listener
         selectFirstListener(propertiesPanel);
 
         // when
         // select ''
-        field.options[0].selected = 'selected';
+        field.selectedIndex = 0;
         TestHelper.triggerEvent(field, 'change');
 
       }));
@@ -483,14 +483,14 @@ describe('task-listener-properties', function() {
         var bo = item.businessObject.definitionRef;
         listeners = getTaskListeners(bo.get('extensionElements'));
 
-        field = getSelect(propertiesPanel._container, 'camunda-listenerType-select');
+        field = getSelect(propertiesPanel._container, 'flowable-listenerType-select');
 
         // select existing task listener
         selectFirstListener(propertiesPanel);
 
         // when
         // select 'expression'
-        field.options[1].selected = 'selected';
+        field.selectedIndex = 1;
         TestHelper.triggerEvent(field, 'change');
 
       }));
@@ -796,7 +796,7 @@ describe('task-listener-properties', function() {
       bo = item.businessObject.definitionRef;
 
       var button = getAddButton(propertiesPanel._container, 'taskListeners');
-      field = getSelect(propertiesPanel._container, 'cam-extensionElements-taskListeners');
+      field = getSelect(propertiesPanel._container, 'flowable-extensionElements-taskListeners');
 
       // when
 
@@ -875,7 +875,7 @@ describe('task-listener-properties', function() {
       bo = item.businessObject.definitionRef;
 
       var button = getRemoveButton(propertiesPanel._container, 'taskListeners');
-      field = getSelect(propertiesPanel._container, 'cam-extensionElements-taskListeners');
+      field = getSelect(propertiesPanel._container, 'flowable-extensionElements-taskListeners');
 
       // select existing task listener
       selectFirstListener(propertiesPanel);

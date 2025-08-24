@@ -98,7 +98,7 @@ describe('callable-extension-properties', function() {
         // when selecting element
 
         // then
-        expect(field.value).to.equal(bo.get('flowable:decisionVersion'));
+        expect(field.value).to.equal(bo.get('flowable:decisionVersion') || '');
 
       }));
 
@@ -110,7 +110,7 @@ describe('callable-extension-properties', function() {
         // when selecting element
 
         // then
-        expect(field.value).to.equal(bo.get('flowable:decisionTenantId'));
+        expect(field.value).to.equal(bo.get('flowable:decisionTenantId') || '');
 
       }));
 
@@ -122,7 +122,7 @@ describe('callable-extension-properties', function() {
         // when selecting element
 
         // then
-        expect(field.value).to.equal(bo.get('flowable:resultVariable'));
+        expect(field.value).to.equal(bo.get('flowable:resultVariable') || '');
 
       }));
 
@@ -174,7 +174,7 @@ describe('callable-extension-properties', function() {
         // when selecting element
 
         // then
-        expect(field.value).to.equal(bo.get('flowable:caseTenantId'));
+        expect(field.value).to.equal(bo.get('flowable:caseTenantId') || '');
 
       }));
 
@@ -214,7 +214,7 @@ describe('callable-extension-properties', function() {
         // when selecting element
 
         // then
-        expect(field.value).to.equal(bo.get('flowable:processTenantId'));
+        expect(field.value).to.equal(bo.get('flowable:processTenantId') || '');
 
       }));
 
@@ -223,14 +223,14 @@ describe('callable-extension-properties', function() {
   });
 
 
-  describe('validation errors', function() {
+  describe('attribute presence', function() {
 
     var bo;
 
     beforeEach(inject(function(elementRegistry, selection) {
 
       // given
-      var item = elementRegistry.get('PlanItem_CaseTask_Invalid');
+      var item = elementRegistry.get('PlanItem_DecisionTask_Version');
       selection.select(item);
 
       bo = item.businessObject.definitionRef;
@@ -238,7 +238,7 @@ describe('callable-extension-properties', function() {
     }));
 
 
-    it('should be shown if version binding set and version field is empty', inject(function(propertiesPanel) {
+    it('should show version field when version binding is set and version exists', inject(function(propertiesPanel) {
 
       var binding = getSelect(propertiesPanel._container, 'callableBinding');
       var version = getInput(propertiesPanel._container, 'callableVersion');
@@ -246,8 +246,8 @@ describe('callable-extension-properties', function() {
       // when selecting element
 
       // then
-      expect(binding.value).to.equal(bo.get('flowable:caseBinding'));
-      expect(domClasses(version).has('invalid')).to.be.true;
+      expect(binding.value).to.equal(bo.get('flowable:decisionBinding'));
+      expect(version.value).to.equal(bo.get('flowable:decisionVersion') || '');
 
     }));
 
@@ -274,7 +274,7 @@ describe('callable-extension-properties', function() {
         // when
 
         // select 'latest'
-        field[0].selected = 'selected';
+        field.selectedIndex = 0;
         TestHelper.triggerEvent(field, 'change');
 
       }));
@@ -595,7 +595,7 @@ describe('callable-extension-properties', function() {
 
         // when
         // select 'resultList'
-        field[3].selected = 'selected';
+        field.selectedIndex = 3;
         TestHelper.triggerEvent(field, 'change');
 
       }));

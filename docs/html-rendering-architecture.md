@@ -80,9 +80,9 @@ Generates actual HTML strings:
 
 ```javascript
 resource.html = 
-  '<label for="camunda-' + resource.id + '">' + escapeHTML(label) + '</label>' +
+  '<label for="flowable-' + resource.id + '">' + escapeHTML(label) + '</label>' +
   '<div class="cpp-field-wrapper">' +
-    '<input id="camunda-' + escapeHTML(resource.id) + '" type="text" name="' + escapeHTML(options.modelProperty) + '" />' +
+    '<input id="flowable-' + escapeHTML(resource.id) + '" type="text" name="' + escapeHTML(options.modelProperty) + '" />' +
     '<button class="clear" data-action="clear" data-show="canClear">' +
       '<span>X</span>' +
     '</button>' +

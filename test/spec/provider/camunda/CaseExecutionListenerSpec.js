@@ -48,9 +48,9 @@ function getCaseExecutionListeners(extensionElements) {
 }
 
 function selectFirstListener(propertiesPanel) {
-  var listeners = getSelect(propertiesPanel._container, 'cam-extensionElements-caseExecutionListeners');
+  var listeners = getSelect(propertiesPanel._container, 'flowable-extensionElements-caseExecutionListeners');
 
-  listeners.options[0].selected = 'selected';
+  listeners.selectedIndex = 0;
   TestHelper.triggerEvent(listeners, 'change');
 }
 
@@ -115,7 +115,7 @@ describe('case-execution-listener-properties', function() {
 
       it('should fetch the eventType of a case execution listener', inject(function(propertiesPanel) {
 
-        var field = getSelect(propertiesPanel._container, 'camunda-caseExecutionListenerEventType-select');
+        var field = getSelect(propertiesPanel._container, 'flowable-caseExecutionListenerEventType-select');
 
         // when selecting element
 
@@ -127,7 +127,7 @@ describe('case-execution-listener-properties', function() {
 
       it('should fetch the listenerType of a case execution listener', inject(function(propertiesPanel) {
 
-        var field = getSelect(propertiesPanel._container, 'camunda-listenerType-select');
+        var field = getSelect(propertiesPanel._container, 'flowable-listenerType-select');
 
         // when selecting element
 
@@ -171,7 +171,7 @@ describe('case-execution-listener-properties', function() {
 
       it('should fetch the eventType of a case execution listener', inject(function(propertiesPanel) {
 
-        var field = getSelect(propertiesPanel._container, 'camunda-caseExecutionListenerEventType-select');
+        var field = getSelect(propertiesPanel._container, 'flowable-caseExecutionListenerEventType-select');
 
         // when selecting element
 
@@ -183,7 +183,7 @@ describe('case-execution-listener-properties', function() {
 
       it('should fetch the listenerType of a case execution listener', inject(function(propertiesPanel) {
 
-        var field = getSelect(propertiesPanel._container, 'camunda-listenerType-select');
+        var field = getSelect(propertiesPanel._container, 'flowable-listenerType-select');
 
         // when selecting element
 
@@ -227,7 +227,7 @@ describe('case-execution-listener-properties', function() {
 
       it('should fetch the eventType of a case execution listener', inject(function(propertiesPanel) {
 
-        var field = getSelect(propertiesPanel._container, 'camunda-caseExecutionListenerEventType-select');
+        var field = getSelect(propertiesPanel._container, 'flowable-caseExecutionListenerEventType-select');
 
         // when selecting element
 
@@ -239,7 +239,7 @@ describe('case-execution-listener-properties', function() {
 
       it('should fetch the listenerType of a case execution listener', inject(function(propertiesPanel) {
 
-        var field = getSelect(propertiesPanel._container, 'camunda-listenerType-select');
+        var field = getSelect(propertiesPanel._container, 'flowable-listenerType-select');
 
         // when selecting element
 
@@ -285,7 +285,7 @@ describe('case-execution-listener-properties', function() {
 
         it('should be shown if listenerType is selected and class is empty', inject(function(propertiesPanel) {
 
-          var listenerType = getSelect(propertiesPanel._container, 'camunda-listenerType-select');
+          var listenerType = getSelect(propertiesPanel._container, 'flowable-listenerType-select');
           var field = getInput(propertiesPanel._container, 'class');
 
           // when selecting element
@@ -313,7 +313,7 @@ describe('case-execution-listener-properties', function() {
 
         it('should be shown if listenerType is selected and expression is empty', inject(function(propertiesPanel) {
 
-          var listenerType = getSelect(propertiesPanel._container, 'camunda-listenerType-select');
+          var listenerType = getSelect(propertiesPanel._container, 'flowable-listenerType-select');
           var field = getInput(propertiesPanel._container, 'expression');
 
           // when selecting element
@@ -341,7 +341,7 @@ describe('case-execution-listener-properties', function() {
 
         it('should be shown if listenerType is selected and delegateExpression is empty', inject(function(propertiesPanel) {
 
-          var listenerType = getSelect(propertiesPanel._container, 'camunda-listenerType-select');
+          var listenerType = getSelect(propertiesPanel._container, 'flowable-listenerType-select');
           var field = getInput(propertiesPanel._container, 'delegateExpression');
 
           // when selecting element
@@ -373,7 +373,7 @@ describe('case-execution-listener-properties', function() {
 
         it('should be shown if eventType is empty', inject(function(propertiesPanel) {
 
-          var eventType = getSelect(propertiesPanel._container, 'camunda-caseExecutionListenerEventType-select');
+          var eventType = getSelect(propertiesPanel._container, 'flowable-caseExecutionListenerEventType-select');
 
           // when selecting element
 
@@ -405,14 +405,14 @@ describe('case-execution-listener-properties', function() {
         var bo = item.businessObject.definitionRef;
         listeners = getCaseExecutionListeners(bo.get('extensionElements'));
 
-        field = getSelect(propertiesPanel._container, 'camunda-caseExecutionListenerEventType-select');
+        field = getSelect(propertiesPanel._container, 'flowable-caseExecutionListenerEventType-select');
 
         // select existing case execution listener
         selectFirstListener(propertiesPanel);
 
         // when
         // select ''
-        field.options[0].selected = 'selected';
+        field.selectedIndex = 0;
         TestHelper.triggerEvent(field, 'change');
 
       }));
@@ -483,14 +483,14 @@ describe('case-execution-listener-properties', function() {
         var bo = item.businessObject.definitionRef;
         listeners = getCaseExecutionListeners(bo.get('extensionElements'));
 
-        field = getSelect(propertiesPanel._container, 'camunda-listenerType-select');
+        field = getSelect(propertiesPanel._container, 'flowable-listenerType-select');
 
         // select existing case execution listener
         selectFirstListener(propertiesPanel);
 
         // when
         // select 'expression'
-        field.options[1].selected = 'selected';
+        field.selectedIndex = 1;
         TestHelper.triggerEvent(field, 'change');
 
       }));
@@ -796,7 +796,7 @@ describe('case-execution-listener-properties', function() {
       bo = item.businessObject.definitionRef;
 
       var button = getAddButton(propertiesPanel._container, 'caseExecutionListeners');
-      field = getSelect(propertiesPanel._container, 'cam-extensionElements-caseExecutionListeners');
+      field = getSelect(propertiesPanel._container, 'flowable-extensionElements-caseExecutionListeners');
 
       // when
 
@@ -875,7 +875,7 @@ describe('case-execution-listener-properties', function() {
       bo = item.businessObject.definitionRef;
 
       var button = getRemoveButton(propertiesPanel._container, 'caseExecutionListeners');
-      field = getSelect(propertiesPanel._container, 'cam-extensionElements-caseExecutionListeners');
+      field = getSelect(propertiesPanel._container, 'flowable-extensionElements-caseExecutionListeners');
 
       // select existing case execution listener
       selectFirstListener(propertiesPanel);
@@ -958,8 +958,8 @@ describe('case-execution-listener-properties', function() {
         var bo = item.businessObject.definitionRef;
 
         var button = getAddButton(propertiesPanel._container, 'caseExecutionListeners');
-        listenersSelect = getSelect(propertiesPanel._container, 'cam-extensionElements-caseExecutionListeners');
-        eventType = getSelect(propertiesPanel._container, 'camunda-caseExecutionListenerEventType-select');
+        listenersSelect = getSelect(propertiesPanel._container, 'flowable-extensionElements-caseExecutionListeners');
+        eventType = getSelect(propertiesPanel._container, 'flowable-caseExecutionListenerEventType-select');
 
         // when
 

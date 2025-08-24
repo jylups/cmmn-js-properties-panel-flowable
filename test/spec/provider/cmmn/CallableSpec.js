@@ -13,7 +13,7 @@ var propertiesPanelModule = require('lib'),
     selectionModule = require('diagram-js/lib/features/selection').default,
     modelingModule = require('cmmn-js/lib/features/modeling'),
     propertiesProviderModule = require('lib/provider/flowable'),
-    camundaModdlePackage = require('camunda-cmmn-moddle/resources/camunda');
+    camundaModdlePackage = require('flowable-cmmn-moddle/resources/flowable');
 
 
 function getInput(container, selector) {

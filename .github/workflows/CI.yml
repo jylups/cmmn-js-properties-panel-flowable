@@ -1,12 +1,15 @@
 name: CI
 on: [ push, pull_request ]
+
+env:
+  
 jobs:
   Build:
 
     strategy:
       matrix:
         os: [ ubuntu-latest ]
-        node-version: [ 14 ]
+        node-version: [ 16 ]
 
     runs-on: ${{ matrix.os }}
 

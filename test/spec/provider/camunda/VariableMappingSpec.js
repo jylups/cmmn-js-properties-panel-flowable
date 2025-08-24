@@ -65,12 +65,12 @@ function getCamundaInWithBusinessKey(extensionElements) {
 function selectVariableMapping(propertiesPanel, selectorId) {
   var inMappings = getSelect(propertiesPanel._container, selectorId);
 
-  inMappings.options[0].selected = 'selected';
+  inMappings.selectedIndex = 0;
   TestHelper.triggerEvent(inMappings, 'change');
 }
 
-var CAMUNDA_IN_EXTENSION_ELEMENT = 'flowable:In',
-    CAMUNDA_OUT_EXTENSION_ELEMENT = 'flowable:Out';
+var FLOWABLE_IN_EXTENSION_ELEMENT = 'flowable:In',
+    FLOWABLE_OUT_EXTENSION_ELEMENT = 'flowable:Out';
 
 var BUSINESS_KEY_VALUE = '#{caseExecution.caseBusinessKey}';
 
@@ -116,7 +116,7 @@ describe('variable-mapping-properties', function() {
 
     describe('# Case Task', function() {
 
-      describe('# camunda:in', function() {
+      describe('# flowable:in', function() {
 
         var variableMappings;
 
@@ -127,10 +127,10 @@ describe('variable-mapping-properties', function() {
           selection.select(item);
 
           var bo = item.businessObject.definitionRef;
-          variableMappings = getVariableMappings(bo.get('extensionElements'), CAMUNDA_IN_EXTENSION_ELEMENT);
+          variableMappings = getVariableMappings(bo.get('extensionElements'), FLOWABLE_IN_EXTENSION_ELEMENT);
 
           // select existing in-mapping
-          selectVariableMapping(propertiesPanel, 'cam-extensionElements-variableMapping-in');
+          selectVariableMapping(propertiesPanel, 'flowable-extensionElements-variableMapping-in');
 
         }));
 
@@ -172,7 +172,7 @@ describe('variable-mapping-properties', function() {
 
       });
 
-      describe('# camunda:out variables', function() {
+      describe('# flowable:out variables', function() {
 
         var variableMappings;
 
@@ -183,17 +183,17 @@ describe('variable-mapping-properties', function() {
           selection.select(item);
 
           var bo = item.businessObject.definitionRef;
-          variableMappings = getVariableMappings(bo.get('extensionElements'), CAMUNDA_OUT_EXTENSION_ELEMENT);
+          variableMappings = getVariableMappings(bo.get('extensionElements'), FLOWABLE_OUT_EXTENSION_ELEMENT);
 
           // select existing in-mapping
-          selectVariableMapping(propertiesPanel, 'cam-extensionElements-variableMapping-out');
+          selectVariableMapping(propertiesPanel, 'flowable-extensionElements-variableMapping-out');
 
         }));
 
 
         it('should fetch the variables of a case task definition', inject(function(propertiesPanel) {
 
-          var field = getSelect(propertiesPanel._container, 'camunda-variableMapping-inOutType-select');
+          var field = getSelect(propertiesPanel._container, 'flowable-variableMapping-inOutType-select');
 
           // when selecting element
 
@@ -211,7 +211,7 @@ describe('variable-mapping-properties', function() {
 
       var variableMappings;
 
-      describe('# camunda:in', function() {
+      describe('# flowable:in', function() {
 
         beforeEach(inject(function(elementRegistry, selection, propertiesPanel) {
 
@@ -220,10 +220,10 @@ describe('variable-mapping-properties', function() {
           selection.select(item);
 
           var bo = item.businessObject.definitionRef;
-          variableMappings = getVariableMappings(bo.get('extensionElements'), CAMUNDA_IN_EXTENSION_ELEMENT);
+          variableMappings = getVariableMappings(bo.get('extensionElements'), FLOWABLE_IN_EXTENSION_ELEMENT);
 
           // select existing in-mapping
-          selectVariableMapping(propertiesPanel, 'cam-extensionElements-variableMapping-in');
+          selectVariableMapping(propertiesPanel, 'flowable-extensionElements-variableMapping-in');
 
         }));
 
@@ -265,7 +265,7 @@ describe('variable-mapping-properties', function() {
 
       });
 
-      describe('# camunda:in businessKey', function() {
+      describe('# flowable:in businessKey', function() {
 
         var variableMappings;
 
@@ -312,13 +312,13 @@ describe('variable-mapping-properties', function() {
         selection.select(item);
 
         // select existing in-mapping
-        selectVariableMapping(propertiesPanel, 'cam-extensionElements-variableMapping-in');
+        selectVariableMapping(propertiesPanel, 'flowable-extensionElements-variableMapping-in');
 
       }));
 
       it('should be shown if source is selected and source is empty', inject(function(propertiesPanel) {
 
-        var inOutType = getSelect(propertiesPanel._container, 'camunda-variableMapping-inOutType-select');
+        var inOutType = getSelect(propertiesPanel._container, 'flowable-variableMapping-inOutType-select');
         var field = getInput(propertiesPanel._container, 'source');
 
         // when selecting element
@@ -331,7 +331,7 @@ describe('variable-mapping-properties', function() {
 
       it('should be shown if source is selected and target is empty', inject(function(propertiesPanel) {
 
-        var inOutType = getSelect(propertiesPanel._container, 'camunda-variableMapping-inOutType-select');
+        var inOutType = getSelect(propertiesPanel._container, 'flowable-variableMapping-inOutType-select');
         var field = getInput(propertiesPanel._container, 'target');
 
         // when selecting element
@@ -353,13 +353,13 @@ describe('variable-mapping-properties', function() {
         selection.select(item);
 
         // select existing in-mapping
-        selectVariableMapping(propertiesPanel, 'cam-extensionElements-variableMapping-in');
+        selectVariableMapping(propertiesPanel, 'flowable-extensionElements-variableMapping-in');
 
       }));
 
       it('should be shown if sourceExpression is selected and sourceExpression is empty', inject(function(propertiesPanel) {
 
-        var inOutType = getSelect(propertiesPanel._container, 'camunda-variableMapping-inOutType-select');
+        var inOutType = getSelect(propertiesPanel._container, 'flowable-variableMapping-inOutType-select');
         var field = getInput(propertiesPanel._container, 'source');
 
         // when selecting element
@@ -372,7 +372,7 @@ describe('variable-mapping-properties', function() {
 
       it('should be shown if sourceExpression is selected and target is empty', inject(function(propertiesPanel) {
 
-        var inOutType = getSelect(propertiesPanel._container, 'camunda-variableMapping-inOutType-select');
+        var inOutType = getSelect(propertiesPanel._container, 'flowable-variableMapping-inOutType-select');
         var field = getInput(propertiesPanel._container, 'target');
 
         // when selecting element
@@ -477,10 +477,10 @@ describe('variable-mapping-properties', function() {
         selection.select(item);
 
         var bo = item.businessObject.definitionRef;
-        variableMappings = getVariableMappings(bo.get('extensionElements'), CAMUNDA_IN_EXTENSION_ELEMENT);
+        variableMappings = getVariableMappings(bo.get('extensionElements'), FLOWABLE_IN_EXTENSION_ELEMENT);
 
         // select existing in-mapping
-        selectVariableMapping(propertiesPanel, 'cam-extensionElements-variableMapping-in');
+        selectVariableMapping(propertiesPanel, 'flowable-extensionElements-variableMapping-in');
 
         field = getInput(propertiesPanel._container, 'source');
 
@@ -554,10 +554,10 @@ describe('variable-mapping-properties', function() {
         selection.select(item);
 
         var bo = item.businessObject.definitionRef;
-        variableMappings = getVariableMappings(bo.get('extensionElements'), CAMUNDA_IN_EXTENSION_ELEMENT);
+        variableMappings = getVariableMappings(bo.get('extensionElements'), FLOWABLE_IN_EXTENSION_ELEMENT);
 
         // select existing in-mapping
-        selectVariableMapping(propertiesPanel, 'cam-extensionElements-variableMapping-in');
+        selectVariableMapping(propertiesPanel, 'flowable-extensionElements-variableMapping-in');
 
         field = getInput(propertiesPanel._container, 'source');
 
@@ -631,10 +631,10 @@ describe('variable-mapping-properties', function() {
         selection.select(item);
 
         var bo = item.businessObject.definitionRef;
-        variableMappings = getVariableMappings(bo.get('extensionElements'), CAMUNDA_IN_EXTENSION_ELEMENT);
+        variableMappings = getVariableMappings(bo.get('extensionElements'), FLOWABLE_IN_EXTENSION_ELEMENT);
 
         // select existing in-mapping
-        selectVariableMapping(propertiesPanel, 'cam-extensionElements-variableMapping-in');
+        selectVariableMapping(propertiesPanel, 'flowable-extensionElements-variableMapping-in');
 
         field = getInput(propertiesPanel._container, 'target');
 
@@ -708,10 +708,10 @@ describe('variable-mapping-properties', function() {
         selection.select(item);
 
         var bo = item.businessObject.definitionRef;
-        variableMappings = getVariableMappings(bo.get('extensionElements'), CAMUNDA_IN_EXTENSION_ELEMENT);
+        variableMappings = getVariableMappings(bo.get('extensionElements'), FLOWABLE_IN_EXTENSION_ELEMENT);
 
         // select existing in-mapping
-        selectVariableMapping(propertiesPanel, 'cam-extensionElements-variableMapping-in');
+        selectVariableMapping(propertiesPanel, 'flowable-extensionElements-variableMapping-in');
 
         field = getInput(propertiesPanel._container, 'local');
 
@@ -787,16 +787,16 @@ describe('variable-mapping-properties', function() {
           selection.select(item);
 
           var bo = item.businessObject.definitionRef;
-          variableMappings = getVariableMappings(bo.get('extensionElements'), CAMUNDA_IN_EXTENSION_ELEMENT);
+          variableMappings = getVariableMappings(bo.get('extensionElements'), FLOWABLE_IN_EXTENSION_ELEMENT);
 
           // select existing in-mapping
-          selectVariableMapping(propertiesPanel, 'cam-extensionElements-variableMapping-in');
+          selectVariableMapping(propertiesPanel, 'flowable-extensionElements-variableMapping-in');
 
-          field = getSelect(propertiesPanel._container, 'camunda-variableMapping-inOutType-select');
+          field = getSelect(propertiesPanel._container, 'flowable-variableMapping-inOutType-select');
 
           // when
           // select 'sourceExpression'
-          field.options[1].selected = 'selected';
+          field.selectedIndex = 1;
           TestHelper.triggerEvent(field, 'change');
 
         }));
@@ -868,16 +868,16 @@ describe('variable-mapping-properties', function() {
           selection.select(item);
 
           var bo = item.businessObject.definitionRef;
-          variableMappings = getVariableMappings(bo.get('extensionElements'), CAMUNDA_IN_EXTENSION_ELEMENT);
+          variableMappings = getVariableMappings(bo.get('extensionElements'), FLOWABLE_IN_EXTENSION_ELEMENT);
 
           // select existing in-mapping
-          selectVariableMapping(propertiesPanel, 'cam-extensionElements-variableMapping-in');
+          selectVariableMapping(propertiesPanel, 'flowable-extensionElements-variableMapping-in');
 
-          field = getSelect(propertiesPanel._container, 'camunda-variableMapping-inOutType-select');
+          field = getSelect(propertiesPanel._container, 'flowable-variableMapping-inOutType-select');
 
           // when
           // select 'all'
-          field.options[2].selected = 'selected';
+          field.selectedIndex = 2;
           TestHelper.triggerEvent(field, 'change');
 
         }));
@@ -945,7 +945,7 @@ describe('variable-mapping-properties', function() {
 
   describe('add', function() {
 
-    describe('# camunda:in', function() {
+    describe('# flowable:in', function() {
 
       var bo, field;
 
@@ -958,7 +958,7 @@ describe('variable-mapping-properties', function() {
         bo = item.businessObject.definitionRef;
 
         var button = getAddButton(propertiesPanel._container, 'variableMapping-in');
-        field = getSelect(propertiesPanel._container, 'cam-extensionElements-variableMapping-in');
+        field = getSelect(propertiesPanel._container, 'flowable-extensionElements-variableMapping-in');
 
         // when
 
@@ -995,7 +995,7 @@ describe('variable-mapping-properties', function() {
       describe('on the business object', function() {
 
         it('should execute', function() {
-          var variableMappings = getVariableMappings(bo.get('extensionElements'), CAMUNDA_IN_EXTENSION_ELEMENT);
+          var variableMappings = getVariableMappings(bo.get('extensionElements'), FLOWABLE_IN_EXTENSION_ELEMENT);
           expect(variableMappings).to.have.length(1);
         });
 
@@ -1004,7 +1004,7 @@ describe('variable-mapping-properties', function() {
           commandStack.undo();
 
           // then
-          var variableMappings = getVariableMappings(bo.get('extensionElements'), CAMUNDA_IN_EXTENSION_ELEMENT);
+          var variableMappings = getVariableMappings(bo.get('extensionElements'), FLOWABLE_IN_EXTENSION_ELEMENT);
           expect(variableMappings).to.have.length(0);
         }));
 
@@ -1014,7 +1014,7 @@ describe('variable-mapping-properties', function() {
           commandStack.redo();
 
           // then
-          var variableMappings = getVariableMappings(bo.get('extensionElements'), CAMUNDA_IN_EXTENSION_ELEMENT);
+          var variableMappings = getVariableMappings(bo.get('extensionElements'), FLOWABLE_IN_EXTENSION_ELEMENT);
           expect(variableMappings).to.have.length(1);
         }));
 
@@ -1022,7 +1022,7 @@ describe('variable-mapping-properties', function() {
 
     });
 
-    describe('# camunda:out', function() {
+    describe('# flowable:out', function() {
 
       var bo, field;
 
@@ -1035,7 +1035,7 @@ describe('variable-mapping-properties', function() {
         bo = item.businessObject.definitionRef;
 
         var button = getAddButton(propertiesPanel._container, 'variableMapping-out');
-        field = getSelect(propertiesPanel._container, 'cam-extensionElements-variableMapping-out');
+        field = getSelect(propertiesPanel._container, 'flowable-extensionElements-variableMapping-out');
 
         // when
 
@@ -1072,7 +1072,7 @@ describe('variable-mapping-properties', function() {
       describe('on the business object', function() {
 
         it('should execute', function() {
-          var variableMappings = getVariableMappings(bo.get('extensionElements'), CAMUNDA_OUT_EXTENSION_ELEMENT);
+          var variableMappings = getVariableMappings(bo.get('extensionElements'), FLOWABLE_OUT_EXTENSION_ELEMENT);
           expect(variableMappings).to.have.length(1);
         });
 
@@ -1081,7 +1081,7 @@ describe('variable-mapping-properties', function() {
           commandStack.undo();
 
           // then
-          var variableMappings = getVariableMappings(bo.get('extensionElements'), CAMUNDA_OUT_EXTENSION_ELEMENT);
+          var variableMappings = getVariableMappings(bo.get('extensionElements'), FLOWABLE_OUT_EXTENSION_ELEMENT);
           expect(variableMappings).to.have.length(0);
         }));
 
@@ -1091,7 +1091,7 @@ describe('variable-mapping-properties', function() {
           commandStack.redo();
 
           // then
-          var variableMappings = getVariableMappings(bo.get('extensionElements'), CAMUNDA_OUT_EXTENSION_ELEMENT);
+          var variableMappings = getVariableMappings(bo.get('extensionElements'), FLOWABLE_OUT_EXTENSION_ELEMENT);
           expect(variableMappings).to.have.length(1);
         }));
 
@@ -1104,7 +1104,7 @@ describe('variable-mapping-properties', function() {
 
   describe('remove', function() {
 
-    describe('# camunda:in', function() {
+    describe('# flowable:in', function() {
 
       var bo, field;
 
@@ -1117,9 +1117,9 @@ describe('variable-mapping-properties', function() {
         bo = item.businessObject.definitionRef;
 
         var button = getRemoveButton(propertiesPanel._container, 'variableMapping-in');
-        field = getSelect(propertiesPanel._container, 'cam-extensionElements-variableMapping-in');
+        field = getSelect(propertiesPanel._container, 'flowable-extensionElements-variableMapping-in');
 
-        selectVariableMapping(propertiesPanel, 'cam-extensionElements-variableMapping-in');
+        selectVariableMapping(propertiesPanel, 'flowable-extensionElements-variableMapping-in');
 
         // when
 
@@ -1156,7 +1156,7 @@ describe('variable-mapping-properties', function() {
       describe('on the business object', function() {
 
         it('should execute', function() {
-          var variableMappings = getVariableMappings(bo.get('extensionElements'), CAMUNDA_IN_EXTENSION_ELEMENT);
+          var variableMappings = getVariableMappings(bo.get('extensionElements'), FLOWABLE_IN_EXTENSION_ELEMENT);
           expect(variableMappings).to.have.length(0);
         });
 
@@ -1165,7 +1165,7 @@ describe('variable-mapping-properties', function() {
           commandStack.undo();
 
           // then
-          var variableMappings = getVariableMappings(bo.get('extensionElements'), CAMUNDA_IN_EXTENSION_ELEMENT);
+          var variableMappings = getVariableMappings(bo.get('extensionElements'), FLOWABLE_IN_EXTENSION_ELEMENT);
           expect(variableMappings).to.have.length(1);
         }));
 
@@ -1175,7 +1175,7 @@ describe('variable-mapping-properties', function() {
           commandStack.redo();
 
           // then
-          var variableMappings = getVariableMappings(bo.get('extensionElements'), CAMUNDA_IN_EXTENSION_ELEMENT);
+          var variableMappings = getVariableMappings(bo.get('extensionElements'), FLOWABLE_IN_EXTENSION_ELEMENT);
           expect(variableMappings).to.have.length(0);
         }));
 
@@ -1183,7 +1183,7 @@ describe('variable-mapping-properties', function() {
 
     });
 
-    describe('# camunda:out', function() {
+    describe('# flowable:out', function() {
 
       var bo, field;
 
@@ -1196,9 +1196,9 @@ describe('variable-mapping-properties', function() {
         bo = item.businessObject.definitionRef;
 
         var button = getRemoveButton(propertiesPanel._container, 'variableMapping-out');
-        field = getSelect(propertiesPanel._container, 'cam-extensionElements-variableMapping-out');
+        field = getSelect(propertiesPanel._container, 'flowable-extensionElements-variableMapping-out');
 
-        selectVariableMapping(propertiesPanel, 'cam-extensionElements-variableMapping-out');
+        selectVariableMapping(propertiesPanel, 'flowable-extensionElements-variableMapping-out');
 
         // when
 
@@ -1235,7 +1235,7 @@ describe('variable-mapping-properties', function() {
       describe('on the business object', function() {
 
         it('should execute', function() {
-          var variableMappings = getVariableMappings(bo.get('extensionElements'), CAMUNDA_OUT_EXTENSION_ELEMENT);
+          var variableMappings = getVariableMappings(bo.get('extensionElements'), FLOWABLE_OUT_EXTENSION_ELEMENT);
           expect(variableMappings).to.have.length(0);
         });
 
@@ -1244,7 +1244,7 @@ describe('variable-mapping-properties', function() {
           commandStack.undo();
 
           // then
-          var variableMappings = getVariableMappings(bo.get('extensionElements'), CAMUNDA_OUT_EXTENSION_ELEMENT);
+          var variableMappings = getVariableMappings(bo.get('extensionElements'), FLOWABLE_OUT_EXTENSION_ELEMENT);
           expect(variableMappings).to.have.length(1);
         }));
 
@@ -1254,7 +1254,7 @@ describe('variable-mapping-properties', function() {
           commandStack.redo();
 
           // then
-          var variableMappings = getVariableMappings(bo.get('extensionElements'), CAMUNDA_OUT_EXTENSION_ELEMENT);
+          var variableMappings = getVariableMappings(bo.get('extensionElements'), FLOWABLE_OUT_EXTENSION_ELEMENT);
           expect(variableMappings).to.have.length(0);
         }));
 
@@ -1295,11 +1295,11 @@ describe('variable-mapping-properties', function() {
           var item = elementRegistry.get('PlanItem_CaseTask_Source');
           selection.select(item);
 
-          selectVariableMapping(propertiesPanel, 'cam-extensionElements-variableMapping-in');
+          selectVariableMapping(propertiesPanel, 'flowable-extensionElements-variableMapping-in');
 
         }));
 
-        it('type', expectVisible(true, getSelect, 'camunda-variableMapping-inOutType-select'));
+        it('type', expectVisible(true, getSelect, 'flowable-variableMapping-inOutType-select'));
         it('source', expectVisible(true, getInput, 'source'));
         it('target', expectVisible(true, getInput, 'target'));
         it('local', expectVisible(true, getInput, 'local'));
@@ -1319,7 +1319,7 @@ describe('variable-mapping-properties', function() {
 
         }));
 
-        it('type', expectVisible(false, getSelect, 'camunda-variableMapping-inOutType-select'));
+        it('type', expectVisible(false, getSelect, 'flowable-variableMapping-inOutType-select'));
         it('source', expectVisible(false, getInput, 'source', true));
         it('target', expectVisible(false, getInput, 'target', true));
         it('local', expectVisible(false, getInput, 'local'));
@@ -1333,7 +1333,7 @@ describe('variable-mapping-properties', function() {
           var item = elementRegistry.get('PlanItem_CaseTask_Out_All');
           selection.select(item);
 
-          selectVariableMapping(propertiesPanel, 'cam-extensionElements-variableMapping-out');
+          selectVariableMapping(propertiesPanel, 'flowable-extensionElements-variableMapping-out');
 
         }));
 

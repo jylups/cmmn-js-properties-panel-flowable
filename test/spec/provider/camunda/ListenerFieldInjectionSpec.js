@@ -86,7 +86,7 @@ describe('listener-fieldInjection - properties', function() {
   function selectOption(container, inputNode) {
     var select = getSelect(container, inputNode);
 
-    select.options[0].selected = 'selected';
+    select.selectedIndex = 0;
     TestHelper.triggerEvent(select, 'change');
   }
 
@@ -426,7 +426,7 @@ describe('listener-fieldInjection - properties', function() {
           field = getSelect(propertiesPanel._container, FIELD_TYPE_ELEMENT);
 
           // select 'expression'
-          field.options[1].selected = 'selected';
+          field.selectedIndex = 1;
           TestHelper.triggerEvent(field, 'change');
 
         }));
@@ -634,7 +634,7 @@ describe('listener-fieldInjection - properties', function() {
           field = getSelect(propertiesPanel._container, FIELD_TYPE_ELEMENT);
 
           // select 'string'
-          field.options[0].selected = 'selected';
+          field.selectedIndex = 0;
           TestHelper.triggerEvent(field, 'change');
 
         }));
@@ -926,7 +926,7 @@ describe('listener-fieldInjection - properties', function() {
           field = getSelect(propertiesPanel._container, FIELD_TYPE_ELEMENT);
 
           // select 'string'
-          field.options[0].selected = 'selected';
+          field.selectedIndex = 0;
           TestHelper.triggerEvent(field, 'change');
 
         }));
@@ -1050,7 +1050,7 @@ describe('listener-fieldInjection - properties', function() {
   });
 
 
-  describe('add camunda:field', function() {
+  describe('add flowable:field', function() {
 
     describe('#taskListener', function() {
 
@@ -1215,7 +1215,7 @@ describe('listener-fieldInjection - properties', function() {
         // select listener
         selectOption(propertiesPanel._container, CASE_EXECUTION_LISTENER_SELECT_ELEMENT);
 
-        // add camunda:field
+        // add flowable:field
         var button = getAddButton(propertiesPanel._container, 'listener-fields');
 
         TestHelper.triggerEvent(button, 'click');
@@ -1281,7 +1281,7 @@ describe('listener-fieldInjection - properties', function() {
   });
 
 
-  describe('remove camunda:field', function() {
+  describe('remove flowable:field', function() {
 
     describe('#variableListener', function() {
 
@@ -1519,7 +1519,7 @@ describe('listener-fieldInjection - properties', function() {
   });
 
 
-  describe('remove camunda:listener', function() {
+  describe('remove flowable:listener', function() {
 
     describe('#variableListener', function() {
 
