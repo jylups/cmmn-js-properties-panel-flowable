@@ -28,7 +28,7 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "flowable-cmmn-moddle": "file:../flowable-cmmn-moddle",
+    "flowable-cmmn-moddle": "^1.0.0",
     "chai": "^4.1.2",
     "cmmn-js": "^0.20.0",
     "diagram-js": "^5.1.1",
