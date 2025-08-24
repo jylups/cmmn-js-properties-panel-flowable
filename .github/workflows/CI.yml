@@ -8,7 +8,7 @@ jobs:
     strategy:
       matrix:
         os: [ ubuntu-latest ]
-        node-version: [ 16 ]
+        node-version: [ 18 ]
 
     runs-on: ${{ matrix.os }}
 
@@ -33,6 +33,7 @@ jobs:
     - name: Build
       env:
         COVERAGE: 1
-      run: node --openssl-legacy-provider ./node_modules/.bin/npm run all
+        NODE_OPTIONS: --openssl-legacy-provider
+      run: npm run all
     - name: Upload coverage
       run: npx codecov

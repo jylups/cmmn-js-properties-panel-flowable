@@ -39,7 +39,9 @@ jobs:
         fi
       
     - name: Run tests
-      run: node --openssl-legacy-provider ./node_modules/.bin/npm run all
+      env:
+        NODE_OPTIONS: --openssl-legacy-provider
+      run: npm run all
       
     - name: Verify package contents
       run: npm pack --dry-run
