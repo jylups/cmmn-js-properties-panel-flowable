@@ -1,7 +1,7 @@
 {
   "name": "cmmn-js-properties-panel-flowable",
-  "version": "1.0.0",
-  "description": "A simple properties panel for cmmn-js",
+  "version": "1.1.0",
+  "description": "A simple properties panel for cmmn-js with flowable namespaces",
   "scripts": {
     "lint": "eslint .",
     "all": "run-s lint test build",
@@ -34,7 +34,7 @@
     "diagram-js": "^5.1.1",
     "eslint": "^5.2.0",
     "eslint-plugin-bpmn-io": "^0.5.3",
-    "flowable-cmmn-moddle": "^1.0.0",
+    "flowable-cmmn-moddle": "^1.1.0",
     "karma": "^4.1.0",
     "karma-chrome-launcher": "^2.2.0",
     "karma-firefox-launcher": "^1.0.1",
