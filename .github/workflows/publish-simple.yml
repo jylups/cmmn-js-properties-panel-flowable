@@ -5,7 +5,6 @@ on:
     types: [published]
 
 env:
-  NODE_OPTIONS: --openssl-legacy-provider
 
 permissions:
   contents: read
@@ -42,9 +41,7 @@ jobs:
         fi
       
     - name: Run tests
-      env:
-        NODE_OPTIONS: --openssl-legacy-provider
-      run: npm run all
+      run: node --openssl-legacy-provider ./node_modules/.bin/npm run all
       
     - name: Verify package contents
       run: npm pack --dry-run
