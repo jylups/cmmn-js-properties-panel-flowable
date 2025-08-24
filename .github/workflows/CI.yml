@@ -2,6 +2,7 @@ name: CI
 on: [ push, pull_request ]
 
 env:
+  NODE_OPTIONS: --openssl-legacy-provider
   
 jobs:
   Build:
@@ -34,6 +35,7 @@ jobs:
     - name: Build
       env:
         COVERAGE: 1
+        NODE_OPTIONS: --openssl-legacy-provider
       run: npm run all
     - name: Upload coverage
       run: npx codecov
