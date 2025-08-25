@@ -588,7 +588,7 @@ describe('callable-properties', function() {
 
           it('should execute', function() {
             expect(bo.get('processRefExpression')).to.be.undefined;
-            expect(bo.get('processRef')).to.be.defined;
+            expect(bo.get('processRef')).to.exist;
           });
 
           it('should undo', inject(function(commandStack) {
@@ -596,7 +596,7 @@ describe('callable-properties', function() {
             commandStack.undo();
 
             // then
-            expect(bo.get('processRefExpression')).to.be.defined;
+            expect(bo.get('processRefExpression')).to.exist;
             expect(bo.get('processRef')).to.be.undefined;
           }));
 
@@ -608,7 +608,7 @@ describe('callable-properties', function() {
 
             // then
             expect(bo.get('processRefExpression')).to.be.undefined;
-            expect(bo.get('processRef')).to.be.defined;
+            expect(bo.get('processRef')).to.exist;
           }));
 
         });
@@ -621,7 +621,7 @@ describe('callable-properties', function() {
         beforeEach(inject(function(elementRegistry, selection, propertiesPanel) {
 
           // given
-          var item = elementRegistry.get('PlanItem_DecisionTask_Valid');
+          var item = elementRegistry.get('PlanItem_CaseTask_Valid');
           selection.select(item);
 
           bo = item.businessObject.definitionRef;
@@ -667,7 +667,7 @@ describe('callable-properties', function() {
         describe('on the business object', function() {
 
           it('should execute', function() {
-            expect(bo.get('caseRefExpression')).to.be.defined;
+            expect(bo.get('caseRefExpression')).to.exist;
             expect(bo.get('caseRef')).to.be.undefined;
           });
 
@@ -677,7 +677,7 @@ describe('callable-properties', function() {
 
             // then
             expect(bo.get('caseRefExpression')).to.be.undefined;
-            expect(bo.get('caseRef')).to.be.defined;
+            expect(bo.get('caseRef')).to.exist;
           }));
 
 
@@ -687,7 +687,7 @@ describe('callable-properties', function() {
             commandStack.redo();
 
             // then
-            expect(bo.get('caseRefExpression')).to.be.defined;
+            expect(bo.get('caseRefExpression')).to.exist;
             expect(bo.get('caseRef')).to.be.undefined;
           }));
 

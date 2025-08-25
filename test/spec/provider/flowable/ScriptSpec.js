@@ -466,7 +466,7 @@ describe('script-properties', function() {
       describe('on the business object', function() {
 
         it('should execute', function() {
-          expect(listeners[0].get('class')).to.be.defined;
+          expect(listeners[0].get('class')).to.exist;
           expect(listeners[0].get('script')).to.be.undefined;
         });
 
@@ -476,7 +476,7 @@ describe('script-properties', function() {
 
           // then
           expect(listeners[0].get('class')).to.be.undefined;
-          expect(listeners[0].get('script')).to.be.defined;
+          expect(listeners[0].get('script')).to.exist;
         }));
 
         it('should redo', inject(function(commandStack) {
@@ -485,7 +485,7 @@ describe('script-properties', function() {
           commandStack.redo();
 
           // then
-          expect(listeners[0].get('class')).to.be.defined;
+          expect(listeners[0].get('class')).to.exist;
           expect(listeners[0].get('script')).to.be.undefined;
         }));
 
@@ -625,7 +625,7 @@ describe('script-properties', function() {
 
         it('should execute', function() {
           expect(listeners[0].get('script').get('value')).to.be.undefined;
-          expect(listeners[0].get('script').get('resource')).to.be.defined;
+          expect(listeners[0].get('script').get('resource')).to.exist;
         });
 
         it('should undo', inject(function(commandStack) {
@@ -633,7 +633,7 @@ describe('script-properties', function() {
           commandStack.undo();
 
           // then
-          expect(listeners[0].get('script').get('value')).to.be.defined;
+          expect(listeners[0].get('script').get('value')).to.exist;
           expect(listeners[0].get('script').get('resource')).to.be.undefined;
         }));
 
@@ -644,7 +644,7 @@ describe('script-properties', function() {
 
           // then
           expect(listeners[0].get('script').get('value')).to.be.undefined;
-          expect(listeners[0].get('script').get('resource')).to.be.defined;
+          expect(listeners[0].get('script').get('resource')).to.exist;
         }));
 
       });

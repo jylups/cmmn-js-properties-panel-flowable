@@ -524,7 +524,7 @@ describe('variable-listener-properties', function() {
       describe('on the business object', function() {
 
         it('should execute', function() {
-          expect(listeners[0].get('expression')).to.be.defined;
+          expect(listeners[0].get('expression')).to.exist;
           expect(listeners[0].get('class')).to.be.undefined;
         });
 
@@ -534,7 +534,7 @@ describe('variable-listener-properties', function() {
 
           // then
           expect(listeners[0].get('expression')).to.be.undefined;
-          expect(listeners[0].get('class')).to.be.defined;
+          expect(listeners[0].get('class')).to.exist;
         }));
 
         it('should redo', inject(function(commandStack) {
@@ -543,7 +543,7 @@ describe('variable-listener-properties', function() {
           commandStack.redo();
 
           // then
-          expect(listeners[0].get('expression')).to.be.defined;
+          expect(listeners[0].get('expression')).to.exist;
           expect(listeners[0].get('class')).to.be.undefined;
         }));
 

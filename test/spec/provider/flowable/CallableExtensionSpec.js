@@ -322,7 +322,7 @@ describe('callable-extension-properties', function() {
 
           // then
           expect(bo.get('flowable:decisionBinding')).to.equal('version');
-          expect(bo.get('flowable:decisionVersion')).to.be.defined;
+          expect(bo.get('flowable:decisionVersion')).to.exist;
         }));
 
 
@@ -550,7 +550,7 @@ describe('callable-extension-properties', function() {
           // then
           expect(bo.get('flowable:resultVariable')).to.be.undefined;
           // default value 'resultList'
-          expect(bo.get('flowable:mapDecisionResult')).to.be.defined;
+          expect(bo.get('flowable:mapDecisionResult')).to.exist;
         });
 
         it('should undo', inject(function(commandStack) {
@@ -559,7 +559,7 @@ describe('callable-extension-properties', function() {
 
           // then
           expect(bo.get('flowable:resultVariable')).to.equal('myResVar');
-          expect(bo.get('flowable:mapDecisionResult')).to.be.defined;
+          expect(bo.get('flowable:mapDecisionResult')).to.exist;
         }));
 
 
@@ -571,7 +571,7 @@ describe('callable-extension-properties', function() {
           // then
           expect(bo.get('flowable:resultVariable')).to.be.undefined;
           // default value 'resultList'
-          expect(bo.get('flowable:mapDecisionResult')).to.be.defined;
+          expect(bo.get('flowable:mapDecisionResult')).to.exist;
         }));
 
       });

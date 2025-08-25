@@ -831,7 +831,7 @@ describe('variable-mapping-properties', function() {
 
           it('should execute', function() {
             expect(variableMappings[0].get('source')).to.be.undefined;
-            expect(variableMappings[0].get('sourceExpression')).to.be.defined;
+            expect(variableMappings[0].get('sourceExpression')).to.exist;
           });
 
           it('should undo', inject(function(commandStack) {
@@ -839,7 +839,7 @@ describe('variable-mapping-properties', function() {
             commandStack.undo();
 
             // then
-            expect(variableMappings[0].get('source')).to.be.defined;
+            expect(variableMappings[0].get('source')).to.exist;
             expect(variableMappings[0].get('sourceExpression')).to.be.undefined;
           }));
 
@@ -850,7 +850,7 @@ describe('variable-mapping-properties', function() {
 
             // then
             expect(variableMappings[0].get('source')).to.be.undefined;
-            expect(variableMappings[0].get('sourceExpression')).to.be.defined;
+            expect(variableMappings[0].get('sourceExpression')).to.exist;
           }));
 
         });
@@ -912,7 +912,7 @@ describe('variable-mapping-properties', function() {
 
           it('should execute', function() {
             expect(variableMappings[0].get('sourceExpression')).to.be.undefined;
-            expect(variableMappings[0].get('variables')).to.be.defined;
+            expect(variableMappings[0].get('variables')).to.exist;
           });
 
           it('should undo', inject(function(commandStack) {
@@ -920,7 +920,7 @@ describe('variable-mapping-properties', function() {
             commandStack.undo();
 
             // then
-            expect(variableMappings[0].get('sourceExpression')).to.be.defined;
+            expect(variableMappings[0].get('sourceExpression')).to.exist;
             expect(variableMappings[0].get('variables')).to.be.undefined;
           }));
 
@@ -931,7 +931,7 @@ describe('variable-mapping-properties', function() {
 
             // then
             expect(variableMappings[0].get('sourceExpression')).to.be.undefined;
-            expect(variableMappings[0].get('variables')).to.be.defined;
+            expect(variableMappings[0].get('variables')).to.exist;
           }));
 
         });
