@@ -36,5 +36,3 @@ jobs:
         NODE_OPTIONS: --openssl-legacy-provider
         TEST_BROWSERS: ChromeHeadless
       run: npm run all
-    - name: Upload coverage
-      run: npx codecov
