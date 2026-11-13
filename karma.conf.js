@@ -5,19 +5,19 @@ var absoluteBasePath = path.resolve(__dirname);
 /* global process */
 
 // configures browsers to run test against
-// any of [ 'ChromeHeadless', 'Chrome', 'Firefox', 'IE', 'PhantomJS' ]
+// any of [ 'ChromeHeadless', 'Chrome', 'Firefox' ]
+//
+// Chrome is the installed Google Chrome (or Chromium) that karma-chrome-launcher
+// finds on the system; set CHROME_BIN to use a different binary.
 var browsers =
   (process.env.TEST_BROWSERS || 'ChromeHeadless')
     .replace(/^\s+|\s+$/, '')
     .split(/\s*,\s*/g)
     .map(function(browser) {
-      if (browser === 'ChromeHeadless') {
-        process.env.CHROME_BIN = require('puppeteer').executablePath();
 
-        // workaround https://github.com/GoogleChrome/puppeteer/issues/290
-        if (process.platform === 'linux') {
-          return 'ChromeHeadless_Linux';
-        }
+      // run without sandbox on Linux (CI containers)
+      if (browser === 'ChromeHeadless' && process.platform === 'linux') {
+        return 'ChromeHeadless_Linux';
       }
 
       return browser;
