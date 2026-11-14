@@ -48,10 +48,7 @@ jobs:
     - name: Install dependencies
       run: npm ci
 
-    # webpack 4 in the karma tests needs the legacy OpenSSL provider
     - name: Lint, test and build
-      env:
-        NODE_OPTIONS: --openssl-legacy-provider
       run: npm run all
 
     - name: Verify package contents
