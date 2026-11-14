@@ -27,7 +27,19 @@ var browsers =
 module.exports = function(karma) {
   karma.set({
 
+    // load the plugins from this package: in a workspace, karma itself may
+    // be installed next to other versions of them
+    plugins: [
+      require('karma-chrome-launcher'),
+      require('karma-firefox-launcher'),
+      require('karma-mocha'),
+      require('karma-sinon-chai'),
+      require('karma-spec-reporter'),
+      require('karma-webpack')
+    ],
+
     frameworks: [
+      'webpack',
       'mocha',
       'sinon-chai'
     ],
@@ -68,11 +80,13 @@ module.exports = function(karma) {
 
     webpack: {
       mode: 'development',
+      devtool: 'eval-source-map',
+      target: 'web',
       module: {
         rules: [
           {
-            test: /\.css|\.cmmn$/,
-            use: 'raw-loader'
+            test: /\.(css|cmmn)$/,
+            type: 'asset/source'
           }
         ]
       },

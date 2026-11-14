@@ -9,6 +9,9 @@ ___Note:__ Yet to be released changes appear here._
 * `CHORE`: use `@jylups/cmmn-js` 0.21 or later, the maintained fork of `cmmn-js`
 * `CHORE`: publish from GitHub releases with npm trusted publishing instead of a stored npm token; prereleases go to the `next` dist-tag
 * `CHORE`: build and test on Node 24 and 26
+* `CHORE`: bundle the tests with webpack 5; the tests no longer need `NODE_OPTIONS=--openssl-legacy-provider`
+* `CHORE`: declare `diagram-js` (`>=4.0.0`) as a peer dependency; the panel uses its translate module
+* `FIX`: include the translate module itself, not its module namespace, in the dependencies of the properties panel module
 
 ### Breaking Changes
 
