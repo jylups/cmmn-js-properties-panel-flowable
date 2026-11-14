@@ -9,11 +9,11 @@ var TestContainer = require('mocha-test-container-support');
 var propertiesPanelModule = require('lib'),
     domQuery = require('min-dom').query,
     domClasses = require('min-dom').classes,
-    is = require('cmmn-js/lib/util/ModelUtil').is,
+    is = require('@jylups/cmmn-js/lib/util/ModelUtil').is,
     forEach = require('lodash/forEach'),
-    coreModule = require('cmmn-js/lib/core'),
+    coreModule = require('@jylups/cmmn-js/lib/core'),
     selectionModule = require('diagram-js/lib/features/selection').default,
-    modelingModule = require('cmmn-js/lib/features/modeling'),
+    modelingModule = require('@jylups/cmmn-js/lib/features/modeling'),
     propertiesProviderModule = require('lib/provider/flowable'),
     flowableModdlePackage = require('flowable-cmmn-moddle/resources/flowable');
 

@@ -1,10 +1,16 @@
 # Changelog
 
-All notable changes to [cmmn-js-properties-panel](https://github.com/bpmn-io/cmmn-js-properties-panel) are documented here. We use [semantic versioning](http://semver.org/) for releases.
+All notable changes to [cmmn-js-properties-panel-flowable](https://github.com/jylups/cmmn-js-properties-panel-flowable) are documented here. Versions up to `0.9.0` are those of [cmmn-js-properties-panel](https://github.com/bpmn-io/cmmn-js-properties-panel) by bpmn.io. We use [semantic versioning](http://semver.org/) for releases.
 
 ## Unreleased
 
 ___Note:__ Yet to be released changes appear here._
+
+* `CHORE`: use `@jylups/cmmn-js` 0.21 or later, the maintained fork of `cmmn-js`
+
+### Breaking Changes
+
+* The peer dependency is now `@jylups/cmmn-js` (`>=0.21.0 <1.0`) instead of `cmmn-js`, and the panel loads its helpers from `@jylups/cmmn-js/lib`. Applications that use `cmmn-js` from bpmn.io must switch to `@jylups/cmmn-js`.
 
 ## 0.9.0
 

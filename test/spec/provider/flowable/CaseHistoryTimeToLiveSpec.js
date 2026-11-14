@@ -8,9 +8,9 @@ var TestContainer = require('mocha-test-container-support');
 
 var propertiesPanelModule = require('lib'),
     domQuery = require('min-dom').query,
-    coreModule = require('cmmn-js/lib/core'),
+    coreModule = require('@jylups/cmmn-js/lib/core'),
     selectionModule = require('diagram-js/lib/features/selection').default,
-    modelingModule = require('cmmn-js/lib/features/modeling'),
+    modelingModule = require('@jylups/cmmn-js/lib/features/modeling'),
     propertiesProviderModule = require('lib/provider/flowable'),
     flowableModdlePackage = require('flowable-cmmn-moddle/resources/flowable');
 

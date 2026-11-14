@@ -9,12 +9,12 @@ var TestContainer = require('mocha-test-container-support');
 var propertiesPanelModule = require('lib'),
     domQuery = require('min-dom').query,
     domClasses = require('min-dom').classes,
-    coreModule = require('cmmn-js/lib/core'),
+    coreModule = require('@jylups/cmmn-js/lib/core'),
     selectionModule = require('diagram-js/lib/features/selection').default,
-    modelingModule = require('cmmn-js/lib/features/modeling'),
+    modelingModule = require('@jylups/cmmn-js/lib/features/modeling'),
     propertiesProviderModule = require('lib/provider/flowable'),
-    getBusinessObject = require('cmmn-js/lib/util/ModelUtil').getBusinessObject,
-    getDefinition = require('cmmn-js/lib/util/ModelUtil').getDefinition;
+    getBusinessObject = require('@jylups/cmmn-js/lib/util/ModelUtil').getBusinessObject,
+    getDefinition = require('@jylups/cmmn-js/lib/util/ModelUtil').getDefinition;
 
 var find = require('lodash/find');
 
