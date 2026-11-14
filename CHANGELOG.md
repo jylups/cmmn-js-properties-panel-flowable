@@ -12,6 +12,7 @@ ___Note:__ Yet to be released changes appear here._
 * `CHORE`: bundle the tests with webpack 5; the tests no longer need `NODE_OPTIONS=--openssl-legacy-provider`
 * `CHORE`: declare `diagram-js` (`>=4.0.0`) as a peer dependency; the panel uses its translate module
 * `FIX`: include the translate module itself, not its module namespace, in the dependencies of the properties panel module
+* `CHORE`: accept the `@jylups/cmmn-js` 0.22 prereleases as peer dependency, and test against `@jylups/cmmn-js@0.22.0-next.2` with `diagram-js@12`
 
 ### Breaking Changes
 
