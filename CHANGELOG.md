@@ -7,6 +7,8 @@ All notable changes to [cmmn-js-properties-panel-flowable](https://github.com/jy
 ___Note:__ Yet to be released changes appear here._
 
 * `CHORE`: use `@jylups/cmmn-js` 0.21 or later, the maintained fork of `cmmn-js`
+* `CHORE`: publish from GitHub releases with npm trusted publishing instead of a stored npm token; prereleases go to the `next` dist-tag
+* `CHORE`: build and test on Node 24 and 26
 
 ### Breaking Changes
 
