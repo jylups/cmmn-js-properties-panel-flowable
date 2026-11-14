@@ -1,4 +1,16 @@
-name: Publish to NPM (Simple)
+name: Publish to NPM
+
+# Publishes cmmn-js-properties-panel-flowable when a GitHub release is
+# published. The release tag must match the package.json version, with or
+# without a leading v (2.0.0 or v2.0.0 for 2.0.0). A prerelease version such
+# as 2.0.0-next.0 is published under the npm dist-tag "next", so "latest"
+# keeps pointing to the last stable version.
+#
+# npm authenticates this workflow with trusted publishing (OIDC), so no npm
+# token is stored in the repository. The package's trusted publisher on
+# npmjs.com must name jylups/cmmn-js-properties-panel-flowable and this file
+# (publish-simple.yml) and allow npm publish. npm also generates a
+# provenance statement for each version.
 
 on:
   release:
@@ -6,47 +18,49 @@ on:
 
 permissions:
   contents: read
+  # lets npm request a short-lived publish token for this run
   id-token: write
 
 jobs:
   publish:
     runs-on: ubuntu-latest
-    
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
-      
+
+    # trusted publishing needs npm 11.5.1 or later; Node 26 includes it
     - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
-        node-version: '18'
+        node-version: '26'
         registry-url: 'https://registry.npmjs.org'
-        
-    - name: Cache dependencies
-      uses: actions/cache@v3
-      with:
-        path: ~/.npm
-        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-        restore-keys: |
-          ${{ runner.os }}-node-
-        
-    - name: Install dependencies
+        cache: npm
+
+    - name: Check release tag matches package version
       run: |
-        if [ -f package-lock.json ]; then
-          npm ci
-        else
-          npm install
+        VERSION="$(node -p "require('./package.json').version")"
+        if [ "${GITHUB_REF_NAME#v}" != "$VERSION" ]; then
+          echo "release tag $GITHUB_REF_NAME does not match package version $VERSION"
+          exit 1
         fi
-      
-    - name: Run tests
+
+    - name: Install dependencies
+      run: npm ci
+
+    # webpack 4 in the karma tests needs the legacy OpenSSL provider
+    - name: Lint, test and build
       env:
         NODE_OPTIONS: --openssl-legacy-provider
       run: npm run all
-      
+
     - name: Verify package contents
       run: npm pack --dry-run
-      
+
     - name: Publish to NPM
-      run: npm publish
-      env:
-        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      run: |
+        VERSION="$(node -p "require('./package.json').version")"
+        case "$VERSION" in
+          *-*) npm publish --tag next ;;
+          *) npm publish ;;
+        esac
