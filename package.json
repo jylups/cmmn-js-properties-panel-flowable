@@ -28,9 +28,9 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@jylups/cmmn-js": "^0.22.0-next.2",
+    "@jylups/cmmn-js": "^0.22.0-next.3",
     "chai": "^4.1.2",
-    "diagram-js": "^12.8.1",
+    "diagram-js": "^15.29.0",
     "eslint": "^5.2.0",
     "eslint-plugin-bpmn-io": "^0.5.3",
     "flowable-cmmn-moddle": "^1.1.0",
