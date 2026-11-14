@@ -28,9 +28,9 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "@jylups/cmmn-js": "^0.21.0",
     "babel-preset-env": "^1.7.0",
     "chai": "^4.1.2",
-    "cmmn-js": "^0.20.0",
     "diagram-js": "^5.1.1",
     "eslint": "^5.2.0",
     "eslint-plugin-bpmn-io": "^0.5.3",
@@ -60,7 +60,7 @@
     "selection-update": "^0.1.2"
   },
   "peerDependencies": {
-    "cmmn-js": ">0.3 <1.0"
+    "@jylups/cmmn-js": ">=0.21.0 <1.0"
   },
   "files": [
     "dist",

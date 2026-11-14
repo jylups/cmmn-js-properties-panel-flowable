@@ -1,8 +1,8 @@
-# cmmn-js-properties-panel
+# cmmn-js-properties-panel-flowable
 
-[![CI](https://github.com/bpmn-io/cmmn-js-properties-panel/workflows/CI/badge.svg)](https://github.com/bpmn-io/cmmn-js-properties-panel/actions?query=workflow%3ACI)
+[![CI](https://github.com/jylups/cmmn-js-properties-panel-flowable/actions/workflows/CI.yml/badge.svg)](https://github.com/jylups/cmmn-js-properties-panel-flowable/actions/workflows/CI.yml)
 
-This is properties panel extension for [cmmn-js](https://github.com/bpmn-io/cmmn-js).
+This is a properties panel extension for [@jylups/cmmn-js](https://github.com/jylups/cmmn-js), with Flowable properties. It is based on [bpmn-io/cmmn-js-properties-panel](https://github.com/bpmn-io/cmmn-js-properties-panel).
 
 
 ## Features
@@ -21,12 +21,12 @@ Provide two HTML elements, one for the properties panel and one for the CMMN dia
 </div>
 ```
 
-Bootstrap [cmmn-js](https://github.com/bpmn-io/cmmn-js) with the properties panel and a [properties provider](https://github.com/bpmn-io/cmmn-js-properties-panel/tree/master/lib/provider):
+Bootstrap [@jylups/cmmn-js](https://github.com/jylups/cmmn-js) with the properties panel and a [properties provider](./lib/provider):
 
 ```javascript
-var CmmnJS = require('cmmn-js/lib/Modeler'),
-    propertiesPanelModule = require('cmmn-js-properties-panel'),
-    propertiesProviderModule = require('cmmn-js-properties-panel/lib/provider/cmmn');
+var CmmnJS = require('@jylups/cmmn-js/lib/Modeler'),
+    propertiesPanelModule = require('cmmn-js-properties-panel-flowable'),
+    propertiesProviderModule = require('cmmn-js-properties-panel-flowable/lib/provider/cmmn');
 
 var cmmnJS = new CmmnJS({
   additionalModules: [
@@ -58,14 +58,14 @@ propertiesPanel.attachTo('#other-properties');
 
 ### Use with Flowable properties
 
-In order to be able to edit [Flowable](https://flowable.org) related properties, use the [flowable properties provider](https://github.com/bpmn-io/cmmn-js-properties-panel/tree/master/lib/provider/flowable).
-In addition, you need to define the `flowable` namespace via [flowable-cmmn-moddle](https://github.com/flowable/flowable-cmmn-moddle).
+In order to be able to edit [Flowable](https://flowable.org) related properties, use the [flowable properties provider](./lib/provider/flowable).
+In addition, you need to define the `flowable` namespace via [flowable-cmmn-moddle](https://github.com/jylups/flowable-cmmn-moddle).
 
 ```javascript
-var CmmnJS = require('cmmn-js/lib/Modeler'),
-    propertiesPanelModule = require('cmmn-js-properties-panel'),
+var CmmnJS = require('@jylups/cmmn-js/lib/Modeler'),
+    propertiesPanelModule = require('cmmn-js-properties-panel-flowable'),
     // use Flowable properties provider
-    propertiesProviderModule = require('cmmn-js-properties-panel/lib/provider/flowable');
+    propertiesProviderModule = require('cmmn-js-properties-panel-flowable/lib/provider/flowable');
 
 // a descriptor that defines Flowable related CMMN 1.1 XML extensions
 var flowableModdleDescriptor = require('flowable-cmmn-moddle/resources/flowable');
@@ -91,7 +91,7 @@ var cmmnJS = new CmmnJS({
 
 ## Additional Resources
 
-* [Issue tracker](https://github.com/bpmn-io/cmmn-js-properties-panel/issues)
+* [Issue tracker](https://github.com/jylups/cmmn-js-env/issues)
 * [Forum](https://forum.bpmn.io)
 
 

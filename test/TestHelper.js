@@ -1,6 +1,6 @@
 'use strict';
 
-var TestHelper = module.exports = require('cmmn-js/test/helper');
+var TestHelper = module.exports = require('@jylups/cmmn-js/test/helper');
 
 var domQuery = require('min-dom').query,
     domQueryAll = require('min-dom').queryAll,
@@ -11,7 +11,7 @@ TestHelper.insertCSS('diagram-js.css',
 );
 
 TestHelper.insertCSS('cmmn-embedded.css',
-  require('cmmn-js/dist/assets/cmmn-font/css/cmmn-embedded.css')
+  require('@jylups/cmmn-js/dist/assets/cmmn-font/css/cmmn-embedded.css')
 );
 TestHelper.insertCSS('properties.css', require('./assets/properties.css'));
 
