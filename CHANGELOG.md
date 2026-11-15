@@ -6,6 +6,7 @@ All notable changes to [cmmn-js-properties-panel-flowable](https://github.com/jy
 
 ___Note:__ Yet to be released changes appear here._
 
+* `CHORE`: use `flowable-cmmn-moddle@1.2.0-next.9`
 * `FEAT`: edit the remaining Flowable attributes ([jylups/cmmn-js-env#50](https://github.com/jylups/cmmn-js-env/issues/50)):
   * in Details of a stage or milestone: include in stage overview, display order and business status, the milestone variable of a milestone, and the auto complete condition of a stage or the case plan model
   * in the Rules tab, for the repetition rule of the item control and the default control: counter variable, ignore counter variable, max instance count, and the collection, element and element index variables
