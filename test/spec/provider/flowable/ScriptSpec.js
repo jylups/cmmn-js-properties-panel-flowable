@@ -133,9 +133,9 @@ describe('script-properties', function() {
       }));
 
 
-      it('should fetch the scriptFormat of a task listener', inject(function(propertiesPanel) {
+      it('should fetch the scriptFormat of a task listener as its language', inject(function(propertiesPanel) {
 
-        var field = getInput(propertiesPanel._container, 'scriptFormat');
+        var field = getInput(propertiesPanel._container, 'scriptLanguage');
 
         // when selecting element
 
@@ -211,9 +211,9 @@ describe('script-properties', function() {
       }));
 
 
-      it('should fetch the scriptFormat of a task listener', inject(function(propertiesPanel) {
+      it('should fetch the scriptFormat of a task listener as its language', inject(function(propertiesPanel) {
 
-        var field = getInput(propertiesPanel._container, 'scriptFormat');
+        var field = getInput(propertiesPanel._container, 'scriptLanguage');
 
         // when selecting element
 
@@ -267,10 +267,10 @@ describe('script-properties', function() {
 
         }));
 
-        it('should be shown if listenerType is selected and scriptFormat is empty', inject(function(propertiesPanel) {
+        it('should be shown if listenerType is selected and the language is empty', inject(function(propertiesPanel) {
 
           var listenerType = getSelect(propertiesPanel._container, 'flowable-listenerType-select');
-          var field = getInput(propertiesPanel._container, 'scriptFormat');
+          var field = getInput(propertiesPanel._container, 'scriptLanguage');
 
           // when selecting element
 
@@ -493,7 +493,7 @@ describe('script-properties', function() {
 
     });
 
-    describe('# scriptFormat', function() {
+    describe('# script language', function() {
 
       var field, listeners;
 
@@ -506,7 +506,7 @@ describe('script-properties', function() {
         var bo = item.businessObject.definitionRef;
         listeners = getTaskListeners(bo.get('extensionElements'));
 
-        field = getInput(propertiesPanel._container, 'scriptFormat');
+        field = getInput(propertiesPanel._container, 'scriptLanguage');
 
         // select existing task listener
         selectFirstListener(propertiesPanel);
@@ -546,7 +546,11 @@ describe('script-properties', function() {
       describe('on the business object', function() {
 
         it('should execute', function() {
-          expect(listeners[0].get('script').get('scriptFormat')).to.equal('FOO');
+
+          // the Flowable form
+          expect(listeners[0].get('script').get('language')).to.equal('FOO');
+          expect(listeners[0].get('script').get('scriptFormat')).to.be.undefined;
+          expect(listeners[0].get('type')).to.equal('script');
         });
 
         it('should undo', inject(function(commandStack) {
@@ -554,7 +558,9 @@ describe('script-properties', function() {
           commandStack.undo();
 
           // then
+          expect(listeners[0].get('script').get('language')).to.be.undefined;
           expect(listeners[0].get('script').get('scriptFormat')).to.equal('groovy');
+          expect(listeners[0].get('type')).to.be.undefined;
         }));
 
         it('should redo', inject(function(commandStack) {
@@ -563,7 +569,8 @@ describe('script-properties', function() {
           commandStack.redo();
 
           // then
-          expect(listeners[0].get('script').get('scriptFormat')).to.equal('FOO');
+          expect(listeners[0].get('script').get('language')).to.equal('FOO');
+          expect(listeners[0].get('type')).to.equal('script');
         }));
 
       });
@@ -577,7 +584,7 @@ describe('script-properties', function() {
       beforeEach(inject(function(elementRegistry, selection, propertiesPanel) {
 
         // given
-        var item = elementRegistry.get('PlanItem_HumanTask_Script');
+        var item = elementRegistry.get('PlanItem_HumanTask_Script_EXTERNAL');
         selection.select(item);
 
         var bo = item.businessObject.definitionRef;
@@ -589,8 +596,8 @@ describe('script-properties', function() {
         selectFirstListener(propertiesPanel);
 
         // when
-        // select 'external'
-        field.selectedIndex = 1;
+        // select 'inline'
+        field.selectedIndex = 0;
         TestHelper.triggerEvent(field, 'change');
 
       }));
@@ -599,7 +606,7 @@ describe('script-properties', function() {
       describe('in the DOM', function() {
 
         it('should execute', function() {
-          expect(field.value).to.equal('external');
+          expect(field.value).to.equal('inline');
         });
 
         it('should undo', inject(function(commandStack) {
@@ -607,7 +614,7 @@ describe('script-properties', function() {
           commandStack.undo();
 
           // then
-          expect(field.value).to.equal('inline');
+          expect(field.value).to.equal('external');
         }));
 
         it('should redo', inject(function(commandStack) {
@@ -616,7 +623,7 @@ describe('script-properties', function() {
           commandStack.redo();
 
           // then
-          expect(field.value).to.equal('external');
+          expect(field.value).to.equal('inline');
         }));
 
       });
@@ -624,8 +631,7 @@ describe('script-properties', function() {
       describe('on the business object', function() {
 
         it('should execute', function() {
-          expect(listeners[0].get('script').get('value')).to.be.undefined;
-          expect(listeners[0].get('script').get('resource')).to.exist;
+          expect(listeners[0].get('script').get('resource')).to.be.undefined;
         });
 
         it('should undo', inject(function(commandStack) {
@@ -633,8 +639,7 @@ describe('script-properties', function() {
           commandStack.undo();
 
           // then
-          expect(listeners[0].get('script').get('value')).to.exist;
-          expect(listeners[0].get('script').get('resource')).to.be.undefined;
+          expect(listeners[0].get('script').get('resource')).to.equal('myScript.js');
         }));
 
         it('should redo', inject(function(commandStack) {
@@ -643,8 +648,7 @@ describe('script-properties', function() {
           commandStack.redo();
 
           // then
-          expect(listeners[0].get('script').get('value')).to.be.undefined;
-          expect(listeners[0].get('script').get('resource')).to.exist;
+          expect(listeners[0].get('script').get('resource')).to.be.undefined;
         }));
 
       });
@@ -807,5 +811,120 @@ describe('script-properties', function() {
 
   });
 
+
+
+
+  describe('Flowable form', function() {
+
+    var listeners;
+
+    beforeEach(inject(function(elementRegistry, selection, propertiesPanel) {
+
+      // given
+      var item = elementRegistry.get('PlanItem_HumanTask_Script_Flowable');
+      selection.select(item);
+
+      listeners = getTaskListeners(item.businessObject.definitionRef.get('extensionElements'));
+
+      selectFirstListener(propertiesPanel);
+    }));
+
+
+    it('should show the language, script and result variable', inject(function(propertiesPanel) {
+
+      // then
+      var container = propertiesPanel._container;
+
+      expect(getSelect(container, 'flowable-listenerType-select').value).to.equal('script');
+      expect(getInput(container, 'scriptLanguage').value).to.equal('javascript');
+      expect(getTextbox(container, 'value').textContent).to.equal('myScript');
+      expect(getInput(container, 'scriptResultVariable').value).to.equal('result');
+
+      // no external resource for a Flowable script
+      expect(domClasses(domQuery('[data-entry="scriptType"]', container)).has('cpp-hidden')).to.be.true;
+    }));
+
+
+    it('should change the result variable', inject(function(propertiesPanel, commandStack) {
+
+      // when
+      TestHelper.triggerValue(getInput(propertiesPanel._container, 'scriptResultVariable'), 'output', 'change');
+
+      // then
+      expect(listeners[0].get('script').get('resultVariable')).to.equal('output');
+
+      // when
+      commandStack.undo();
+
+      // then
+      expect(listeners[0].get('script').get('resultVariable')).to.equal('result');
+    }));
+
+
+    it('should remove type="script" with another listener type', inject(function(propertiesPanel) {
+
+      // when
+      var field = getSelect(propertiesPanel._container, 'flowable-listenerType-select');
+
+      field.selectedIndex = 0;
+      TestHelper.triggerEvent(field, 'change');
+
+      // then
+      expect(listeners[0].get('type')).to.be.undefined;
+      expect(listeners[0].get('script')).to.be.undefined;
+      expect(listeners[0].get('class')).to.equal('');
+    }));
+
+  });
+
+
+  it('should write type="script" for a new script listener', inject(function(elementRegistry, selection, propertiesPanel) {
+
+    // given
+    var item = elementRegistry.get('PlanItem_HumanTask_Script_EXTERNAL'),
+        listeners;
+
+    selection.select(item);
+
+    listeners = getTaskListeners(item.businessObject.definitionRef.get('extensionElements'));
+
+    // a new task listener, with a Java class
+    TestHelper.triggerEvent(
+      domQuery('[data-entry="taskListeners"] button[data-action="createElement"]', propertiesPanel._container),
+      'click'
+    );
+
+    listeners = getTaskListeners(item.businessObject.definitionRef.get('extensionElements'));
+
+    var list = getSelect(propertiesPanel._container, 'flowable-extensionElements-taskListeners');
+
+    list.selectedIndex = 1;
+    TestHelper.triggerEvent(list, 'change');
+
+    // when
+    var field = getSelect(propertiesPanel._container, 'flowable-listenerType-select');
+
+    field.value = 'script';
+    TestHelper.triggerEvent(field, 'change');
+
+    // then
+    expect(listeners[1].get('type')).to.equal('script');
+    expect(listeners[1].get('script').$type).to.equal('flowable:Script');
+  }));
+
+
+  it('should warn about a script without type="script"', inject(function(elementRegistry, selection, propertiesPanel) {
+
+    // given
+    selection.select(elementRegistry.get('PlanItem_HumanTask_Script'));
+
+    // when
+    selectFirstListener(propertiesPanel);
+
+    // then
+    var entry = domQuery('[data-entry="scriptLanguage"]', propertiesPanel._container);
+
+    expect(entry.textContent).to.contain('type="script"');
+  }));
 
 });
