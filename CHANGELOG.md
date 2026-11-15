@@ -6,6 +6,7 @@ All notable changes to [cmmn-js-properties-panel-flowable](https://github.com/jy
 
 ___Note:__ Yet to be released changes appear here._
 
+* `FEAT`: edit the Flowable item control rules in the Rules tab ([jylups/cmmn-js-env#44](https://github.com/jylups/cmmn-js-env/issues/44)): parent completion, completion neutral with its condition, and the reactivation conditions of the item control of a plan item and the default control of its definition, and the default reactivation rule of an event listener that reactivates the case
 * `FEAT`: edit lifecycle listeners in the Listener tab ([jylups/cmmn-js-env#44](https://github.com/jylups/cmmn-js-env/issues/44)): `flowable:planItemLifecycleListener` of tasks, stages, milestones and event listeners, and `flowable:caseLifecycleListener` of the case, selected through its case plan model; each with its source and target state, implementation and fields
 * `FEAT`: edit the Flowable task attributes ([jylups/cmmn-js-env#44](https://github.com/jylups/cmmn-js-env/issues/44)):
   * an Implementation group for a plain task: its `flowable:type` (java, script, HTTP, external worker, case page, send event, mail) and the fields of that type; a new type removes the attributes only the previous type uses
