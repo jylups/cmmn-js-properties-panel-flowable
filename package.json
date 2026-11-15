@@ -33,7 +33,7 @@
     "diagram-js": "^15.29.0",
     "eslint": "^5.2.0",
     "eslint-plugin-bpmn-io": "^0.5.3",
-    "flowable-cmmn-moddle": "^1.2.0-next.2",
+    "flowable-cmmn-moddle": "^1.2.0-next.4",
     "karma": "^4.1.0",
     "karma-chrome-launcher": "^2.2.0",
     "karma-firefox-launcher": "^1.0.1",

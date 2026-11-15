@@ -326,3 +326,54 @@ label.cpp-hidden {
 @import "./header";
 @import "./groups";
 @import "./tabs";
+
+// read-only view of extension attributes and elements
+.cpp-extensions {
+  font-size: 12px;
+  overflow-x: auto;
+
+  .cpp-extensions-attributes {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 2px 8px;
+    margin: 2px 0 4px;
+
+    dt {
+      font-family: monospace;
+      color: #666;
+    }
+
+    dd {
+      margin: 0;
+      word-break: break-all;
+    }
+  }
+
+  .cpp-extensions-elements {
+    list-style: none;
+    margin: 0;
+    padding-left: 0;
+
+    .cpp-extensions-elements {
+      padding-left: 12px;
+      border-left: 1px solid #ddd;
+    }
+
+    li {
+      margin: 4px 0;
+    }
+  }
+
+  .cpp-extensions-name {
+    font-family: monospace;
+    font-weight: bold;
+  }
+
+  .cpp-extensions-text {
+    margin: 2px 0;
+    padding: 2px 4px;
+    background: #f6f6f6;
+    white-space: pre-wrap;
+    word-break: break-all;
+  }
+}
