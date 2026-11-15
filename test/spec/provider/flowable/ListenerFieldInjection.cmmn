@@ -14,6 +14,8 @@
       <cmmn:planItem id="PlanItem_Task_Invalid" name="PlanItem_Task_Invalid" definitionRef="Task_17mfnxw" />
       <cmmn:planItem id="PlanItem_Task_StringValue" name="PlanItem_Task_StringValue" definitionRef="Task_1xnj0nl" />
       <cmmn:planItem id="PlanItem_HumanTask_Expression" name="PlanItem_HumanTask_Expression" definitionRef="HumanTask_1opdmw4" />
+      <cmmn:planItem id="PlanItem_Task_CmmnString" name="PlanItem_Task_CmmnString" definitionRef="Task_CmmnString" />
+      <cmmn:planItem id="PlanItem_HumanTask_CmmnExpression" name="PlanItem_HumanTask_CmmnExpression" definitionRef="HumanTask_CmmnExpression" />
       <cmmn:task id="Task_1">
         <cmmn:extensionElements>
           <flowable:caseExecutionListener event="complete" class="myClass">
@@ -50,6 +52,20 @@
           </flowable:taskListener>
         </cmmn:extensionElements>
       </cmmn:humanTask>
+      <cmmn:task id="Task_CmmnString">
+        <cmmn:extensionElements>
+          <flowable:caseExecutionListener event="complete" class="myClass">
+            <flowable:field name="myListener"><cmmn:string>myListenerValue</cmmn:string></flowable:field>
+          </flowable:caseExecutionListener>
+        </cmmn:extensionElements>
+      </cmmn:task>
+      <cmmn:humanTask id="HumanTask_CmmnExpression">
+        <cmmn:extensionElements>
+          <flowable:taskListener event="create" class="myClass">
+            <flowable:field name="myListener"><cmmn:expression>myListenerValue</cmmn:expression></flowable:field>
+          </flowable:taskListener>
+        </cmmn:extensionElements>
+      </cmmn:humanTask>
     </cmmn:casePlanModel>
   </cmmn:case>
   <cmmndi:CMMNDI>
@@ -77,6 +93,14 @@
       </cmmndi:CMMNShape>
       <cmmndi:CMMNShape id="PlanItem_05wy30z_di" cmmnElementRef="PlanItem_HumanTask_Expression">
         <dc:Bounds x="278" y="233" width="100" height="80" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="PlanItem_Task_CmmnString_di" cmmnElementRef="PlanItem_Task_CmmnString">
+        <dc:Bounds x="150" y="350" width="100" height="80" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="PlanItem_HumanTask_CmmnExpression_di" cmmnElementRef="PlanItem_HumanTask_CmmnExpression">
+        <dc:Bounds x="278" y="350" width="100" height="80" />
         <cmmndi:CMMNLabel />
       </cmmndi:CMMNShape>
     </cmmndi:CMMNDiagram>
