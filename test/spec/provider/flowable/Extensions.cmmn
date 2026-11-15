@@ -15,6 +15,7 @@
         <cmmn:entryCriterion id="EC_1" sentryRef="Sentry_1" />
       </cmmn:planItem>
       <cmmn:planItem id="PI_Plain" definitionRef="Task_2" />
+      <cmmn:planItem id="PI_Process" definitionRef="ProcessTask_1" />
       <cmmn:sentry id="Sentry_1">
         <cmmn:extensionElements>
           <flowable:condition group="true" match="all">
@@ -22,7 +23,7 @@
           </flowable:condition>
         </cmmn:extensionElements>
       </cmmn:sentry>
-      <cmmn:task id="Task_1" flowable:type="java" flowable:async="true">
+      <cmmn:task id="Task_1" flowable:type="java" flowable:async="true" flowable:custom="1">
         <cmmn:extensionElements>
           <flowable:taskListener event="create" class="org.example.Listener">
             <flowable:field name="greeting">
@@ -35,6 +36,7 @@
         </cmmn:extensionElements>
       </cmmn:task>
       <cmmn:task id="Task_2" />
+      <cmmn:processTask id="ProcessTask_1" />
     </cmmn:casePlanModel>
   </cmmn:case>
   <cmmndi:CMMNDI>
@@ -50,6 +52,9 @@
       </cmmndi:CMMNShape>
       <cmmndi:CMMNShape id="DI_PI_Plain" cmmnElementRef="PI_Plain">
         <dc:Bounds x="350" y="100" width="100" height="80" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_PI_Process" cmmnElementRef="PI_Process">
+        <dc:Bounds x="350" y="250" width="100" height="80" />
       </cmmndi:CMMNShape>
     </cmmndi:CMMNDiagram>
   </cmmndi:CMMNDI>
