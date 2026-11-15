@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cmmn:definitions xmlns:dc="http://www.omg.org/spec/CMMN/20151109/DC" xmlns:cmmndi="http://www.omg.org/spec/CMMN/20151109/CMMNDI" xmlns:cmmn="http://www.omg.org/spec/CMMN/20151109/MODEL" xmlns:flowable="http://flowable.org/cmmn" id="FlowableAttributes" targetNamespace="http://bpmn.io/schema/cmmn">
+  <cmmn:case id="Case_1">
+    <cmmn:casePlanModel id="CasePlanModel_1" name="Plan" flowable:autoCompleteCondition="${planDone}">
+      <cmmn:planItem id="PI_Stage" definitionRef="Stage_1">
+        <cmmn:itemControl id="ItemControl_Stage">
+          <cmmn:repetitionRule id="RepetitionRule_Stage" flowable:counterVariable="count" flowable:maxInstanceCount="unlimited" flowable:collectionVariable="${orders}" flowable:elementVariable="order" flowable:elementIndexVariable="orderIndex" flowable:ignoreCounterVariable="true" />
+        </cmmn:itemControl>
+        <cmmn:exitCriterion id="ExitCriterion_Stage" sentryRef="Sentry_Stage" flowable:exitEventType="complete" flowable:exitType="activeInstances" />
+      </cmmn:planItem>
+      <cmmn:planItem id="PI_Milestone" definitionRef="Milestone_1" />
+      <cmmn:planItem id="PI_Task" definitionRef="Task_1">
+        <cmmn:entryCriterion id="EntryCriterion_Task" sentryRef="Sentry_Task" />
+        <cmmn:exitCriterion id="ExitCriterion_Task" sentryRef="Sentry_Exit" />
+      </cmmn:planItem>
+      <cmmn:planItem id="PI_Plain" definitionRef="Task_2" />
+      <cmmn:sentry id="Sentry_Stage" />
+      <cmmn:sentry id="Sentry_Task" flowable:triggerMode="onEvent" />
+      <cmmn:sentry id="Sentry_Exit" />
+      <cmmn:sentry id="Sentry_Plan" />
+      <cmmn:stage id="Stage_1" name="Review" flowable:includeInStageOverview="false" flowable:displayOrder="20" flowable:businessStatus="inReview" />
+      <cmmn:milestone id="Milestone_1" name="Approved" flowable:milestoneVariable="approved" />
+      <cmmn:task id="Task_1" name="Check">
+        <cmmn:defaultControl id="DefaultControl_Task">
+          <cmmn:repetitionRule id="RepetitionRule_Default" flowable:collectionVariable="items" />
+        </cmmn:defaultControl>
+      </cmmn:task>
+      <cmmn:task id="Task_2" name="Plain" />
+      <cmmn:exitCriterion id="ExitCriterion_Plan" sentryRef="Sentry_Plan" />
+    </cmmn:casePlanModel>
+  </cmmn:case>
+  <cmmndi:CMMNDI>
+    <cmmndi:CMMNDiagram id="Diagram_1">
+      <cmmndi:CMMNShape id="DI_CasePlanModel_1" cmmnElementRef="CasePlanModel_1">
+        <dc:Bounds x="20" y="20" width="700" height="400" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_ExitCriterion_Plan" cmmnElementRef="ExitCriterion_Plan">
+        <dc:Bounds x="710" y="200" width="20" height="28" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_PI_Stage" cmmnElementRef="PI_Stage">
+        <dc:Bounds x="60" y="60" width="250" height="150" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_ExitCriterion_Stage" cmmnElementRef="ExitCriterion_Stage">
+        <dc:Bounds x="300" y="120" width="20" height="28" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_PI_Milestone" cmmnElementRef="PI_Milestone">
+        <dc:Bounds x="400" y="80" width="100" height="40" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_PI_Task" cmmnElementRef="PI_Task">
+        <dc:Bounds x="400" y="250" width="100" height="80" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_EntryCriterion_Task" cmmnElementRef="EntryCriterion_Task">
+        <dc:Bounds x="390" y="276" width="20" height="28" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_ExitCriterion_Task" cmmnElementRef="ExitCriterion_Task">
+        <dc:Bounds x="490" y="276" width="20" height="28" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_PI_Plain" cmmnElementRef="PI_Plain">
+        <dc:Bounds x="100" y="280" width="100" height="80" />
+      </cmmndi:CMMNShape>
+    </cmmndi:CMMNDiagram>
+  </cmmndi:CMMNDI>
+</cmmn:definitions>
