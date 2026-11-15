@@ -333,6 +333,61 @@ describe('listener-fieldInjection - properties', function() {
     });
 
 
+    [
+      [ 'caseExecutionListener with string element in the CMMN namespace',
+        'PlanItem_Task_CmmnString', CASE_EXECUTION_LISTENER_TYPE,
+        CASE_EXECUTION_LISTENER_SELECT_ELEMENT, 'string', 'cmmnString', 'cmmn:String' ],
+      [ 'taskListener with expression element in the CMMN namespace',
+        'PlanItem_HumanTask_CmmnExpression', TASK_LISTENER_TYPE,
+        TASK_LISTENER_SELECT_ELEMENT, 'expression', 'cmmnExpression', 'cmmn:Expression' ]
+    ].forEach(function(spec) {
+
+      var title = spec[0], planItemId = spec[1], listenerType = spec[2],
+          listenerSelect = spec[3], fieldType = spec[4], property = spec[5],
+          elementType = spec[6];
+
+      describe('#' + title, function() {
+
+        var camundaField;
+
+        beforeEach(inject(function(propertiesPanel, elementRegistry, selection) {
+          var shape = elementRegistry.get(planItemId);
+          selection.select(shape);
+
+          var bo = getBusinessObject(shape).definitionRef;
+          camundaField = getCamundaFields(bo, listenerType, 0)[0];
+
+          // select listener
+          selectOption(propertiesPanel._container, listenerSelect);
+          // select field
+          selectOption(propertiesPanel._container, FIELDS_SELECT_ELEMENT);
+
+        }));
+
+
+        it('fieldType', inject(function(propertiesPanel) {
+
+          var field = getSelect(propertiesPanel._container, FIELD_TYPE_ELEMENT);
+
+          expect(field.value).to.equal(fieldType);
+
+        }));
+
+        it('fieldValue', inject(function(propertiesPanel) {
+
+          var field = getTextbox(propertiesPanel._container, FIELD_VALUE_ELEMENT);
+
+          expect(field.textContent).to.equal('myListenerValue');
+          expect(camundaField.get(property).$type).to.equal(elementType);
+          expect(camundaField.get(property).body).to.equal('myListenerValue');
+
+        }));
+
+      });
+
+    });
+
+
   });
 
 
@@ -594,6 +649,97 @@ describe('listener-fieldInjection - properties', function() {
           expect(camundaField.get('expressionElement').body).to.equal('${foo}');
           expect(camundaField.get('expression')).not.to.exist;
         }));
+
+      });
+
+    });
+
+
+    [
+      [ 'caseExecutionListener with string element in the CMMN namespace',
+        'PlanItem_Task_CmmnString', CASE_EXECUTION_LISTENER_TYPE,
+        CASE_EXECUTION_LISTENER_SELECT_ELEMENT, 'cmmnString', 'string', 'string' ],
+      [ 'taskListener with expression element in the CMMN namespace',
+        'PlanItem_HumanTask_CmmnExpression', TASK_LISTENER_TYPE,
+        TASK_LISTENER_SELECT_ELEMENT, 'cmmnExpression', 'expression', 'expressionElement' ]
+    ].forEach(function(spec) {
+
+      var title = spec[0], planItemId = spec[1], listenerType = spec[2],
+          listenerSelect = spec[3], property = spec[4], tagName = spec[5],
+          flowableProperty = spec[6];
+
+      describe('#' + title, function() {
+
+        var camundaField, valueElement, field;
+
+        beforeEach(inject(function(propertiesPanel, elementRegistry, selection) {
+          var shape = elementRegistry.get(planItemId);
+          selection.select(shape);
+
+          var bo = getBusinessObject(shape).definitionRef;
+          camundaField = getCamundaFields(bo, listenerType, 0)[0];
+          valueElement = camundaField.get(property);
+
+          // select listener
+          selectOption(propertiesPanel._container, listenerSelect);
+          // select field
+          selectOption(propertiesPanel._container, FIELDS_SELECT_ELEMENT);
+
+          field = getTextbox(propertiesPanel._container, FIELD_VALUE_ELEMENT);
+
+          TestHelper.triggerValue(field, '${foo}', 'change');
+        }));
+
+
+        describe('#fieldValue keeps the element in the CMMN namespace', function() {
+
+          it('should execute', function() {
+            expect(field.textContent).to.equal('${foo}');
+            expect(camundaField.get(property)).to.equal(valueElement);
+            expect(valueElement.body).to.equal('${foo}');
+            expect(valueElement.id).not.to.exist;
+            expect(camundaField.get(flowableProperty)).not.to.exist;
+          });
+
+          it('should undo', inject(function(commandStack) {
+
+            commandStack.undo();
+
+            expect(field.textContent).to.equal('myListenerValue');
+            expect(valueElement.body).to.equal('myListenerValue');
+          }));
+
+          it('should redo', inject(function(commandStack) {
+
+            commandStack.undo();
+            commandStack.redo();
+
+            expect(valueElement.body).to.equal('${foo}');
+            expect(camundaField.get(flowableProperty)).not.to.exist;
+          }));
+
+          it('should save', function(done) {
+
+            inject(function(cmmnjs) {
+
+              cmmnjs.saveXML({ format: false }, function(err, xml) {
+
+                try {
+                  expect(err).not.to.exist;
+                  expect(xml).to.contain(
+                    '<flowable:field name="myListener">' +
+                      '<cmmn:' + tagName + '>${foo}</cmmn:' + tagName + '>' +
+                    '</flowable:field>');
+
+                  done();
+                } catch (e) {
+                  done(e);
+                }
+              });
+            })();
+          });
+
+        });
 
       });
 

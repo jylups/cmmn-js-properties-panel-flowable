@@ -14,8 +14,9 @@ ___Note:__ Yet to be released changes appear here._
 * `FIX`: include the translate module itself, not its module namespace, in the dependencies of the properties panel module
 * `CHORE`: accept the `@jylups/cmmn-js` 0.22 prereleases as peer dependency, and test against `@jylups/cmmn-js@0.22.0-next.3` with `diagram-js@15`
 * `FIX`: show and edit a field injection expression written as a `<flowable:expression>` child element, and keep it in that form
+* `FIX`: show and edit a field injection value written as a `<string>` or `<expression>` child element in the CMMN namespace, and keep it in that form
 * `FIX`: validate the ID of an element without a reference, which threw with `moddle@8`
-* `CHORE`: test against `@jylups/cmmn-js@0.22.0-next.4` (on `@jylups/cmmn-moddle@6`) and `flowable-cmmn-moddle@1.2.0-next.1`
+* `CHORE`: test against `@jylups/cmmn-js@0.22.0-next.4` (on `@jylups/cmmn-moddle@6`) and `flowable-cmmn-moddle@1.2.0-next.2`
 
 ### Breaking Changes
 
