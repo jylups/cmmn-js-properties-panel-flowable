@@ -325,7 +325,8 @@ describe('listener-fieldInjection - properties', function() {
 
         var field = getTextbox(propertiesPanel._container, FIELD_VALUE_ELEMENT);
 
-        expect(field.textContent).to.equal(camundaField.get('expression'));
+        expect(field.textContent).to.equal('myListenerValue');
+        expect(camundaField.get('expressionElement').body).to.equal('myListenerValue');
 
       }));
 
@@ -543,6 +544,58 @@ describe('listener-fieldInjection - properties', function() {
 
       });
 
+
+    });
+
+
+    describe('#taskListener with expression element', function() {
+
+      var camundaField, field;
+
+      beforeEach(inject(function(propertiesPanel, elementRegistry, selection) {
+        var shape = elementRegistry.get('PlanItem_HumanTask_Expression');
+        selection.select(shape);
+
+        var bo = getBusinessObject(shape).definitionRef;
+        camundaField = getCamundaFields(bo, TASK_LISTENER_TYPE, 0)[0];
+
+        // select listener
+        selectOption(propertiesPanel._container, TASK_LISTENER_SELECT_ELEMENT);
+        // select field
+        selectOption(propertiesPanel._container, FIELDS_SELECT_ELEMENT);
+
+        field = getTextbox(propertiesPanel._container, FIELD_VALUE_ELEMENT);
+
+        TestHelper.triggerValue(field, '${foo}', 'change');
+      }));
+
+
+      describe('#fieldValue keeps the expression element', function() {
+
+        it('should execute', function() {
+          expect(field.textContent).to.equal('${foo}');
+          expect(camundaField.get('expressionElement').body).to.equal('${foo}');
+          expect(camundaField.get('expression')).not.to.exist;
+        });
+
+        it('should undo', inject(function(commandStack) {
+
+          commandStack.undo();
+
+          expect(field.textContent).to.equal('myListenerValue');
+          expect(camundaField.get('expressionElement').body).to.equal('myListenerValue');
+        }));
+
+        it('should redo', inject(function(commandStack) {
+
+          commandStack.undo();
+          commandStack.redo();
+
+          expect(camundaField.get('expressionElement').body).to.equal('${foo}');
+          expect(camundaField.get('expression')).not.to.exist;
+        }));
+
+      });
 
     });
 
