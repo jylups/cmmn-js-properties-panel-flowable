@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cmmn:definitions xmlns:dc="http://www.omg.org/spec/CMMN/20151109/DC" xmlns:cmmndi="http://www.omg.org/spec/CMMN/20151109/CMMNDI" xmlns:cmmn="http://www.omg.org/spec/CMMN/20151109/MODEL" xmlns:flowable="http://flowable.org/cmmn" id="Test" targetNamespace="http://bpmn.io/schema/cmmn">
+  <cmmn:case id="Case_1" flowable:initiatorVariableName="initiator">
+    <cmmn:extensionElements>
+      <flowable:eventType>orderReceived</flowable:eventType>
+      <flowable:startEventCorrelationConfiguration>storeAsUniqueReferenceId</flowable:startEventCorrelationConfiguration>
+    </cmmn:extensionElements>
+    <cmmn:casePlanModel id="CasePlanModel_1" name="A CasePlanModel">
+      <cmmn:planItem id="PI_Task" definitionRef="Task_1">
+        <cmmn:itemControl id="ItemControl_1">
+          <cmmn:extensionElements>
+            <flowable:parentCompletionRule type="ignore" />
+          </cmmn:extensionElements>
+        </cmmn:itemControl>
+        <cmmn:entryCriterion id="EC_1" sentryRef="Sentry_1" />
+      </cmmn:planItem>
+      <cmmn:planItem id="PI_Plain" definitionRef="Task_2" />
+      <cmmn:sentry id="Sentry_1">
+        <cmmn:extensionElements>
+          <flowable:condition group="true" match="all">
+            <flowable:condition sourceName="approved" operator="equals" />
+          </flowable:condition>
+        </cmmn:extensionElements>
+      </cmmn:sentry>
+      <cmmn:task id="Task_1" flowable:type="java" flowable:async="true">
+        <cmmn:extensionElements>
+          <flowable:taskListener event="create" class="org.example.Listener">
+            <flowable:field name="greeting">
+              <flowable:string>&lt;hello&gt;</flowable:string>
+            </flowable:field>
+          </flowable:taskListener>
+          <flowable:customElement customAttribute="1">
+            <flowable:nested>value</flowable:nested>
+          </flowable:customElement>
+        </cmmn:extensionElements>
+      </cmmn:task>
+      <cmmn:task id="Task_2" />
+    </cmmn:casePlanModel>
+  </cmmn:case>
+  <cmmndi:CMMNDI>
+    <cmmndi:CMMNDiagram id="Diagram_1">
+      <cmmndi:CMMNShape id="DI_CasePlanModel_1" cmmnElementRef="CasePlanModel_1">
+        <dc:Bounds x="20" y="20" width="600" height="400" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_PI_Task" cmmnElementRef="PI_Task">
+        <dc:Bounds x="150" y="100" width="100" height="80" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_EC_1" cmmnElementRef="EC_1">
+        <dc:Bounds x="140" y="126" width="20" height="28" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_PI_Plain" cmmnElementRef="PI_Plain">
+        <dc:Bounds x="350" y="100" width="100" height="80" />
+      </cmmndi:CMMNShape>
+    </cmmndi:CMMNDiagram>
+  </cmmndi:CMMNDI>
+</cmmn:definitions>
