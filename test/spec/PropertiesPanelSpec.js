@@ -259,4 +259,62 @@ describe('properties-panel', function() {
     // Cf. https://developer.mozilla.org/en-US/docs/Web/API/Element/paste_event
     it('should paste to [contenteditable] as plain text');
   });
+
+
+  describe('element without a business object', function() {
+
+    var Modeler = require('@jylups/cmmn-js/lib/Modeler');
+
+
+    it('should show nothing', inject(function(propertiesPanel) {
+
+      // given
+      propertiesPanel.attachTo(container);
+
+      // when
+      propertiesPanel.update({ id: '__implicitroot_1' });
+
+      // then
+      expect(propertiesPanel._current).not.to.exist;
+      expect(domQuery('.cpp-properties', container)).not.to.exist;
+    }));
+
+
+    it('should show an element again', inject(function(propertiesPanel, elementRegistry, selection) {
+
+      // given
+      propertiesPanel.attachTo(container);
+      selection.select(elementRegistry.get('PlanItem_1'));
+
+      propertiesPanel.update({ id: '__implicitroot_1' });
+
+      // when
+      selection.select(elementRegistry.get('PlanItem_1'));
+
+      // then
+      expect(domQuery('.cpp-properties', container)).to.exist;
+      expect(domQuery('[data-label-id]', container).textContent).to.exist;
+    }));
+
+
+    it('should ignore the implicit root of an empty canvas', function() {
+
+      // given
+      var modeler = new Modeler({
+        container: container,
+        additionalModules: [ propertiesPanelModule, propertiesProviderModule ],
+        propertiesPanel: { parent: container }
+      });
+
+      // when
+      var root = modeler.get('canvas').getRootElement();
+
+      // then
+      expect(root.businessObject).not.to.exist;
+      expect(modeler.get('propertiesPanel')._current).not.to.exist;
+
+      modeler.destroy();
+    });
+
+  });
 });
