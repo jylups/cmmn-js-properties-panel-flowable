@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cmmn:definitions xmlns:dc="http://www.omg.org/spec/CMMN/20151109/DC" xmlns:cmmndi="http://www.omg.org/spec/CMMN/20151109/CMMNDI" xmlns:cmmn="http://www.omg.org/spec/CMMN/20151109/MODEL" xmlns:flowable="http://flowable.org/cmmn" id="Test" targetNamespace="http://bpmn.io/schema/cmmn">
+  <cmmn:case id="Case_1">
+    <cmmn:casePlanModel id="CasePlanModel_1" name="A CasePlanModel">
+      <cmmn:planItem id="PI_Java" definitionRef="Task_Java" />
+      <cmmn:planItem id="PI_CasePage" definitionRef="Task_CasePage" />
+      <cmmn:planItem id="PI_Plain" definitionRef="Task_Plain" />
+      <cmmn:planItem id="PI_Async" definitionRef="Task_Async" />
+      <cmmn:planItem id="PI_Human" definitionRef="HumanTask_1" />
+      <cmmn:planItem id="PI_Process" definitionRef="ProcessTask_1" />
+      <cmmn:planItem id="PI_Decision" definitionRef="DecisionTask_1" />
+      <cmmn:task id="Task_Java" name="Java" flowable:type="java" flowable:class="org.example.Delegate" flowable:resultVariableName="result" flowable:formKey="javaForm" />
+      <cmmn:task id="Task_CasePage" name="Case Page" flowable:type="casePage" flowable:formKey="pageKey" flowable:label="Overview" />
+      <cmmn:task id="Task_Plain" name="Plain" />
+      <cmmn:task id="Task_Async" name="Async" flowable:async="true" flowable:exclusive="true" flowable:isBlockingExpression="${blocking}" />
+      <cmmn:humanTask id="HumanTask_1" name="Human" />
+      <cmmn:processTask id="ProcessTask_1" name="Process" flowable:businessKey="${key}" flowable:inheritVariables="true" flowable:idVariableName="processId" />
+      <cmmn:decisionTask id="DecisionTask_1" name="Decision" />
+    </cmmn:casePlanModel>
+  </cmmn:case>
+  <cmmndi:CMMNDI>
+    <cmmndi:CMMNDiagram id="Diagram_1">
+      <cmmndi:CMMNShape id="DI_CasePlanModel_1" cmmnElementRef="CasePlanModel_1">
+        <dc:Bounds x="20" y="20" width="620" height="300" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_PI_Java" cmmnElementRef="PI_Java">
+        <dc:Bounds x="60" y="60" width="100" height="80" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_PI_CasePage" cmmnElementRef="PI_CasePage">
+        <dc:Bounds x="200" y="60" width="100" height="80" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_PI_Plain" cmmnElementRef="PI_Plain">
+        <dc:Bounds x="340" y="60" width="100" height="80" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_PI_Async" cmmnElementRef="PI_Async">
+        <dc:Bounds x="480" y="60" width="100" height="80" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_PI_Human" cmmnElementRef="PI_Human">
+        <dc:Bounds x="60" y="180" width="100" height="80" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_PI_Process" cmmnElementRef="PI_Process">
+        <dc:Bounds x="200" y="180" width="100" height="80" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_PI_Decision" cmmnElementRef="PI_Decision">
+        <dc:Bounds x="340" y="180" width="100" height="80" />
+      </cmmndi:CMMNShape>
+    </cmmndi:CMMNDiagram>
+  </cmmndi:CMMNDI>
+</cmmn:definitions>

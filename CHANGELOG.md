@@ -6,6 +6,13 @@ All notable changes to [cmmn-js-properties-panel-flowable](https://github.com/jy
 
 ___Note:__ Yet to be released changes appear here._
 
+* `FEAT`: edit the Flowable task attributes ([jylups/cmmn-js-env#44](https://github.com/jylups/cmmn-js-env/issues/44)):
+  * an Implementation group for a plain task: its `flowable:type` (java, script, HTTP, external worker, case page, send event, mail) and the fields of that type; a new type removes the attributes only the previous type uses
+  * an Asynchronous Continuations group for every task: `async`, `exclusive`, `asyncLeave`, `asyncLeaveExclusive`
+  * in Details: the blocking expression of every task, same deployment of human, case and process tasks, and the business key expression, inherit business key, inherit variables, id variable and fallback to default tenant of case and process tasks
+* `FIX`: show only the attributes written in the model in the Extensions tab, not the defaults of the descriptor
+* `FIX`: show and disable the entries of a newly selected element for that element; selecting a case, process or decision task after another task failed with `Cannot read properties of undefined (reading 'includes')`
+* `CHORE`: use `flowable-cmmn-moddle@1.2.0-next.5`
 * `FEAT`: add a read-only Extensions tab that shows every extension of the selected element and the elements it stands for (definition, item control, default control, sentry, case, on-part): attributes of other namespaces, typed or unknown, and extension elements, typed or generic, as a tree ([jylups/cmmn-js-env#44](https://github.com/jylups/cmmn-js-env/issues/44))
 * `CHORE`: test against `flowable-cmmn-moddle@1.2.0-next.4` and `@jylups/cmmn-moddle@6.1.0`
 * `FIX`: show nothing for an element without a business object, such as the implicit root of an empty canvas, instead of failing with `bo.get is not a function` ([jylups/cmmn-js-env#42](https://github.com/jylups/cmmn-js-env/issues/42))

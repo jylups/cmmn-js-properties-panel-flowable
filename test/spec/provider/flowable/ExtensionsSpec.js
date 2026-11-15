@@ -132,7 +132,7 @@ describe('flowable - extensions', function() {
 
       var definition = getGroup('definition');
 
-      expect(topAttributes(definition)).to.eql([ 'flowable:type=java', 'flowable:async=true' ]);
+      expect(topAttributes(definition)).to.eql([ 'flowable:async=true', 'flowable:type=java', 'flowable:custom=1' ]);
       expect(elementNames(definition)).to.eql([
         'flowable:taskListener',
         '  flowable:field',
@@ -189,6 +189,17 @@ describe('flowable - extensions', function() {
   });
 
 
+  it('should not show the defaults of the descriptor', function() {
+
+    // when
+    select('PI_Process');
+
+    // then
+    expect(getGroups().filter(isVisible)).to.be.empty;
+    expect(isVisible(getTabLink())).to.be.false;
+  });
+
+
   it('should hide the tab for an element without extensions', function() {
 
     // when
@@ -209,11 +220,12 @@ describe('flowable - extensions', function() {
         definition = shape.businessObject.definitionRef;
 
     // when
-    definition.$attrs['flowable:async'] = 'false';
+    definition.set('flowable:async', false);
+    definition.$attrs['flowable:custom'] = '2';
     propertiesPanel.update(shape);
 
     // then
-    expect(topAttributes(getGroup('definition'))).to.eql([ 'flowable:type=java', 'flowable:async=false' ]);
+    expect(topAttributes(getGroup('definition'))).to.eql([ 'flowable:async=false', 'flowable:type=java', 'flowable:custom=2' ]);
   }));
 
 });
