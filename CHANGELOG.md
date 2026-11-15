@@ -6,6 +6,8 @@ All notable changes to [cmmn-js-properties-panel-flowable](https://github.com/jy
 
 ___Note:__ Yet to be released changes appear here._
 
+* `CHORE`: test against `@jylups/cmmn-js@0.22.0-next.8`
+* `FEAT`: show the problems of the selected element, from the `problems` service of `@jylups/cmmn-js`, in a Problems group at the top of the General tab ([jylups/cmmn-js-env#47](https://github.com/jylups/cmmn-js-env/issues/47))
 * `CHORE`: use `flowable-cmmn-moddle@1.2.0-next.7`
 * `FIX`: write a script listener the way Flowable reads it: `type="script"` and a `<flowable:script>` with its `language`, script and optional `resultVariable`; a script in the Camunda form (`scriptFormat`, no `type`) is shown and is changed to the Flowable form when edited, with a warning until then ([jylups/cmmn-js-env#45](https://github.com/jylups/cmmn-js-env/issues/45))
 * `FEAT`: edit event listeners and the event registry ([jylups/cmmn-js-env#44](https://github.com/jylups/cmmn-js-env/issues/44)):
