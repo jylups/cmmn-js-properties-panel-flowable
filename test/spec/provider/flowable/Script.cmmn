@@ -5,6 +5,7 @@
       <cmmn:planItem id="PlanItem_HumanTask_Script_Invalid" name="PlanItem_HumanTask_Script_Invalid" definitionRef="HumanTask_Script_Invalid" />
       <cmmn:planItem id="PlanItem_HumanTask_Script" name="PlanItem_HumanTask_Script" definitionRef="HumanTask_Script" />
       <cmmn:planItem id="PlanItem_HumanTask_Script_EXTERNAL" name="PlanItem_HumanTask_Script_EXTERNAL" definitionRef="HumanTask_Script_EXTERNAL" />
+      <cmmn:planItem id="PlanItem_HumanTask_Script_Flowable" name="PlanItem_HumanTask_Script_Flowable" definitionRef="HumanTask_Script_Flowable" />
       <cmmn:humanTask id="HumanTask_Script_Invalid" name="HumanTask_Script_Invalid">
         <cmmn:extensionElements>
           <flowable:taskListener>
@@ -23,6 +24,13 @@
         <cmmn:extensionElements>
           <flowable:taskListener event="create">
             <flowable:script scriptFormat="groovy" resource="myScript.js" />
+          </flowable:taskListener>
+        </cmmn:extensionElements>
+      </cmmn:humanTask>
+      <cmmn:humanTask id="HumanTask_Script_Flowable" name="HumanTask_Script_Flowable">
+        <cmmn:extensionElements>
+          <flowable:taskListener event="create" type="script">
+            <flowable:script language="javascript" resultVariable="result">myScript</flowable:script>
           </flowable:taskListener>
         </cmmn:extensionElements>
       </cmmn:humanTask>
@@ -45,6 +53,10 @@
       </cmmndi:CMMNShape>
       <cmmndi:CMMNShape id="PlanItem_17swmz4_di" cmmnElementRef="PlanItem_HumanTask_Script_EXTERNAL">
         <dc:Bounds x="459" y="78" width="100" height="80" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="PlanItem_Flowable_di" cmmnElementRef="PlanItem_HumanTask_Script_Flowable">
+        <dc:Bounds x="148" y="200" width="100" height="80" />
         <cmmndi:CMMNLabel />
       </cmmndi:CMMNShape>
     </cmmndi:CMMNDiagram>

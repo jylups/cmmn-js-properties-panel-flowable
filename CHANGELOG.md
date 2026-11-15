@@ -6,6 +6,8 @@ All notable changes to [cmmn-js-properties-panel-flowable](https://github.com/jy
 
 ___Note:__ Yet to be released changes appear here._
 
+* `CHORE`: use `flowable-cmmn-moddle@1.2.0-next.7`
+* `FIX`: write a script listener the way Flowable reads it: `type="script"` and a `<flowable:script>` with its `language`, script and optional `resultVariable`; a script in the Camunda form (`scriptFormat`, no `type`) is shown and is changed to the Flowable form when edited, with a warning until then ([jylups/cmmn-js-env#45](https://github.com/jylups/cmmn-js-env/issues/45))
 * `FEAT`: edit event listeners and the event registry ([jylups/cmmn-js-env#44](https://github.com/jylups/cmmn-js-env/issues/44)):
   * in Details: the kind of a generic event listener (signal, variable, intent, reactivate, or an event registry event) with its signal or variable and change type, and the available condition of every event listener
   * an Event Registry tab for a case started by an event, an event listener that waits for an event and a send event task: the event key, the start correlation of the case, the channel key and system channel of the task, the correlation parameters and the payload mapping
