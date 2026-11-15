@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cmmn:definitions xmlns:dc="http://www.omg.org/spec/CMMN/20151109/DC" xmlns:cmmndi="http://www.omg.org/spec/CMMN/20151109/CMMNDI" xmlns:cmmn="http://www.omg.org/spec/CMMN/20151109/MODEL" xmlns:flowable="http://flowable.org/cmmn" id="Test" targetNamespace="http://bpmn.io/schema/cmmn">
+  <cmmn:case id="Case_1">
+    <cmmn:extensionElements>
+      <flowable:eventType>orderReceived</flowable:eventType>
+      <flowable:startEventCorrelationConfiguration>storeAsUniqueReferenceId</flowable:startEventCorrelationConfiguration>
+      <flowable:eventCorrelationParameter name="orderId" value="${orderId}" />
+      <flowable:eventOutParameter source="customer" target="customerName" transient="true" />
+    </cmmn:extensionElements>
+    <cmmn:casePlanModel id="CasePlanModel_1" name="A CasePlanModel">
+      <cmmn:planItem id="PI_Registry" definitionRef="EventListener_Registry" />
+      <cmmn:planItem id="PI_Variable" definitionRef="EventListener_Variable" />
+      <cmmn:planItem id="PI_Signal" definitionRef="EventListener_Signal" />
+      <cmmn:planItem id="PI_User" definitionRef="UserEventListener_1" />
+      <cmmn:planItem id="PI_Send" definitionRef="Task_Send" />
+      <cmmn:planItem id="PI_Plain" definitionRef="Task_Plain" />
+      <cmmn:eventListener id="EventListener_Registry" name="Payment">
+        <cmmn:extensionElements>
+          <flowable:eventType>paymentReceived</flowable:eventType>
+          <flowable:eventCorrelationParameter name="orderId" value="${orderId}" />
+        </cmmn:extensionElements>
+      </cmmn:eventListener>
+      <cmmn:eventListener id="EventListener_Variable" name="Approved" flowable:availableCondition="${listening}" flowable:eventType="variable" flowable:variableName="approved" flowable:variableChangeType="update" />
+      <cmmn:eventListener id="EventListener_Signal" name="Cancelled" flowable:eventType="signal" flowable:signalRef="orderCancelled" />
+      <cmmn:userEventListener id="UserEventListener_1" name="User" flowable:availableCondition="${allowed}" />
+      <cmmn:task id="Task_Send" name="Send" flowable:type="send-event">
+        <cmmn:extensionElements>
+          <flowable:eventType>orderShipped</flowable:eventType>
+          <flowable:channelKey>orderChannel</flowable:channelKey>
+          <flowable:eventInParameter source="${orderId}" target="orderId" />
+        </cmmn:extensionElements>
+      </cmmn:task>
+      <cmmn:task id="Task_Plain" name="Plain" />
+    </cmmn:casePlanModel>
+  </cmmn:case>
+  <cmmndi:CMMNDI>
+    <cmmndi:CMMNDiagram id="Diagram_1">
+      <cmmndi:CMMNShape id="DI_CasePlanModel_1" cmmnElementRef="CasePlanModel_1">
+        <dc:Bounds x="20" y="20" width="620" height="300" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_PI_Registry" cmmnElementRef="PI_Registry">
+        <dc:Bounds x="80" y="80" width="36" height="36" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_PI_Variable" cmmnElementRef="PI_Variable">
+        <dc:Bounds x="180" y="80" width="36" height="36" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_PI_Signal" cmmnElementRef="PI_Signal">
+        <dc:Bounds x="280" y="80" width="36" height="36" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_PI_User" cmmnElementRef="PI_User">
+        <dc:Bounds x="380" y="80" width="36" height="36" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_PI_Send" cmmnElementRef="PI_Send">
+        <dc:Bounds x="80" y="180" width="100" height="80" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_PI_Plain" cmmnElementRef="PI_Plain">
+        <dc:Bounds x="240" y="180" width="100" height="80" />
+      </cmmndi:CMMNShape>
+    </cmmndi:CMMNDiagram>
+  </cmmndi:CMMNDI>
+</cmmn:definitions>

@@ -6,6 +6,9 @@ All notable changes to [cmmn-js-properties-panel-flowable](https://github.com/jy
 
 ___Note:__ Yet to be released changes appear here._
 
+* `FEAT`: edit event listeners and the event registry ([jylups/cmmn-js-env#44](https://github.com/jylups/cmmn-js-env/issues/44)):
+  * in Details: the kind of a generic event listener (signal, variable, intent, reactivate, or an event registry event) with its signal or variable and change type, and the available condition of every event listener
+  * an Event Registry tab for a case started by an event, an event listener that waits for an event and a send event task: the event key, the start correlation of the case, the channel key and system channel of the task, the correlation parameters and the payload mapping
 * `FEAT`: edit the Flowable item control rules in the Rules tab ([jylups/cmmn-js-env#44](https://github.com/jylups/cmmn-js-env/issues/44)): parent completion, completion neutral with its condition, and the reactivation conditions of the item control of a plan item and the default control of its definition, and the default reactivation rule of an event listener that reactivates the case
 * `FEAT`: edit lifecycle listeners in the Listener tab ([jylups/cmmn-js-env#44](https://github.com/jylups/cmmn-js-env/issues/44)): `flowable:planItemLifecycleListener` of tasks, stages, milestones and event listeners, and `flowable:caseLifecycleListener` of the case, selected through its case plan model; each with its source and target state, implementation and fields
 * `FEAT`: edit the Flowable task attributes ([jylups/cmmn-js-env#44](https://github.com/jylups/cmmn-js-env/issues/44)):
@@ -14,7 +17,7 @@ ___Note:__ Yet to be released changes appear here._
   * in Details: the blocking expression of every task, same deployment of human, case and process tasks, and the business key expression, inherit business key, inherit variables, id variable and fallback to default tenant of case and process tasks
 * `FIX`: show only the attributes written in the model in the Extensions tab, not the defaults of the descriptor
 * `FIX`: show and disable the entries of a newly selected element for that element; selecting a case, process or decision task after another task failed with `Cannot read properties of undefined (reading 'includes')`
-* `CHORE`: use `flowable-cmmn-moddle@1.2.0-next.5`
+* `CHORE`: use `flowable-cmmn-moddle@1.2.0-next.6`
 * `FEAT`: add a read-only Extensions tab that shows every extension of the selected element and the elements it stands for (definition, item control, default control, sentry, case, on-part): attributes of other namespaces, typed or unknown, and extension elements, typed or generic, as a tree ([jylups/cmmn-js-env#44](https://github.com/jylups/cmmn-js-env/issues/44))
 * `CHORE`: test against `flowable-cmmn-moddle@1.2.0-next.4` and `@jylups/cmmn-moddle@6.1.0`
 * `FIX`: show nothing for an element without a business object, such as the implicit root of an empty canvas, instead of failing with `bo.get is not a function` ([jylups/cmmn-js-env#42](https://github.com/jylups/cmmn-js-env/issues/42))
