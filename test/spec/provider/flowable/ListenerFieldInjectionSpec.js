@@ -90,22 +90,22 @@ describe('listener-fieldInjection - properties', function() {
     TestHelper.triggerEvent(select, 'change');
   }
 
-  var CASE_EXECUTION_LISTENER_TYPE = 'flowable:CaseExecutionListener',
+  var CASE_EXECUTION_LISTENER_TYPE = 'flowable:PlanItemLifecycleListener',
       TASK_LISTENER_TYPE = 'flowable:TaskListener',
-      VARIABLE_LISTENER_TYPE = 'flowable:VariableListener';
+      VARIABLE_LISTENER_TYPE = 'flowable:CaseLifecycleListener';
 
   var FIELD_NAME_ELEMENT = { dataEntry: 'listener-field-name', name: 'fieldName' },
       FIELD_TYPE_ELEMENT = { dataEntry: 'listener-field-type', name: 'fieldType' },
       FIELD_VALUE_ELEMENT = { dataEntry: 'listener-field-value', name: 'fieldValue' },
       FIELDS_SELECT_ELEMENT = { dataEntry: 'listener-fields', name: 'selectedExtensionElement' },
-      CASE_EXECUTION_LISTENER_SELECT_ELEMENT = { dataEntry: 'caseExecutionListeners', name: 'selectedExtensionElement' },
+      CASE_EXECUTION_LISTENER_SELECT_ELEMENT = { dataEntry: 'planItemLifecycleListeners', name: 'selectedExtensionElement' },
       TASK_LISTENER_SELECT_ELEMENT = { dataEntry: 'taskListeners', name: 'selectedExtensionElement' },
-      VARIABLE_LISTENER_SELECT_ELEMENT = { dataEntry: 'variableListeners', name: 'selectedExtensionElement' };
+      VARIABLE_LISTENER_SELECT_ELEMENT = { dataEntry: 'caseLifecycleListeners', name: 'selectedExtensionElement' };
 
 
   describe('get', function() {
 
-    describe('#variableListener', function() {
+    describe('#caseLifecycleListener', function() {
 
       var camundaField;
 
@@ -113,7 +113,8 @@ describe('listener-fieldInjection - properties', function() {
         var shape = elementRegistry.get('CasePlanModel_1');
         selection.select(shape);
 
-        var bo = getBusinessObject(shape);
+        // the case lifecycle listeners of the case
+        var bo = getBusinessObject(shape).$parent;
         camundaField = getCamundaFields(bo, VARIABLE_LISTENER_TYPE, 0)[0];
 
         // select listener
@@ -151,7 +152,7 @@ describe('listener-fieldInjection - properties', function() {
     });
 
 
-    describe('#caseExecutionListener', function() {
+    describe('#planItemLifecycleListener', function() {
 
       var camundaField;
 
@@ -196,7 +197,7 @@ describe('listener-fieldInjection - properties', function() {
 
     });
 
-    describe('#caseExecutionListener with stringValue attr', function() {
+    describe('#planItemLifecycleListener with stringValue attr', function() {
 
       var camundaField;
 
@@ -334,7 +335,7 @@ describe('listener-fieldInjection - properties', function() {
 
 
     [
-      [ 'caseExecutionListener with string element in the CMMN namespace',
+      [ 'planItemLifecycleListener with string element in the CMMN namespace',
         'PlanItem_Task_CmmnString', CASE_EXECUTION_LISTENER_TYPE,
         CASE_EXECUTION_LISTENER_SELECT_ELEMENT, 'string', 'cmmnString', 'cmmn:String' ],
       [ 'taskListener with expression element in the CMMN namespace',
@@ -393,7 +394,7 @@ describe('listener-fieldInjection - properties', function() {
 
   describe('set', function() {
 
-    describe('#variableListener', function() {
+    describe('#caseLifecycleListener', function() {
 
       var camundaField;
 
@@ -401,7 +402,8 @@ describe('listener-fieldInjection - properties', function() {
         var shape = elementRegistry.get('CasePlanModel_1');
         selection.select(shape);
 
-        var bo = getBusinessObject(shape);
+        // the case lifecycle listeners of the case
+        var bo = getBusinessObject(shape).$parent;
         camundaField = getCamundaFields(bo, VARIABLE_LISTENER_TYPE, 0)[0];
 
         // select listener
@@ -656,7 +658,7 @@ describe('listener-fieldInjection - properties', function() {
 
 
     [
-      [ 'caseExecutionListener with string element in the CMMN namespace',
+      [ 'planItemLifecycleListener with string element in the CMMN namespace',
         'PlanItem_Task_CmmnString', CASE_EXECUTION_LISTENER_TYPE,
         CASE_EXECUTION_LISTENER_SELECT_ELEMENT, 'cmmnString', 'string', 'string' ],
       [ 'taskListener with expression element in the CMMN namespace',
@@ -746,7 +748,7 @@ describe('listener-fieldInjection - properties', function() {
     });
 
 
-    describe('#caseExecutionListener', function() {
+    describe('#planItemLifecycleListener', function() {
 
       var camundaField;
 
@@ -954,7 +956,7 @@ describe('listener-fieldInjection - properties', function() {
     });
 
 
-    describe('#caseExecutionListener with stringValue attr', function() {
+    describe('#planItemLifecycleListener with stringValue attr', function() {
 
       var camundaField;
 
@@ -1326,7 +1328,7 @@ describe('listener-fieldInjection - properties', function() {
     });
 
 
-    describe('#variableListener', function() {
+    describe('#caseLifecycleListener', function() {
 
       var bo;
 
@@ -1334,7 +1336,8 @@ describe('listener-fieldInjection - properties', function() {
         var shape = elementRegistry.get('CasePlanModel_1');
         selection.select(shape);
 
-        bo = getBusinessObject(shape);
+        // the case lifecycle listeners of the case
+        bo = getBusinessObject(shape).$parent;
 
         // select listener
         selectOption(propertiesPanel._container, VARIABLE_LISTENER_SELECT_ELEMENT);
@@ -1482,7 +1485,7 @@ describe('listener-fieldInjection - properties', function() {
 
   describe('remove flowable:field', function() {
 
-    describe('#variableListener', function() {
+    describe('#caseLifecycleListener', function() {
 
       var bo;
 
@@ -1490,7 +1493,8 @@ describe('listener-fieldInjection - properties', function() {
         var shape = elementRegistry.get('CasePlanModel_1');
         selection.select(shape);
 
-        bo = getBusinessObject(shape);
+        // the case lifecycle listeners of the case
+        bo = getBusinessObject(shape).$parent;
 
         var button = getRemoveButton(propertiesPanel._container, 'listener-fields');
 
@@ -1560,7 +1564,7 @@ describe('listener-fieldInjection - properties', function() {
     });
 
 
-    describe('#caseExecutionListener', function() {
+    describe('#planItemLifecycleListener', function() {
 
       var bo;
 
@@ -1720,7 +1724,7 @@ describe('listener-fieldInjection - properties', function() {
 
   describe('remove flowable:listener', function() {
 
-    describe('#variableListener', function() {
+    describe('#caseLifecycleListener', function() {
 
       var bo;
 
@@ -1728,9 +1732,10 @@ describe('listener-fieldInjection - properties', function() {
         var shape = elementRegistry.get('CasePlanModel_1');
         selection.select(shape);
 
-        bo = getBusinessObject(shape);
+        // the case lifecycle listeners of the case
+        bo = getBusinessObject(shape).$parent;
 
-        var button = getRemoveButton(propertiesPanel._container, 'variableListeners');
+        var button = getRemoveButton(propertiesPanel._container, 'caseLifecycleListeners');
 
         // select listener
         selectOption(propertiesPanel._container, VARIABLE_LISTENER_SELECT_ELEMENT);
@@ -1801,7 +1806,7 @@ describe('listener-fieldInjection - properties', function() {
     });
 
 
-    describe('#caseExecutionListener', function() {
+    describe('#planItemLifecycleListener', function() {
 
       var bo;
 
@@ -1811,7 +1816,7 @@ describe('listener-fieldInjection - properties', function() {
 
         bo = getBusinessObject(shape).definitionRef;
 
-        var button = getRemoveButton(propertiesPanel._container, 'caseExecutionListeners');
+        var button = getRemoveButton(propertiesPanel._container, 'planItemLifecycleListeners');
 
         // select listener
         selectOption(propertiesPanel._container, CASE_EXECUTION_LISTENER_SELECT_ELEMENT);

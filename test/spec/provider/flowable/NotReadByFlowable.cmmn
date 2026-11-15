@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cmmn:definitions xmlns:dc="http://www.omg.org/spec/CMMN/20151109/DC" xmlns:cmmndi="http://www.omg.org/spec/CMMN/20151109/CMMNDI" xmlns:cmmn="http://www.omg.org/spec/CMMN/20151109/MODEL" xmlns:flowable="http://flowable.org/cmmn" id="NotRead" targetNamespace="http://bpmn.io/schema/cmmn">
+  <cmmn:case id="Case_1">
+    <cmmn:casePlanModel id="CasePlanModel_1" name="Plan">
+      <cmmn:extensionElements>
+        <flowable:variableListener event="update" class="org.example.VariableListener" />
+      </cmmn:extensionElements>
+      <cmmn:planItem id="PI_Task" definitionRef="Task_1" />
+      <cmmn:planItem id="PI_Process" definitionRef="ProcessTask_1" />
+      <cmmn:planItem id="PI_Clean" definitionRef="ProcessTask_2" />
+      <cmmn:task id="Task_1" name="Review">
+        <cmmn:extensionElements>
+          <flowable:caseExecutionListener event="complete" class="org.example.Listener" />
+        </cmmn:extensionElements>
+      </cmmn:task>
+      <cmmn:processTask id="ProcessTask_1" name="Order">
+        <cmmn:extensionElements>
+          <flowable:in businessKey="#{caseExecution.caseBusinessKey}" />
+          <flowable:in variables="all" />
+          <flowable:out source="result" target="orderResult" local="true" />
+        </cmmn:extensionElements>
+      </cmmn:processTask>
+      <cmmn:processTask id="ProcessTask_2" name="Clean">
+        <cmmn:extensionElements>
+          <flowable:in source="amount" target="childAmount" />
+        </cmmn:extensionElements>
+      </cmmn:processTask>
+    </cmmn:casePlanModel>
+  </cmmn:case>
+  <cmmndi:CMMNDI>
+    <cmmndi:CMMNDiagram id="Diagram_1">
+      <cmmndi:CMMNShape id="DI_CasePlanModel_1" cmmnElementRef="CasePlanModel_1">
+        <dc:Bounds x="20" y="20" width="500" height="300" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_PI_Task" cmmnElementRef="PI_Task">
+        <dc:Bounds x="60" y="60" width="100" height="80" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_PI_Process" cmmnElementRef="PI_Process">
+        <dc:Bounds x="200" y="60" width="100" height="80" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_PI_Clean" cmmnElementRef="PI_Clean">
+        <dc:Bounds x="340" y="60" width="100" height="80" />
+      </cmmndi:CMMNShape>
+    </cmmndi:CMMNDiagram>
+  </cmmndi:CMMNDI>
+</cmmn:definitions>

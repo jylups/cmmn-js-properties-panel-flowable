@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <cmmn:definitions xmlns:dc="http://www.omg.org/spec/CMMN/20151109/DC" xmlns:di="http://www.omg.org/spec/CMMN/20151109/DI" xmlns:cmmndi="http://www.omg.org/spec/CMMN/20151109/CMMNDI" xmlns:cmmn="http://www.omg.org/spec/CMMN/20151109/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:flowable="http://flowable.org/cmmn" id="Test" targetNamespace="http://bpmn.io/schema/cmmn">
   <cmmn:case id="Case_1">
-    <cmmn:casePlanModel id="CasePlanModel_1" name="A CasePlanModel">
-      <cmmn:extensionElements>
-        <flowable:variableListener event="update" class="myClass">
-          <flowable:field name="myListenerOne">          <flowable:string>myListenerValueOne</flowable:string>
+    <cmmn:extensionElements>
+      <flowable:caseLifecycleListener targetState="completed" class="myClass">
+        <flowable:field name="myListenerOne">          <flowable:string>myListenerValueOne</flowable:string>
 </flowable:field>
-          <flowable:field name="myListenerTwo" expression="myListenerValueTwo" />
-        </flowable:variableListener>
-      </cmmn:extensionElements>
+        <flowable:field name="myListenerTwo" expression="myListenerValueTwo" />
+      </flowable:caseLifecycleListener>
+    </cmmn:extensionElements>
+    <cmmn:casePlanModel id="CasePlanModel_1" name="A CasePlanModel">
       <cmmn:planItem id="PlanItem_Task" name="PlanItem_Task" definitionRef="Task_1" />
       <cmmn:planItem id="PlanItem_HumanTask" name="PlanItem_HumanTask" definitionRef="HumanTask_0vgxb8j" />
       <cmmn:planItem id="PlanItem_Task_Invalid" name="PlanItem_Task_Invalid" definitionRef="Task_17mfnxw" />
@@ -18,9 +18,9 @@
       <cmmn:planItem id="PlanItem_HumanTask_CmmnExpression" name="PlanItem_HumanTask_CmmnExpression" definitionRef="HumanTask_CmmnExpression" />
       <cmmn:task id="Task_1">
         <cmmn:extensionElements>
-          <flowable:caseExecutionListener event="complete" class="myClass">
+          <flowable:planItemLifecycleListener targetState="completed" class="myClass">
             <flowable:field name="myListener" expression="myListenerValue" />
-          </flowable:caseExecutionListener>
+          </flowable:planItemLifecycleListener>
         </cmmn:extensionElements>
       </cmmn:task>
       <cmmn:humanTask id="HumanTask_0vgxb8j">
@@ -32,17 +32,17 @@
       </cmmn:humanTask>
       <cmmn:task id="Task_17mfnxw">
         <cmmn:extensionElements>
-          <flowable:caseExecutionListener event="complete" class="myClass">
+          <flowable:planItemLifecycleListener targetState="completed" class="myClass">
             <flowable:field name="">            <flowable:string></flowable:string>
 </flowable:field>
-          </flowable:caseExecutionListener>
+          </flowable:planItemLifecycleListener>
         </cmmn:extensionElements>
       </cmmn:task>
       <cmmn:task id="Task_1xnj0nl">
         <cmmn:extensionElements>
-          <flowable:caseExecutionListener event="complete" class="myClass">
+          <flowable:planItemLifecycleListener targetState="completed" class="myClass">
             <flowable:field name="myListener" stringValue="myListenerValue" />
-          </flowable:caseExecutionListener>
+          </flowable:planItemLifecycleListener>
         </cmmn:extensionElements>
       </cmmn:task>
       <cmmn:humanTask id="HumanTask_1opdmw4">
@@ -54,9 +54,9 @@
       </cmmn:humanTask>
       <cmmn:task id="Task_CmmnString">
         <cmmn:extensionElements>
-          <flowable:caseExecutionListener event="complete" class="myClass">
+          <flowable:planItemLifecycleListener targetState="completed" class="myClass">
             <flowable:field name="myListener"><cmmn:string>myListenerValue</cmmn:string></flowable:field>
-          </flowable:caseExecutionListener>
+          </flowable:planItemLifecycleListener>
         </cmmn:extensionElements>
       </cmmn:task>
       <cmmn:humanTask id="HumanTask_CmmnExpression">
