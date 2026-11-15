@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cmmn:definitions xmlns:dc="http://www.omg.org/spec/CMMN/20151109/DC" xmlns:cmmndi="http://www.omg.org/spec/CMMN/20151109/CMMNDI" xmlns:cmmn="http://www.omg.org/spec/CMMN/20151109/MODEL" xmlns:flowable="http://flowable.org/cmmn" id="Test" targetNamespace="http://bpmn.io/schema/cmmn">
+  <cmmn:case id="Case_1">
+    <cmmn:extensionElements>
+      <flowable:caseLifecycleListener sourceState="active" targetState="completed" class="org.example.CaseListener" />
+    </cmmn:extensionElements>
+    <cmmn:casePlanModel id="CasePlanModel_1" name="A CasePlanModel">
+      <cmmn:planItem id="PI_Human" definitionRef="HumanTask_1" />
+      <cmmn:planItem id="PI_Milestone" definitionRef="Milestone_1" />
+      <cmmn:planItem id="PI_EventListener" definitionRef="UserEventListener_1" />
+      <cmmn:humanTask id="HumanTask_1" name="Human">
+        <cmmn:extensionElements>
+          <flowable:taskListener event="create" class="org.example.TaskListener" />
+          <flowable:planItemLifecycleListener targetState="active" expression="${listener.notify(planItemInstance)}">
+            <flowable:field name="greeting" stringValue="hello" />
+          </flowable:planItemLifecycleListener>
+        </cmmn:extensionElements>
+      </cmmn:humanTask>
+      <cmmn:milestone id="Milestone_1" name="Milestone" />
+      <cmmn:userEventListener id="UserEventListener_1" name="User Event" />
+    </cmmn:casePlanModel>
+  </cmmn:case>
+  <cmmndi:CMMNDI>
+    <cmmndi:CMMNDiagram id="Diagram_1">
+      <cmmndi:CMMNShape id="DI_CasePlanModel_1" cmmnElementRef="CasePlanModel_1">
+        <dc:Bounds x="20" y="20" width="560" height="260" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_PI_Human" cmmnElementRef="PI_Human">
+        <dc:Bounds x="80" y="80" width="100" height="80" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_PI_Milestone" cmmnElementRef="PI_Milestone">
+        <dc:Bounds x="240" y="100" width="100" height="40" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_PI_EventListener" cmmnElementRef="PI_EventListener">
+        <dc:Bounds x="400" y="100" width="36" height="36" />
+      </cmmndi:CMMNShape>
+    </cmmndi:CMMNDiagram>
+  </cmmndi:CMMNDI>
+</cmmn:definitions>
