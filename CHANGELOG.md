@@ -6,6 +6,10 @@ All notable changes to [cmmn-js-properties-panel-flowable](https://github.com/jy
 
 ___Note:__ Yet to be released changes appear here._
 
+* `CHORE`: use `@jylups/cmmn-js@0.22.0-next.9` and `flowable-cmmn-moddle@1.2.0-next.8`
+* `FEAT`: edit the target expression, the source and target variable types and transient of in and out mappings, as Flowable reads them ([jylups/cmmn-js-env#49](https://github.com/jylups/cmmn-js-env/issues/49))
+* `FEAT`: report the parts of a model Flowable does not read (case execution listeners, variable listeners, and the business key, all variables and local of in and out mappings) as problems, with the `problems` service of `@jylups/cmmn-js`; they are kept on save ([jylups/cmmn-js-env#49](https://github.com/jylups/cmmn-js-env/issues/49))
+* `FEAT`: remove what Flowable does not read from the panel: the Case Execution Listeners and Variable Listeners groups, the Business Key checkbox of case and process tasks, and the All mapping type and Local checkbox of in and out mappings ([jylups/cmmn-js-env#49](https://github.com/jylups/cmmn-js-env/issues/49))
 * `CHORE`: test against `@jylups/cmmn-js@0.22.0-next.8`
 * `FEAT`: show the problems of the selected element, from the `problems` service of `@jylups/cmmn-js`, in a Problems group at the top of the General tab ([jylups/cmmn-js-env#47](https://github.com/jylups/cmmn-js-env/issues/47))
 * `CHORE`: use `flowable-cmmn-moddle@1.2.0-next.7`
@@ -39,6 +43,7 @@ ___Note:__ Yet to be released changes appear here._
 
 ### Breaking Changes
 
+* The panel no longer offers case execution listeners, variable listeners, the Business Key checkbox of case and process tasks, or the All mapping type and Local checkbox of in and out mappings; Flowable reads none of them. Models that have them keep them on save, and they are reported as problems. Use lifecycle listeners, variable event listeners, and the business key expression, inherit business key and inherit variables of the task instead.
 * The peer dependency is now `@jylups/cmmn-js` (`>=0.21.0 <1.0`) instead of `cmmn-js`, and the panel loads its helpers from `@jylups/cmmn-js/lib`. Applications that use `cmmn-js` from bpmn.io must switch to `@jylups/cmmn-js`.
 
 ## 0.9.0

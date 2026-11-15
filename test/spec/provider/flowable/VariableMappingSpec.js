@@ -50,18 +50,6 @@ function getVariableMappings(extensionElements, type) {
   return mappings;
 }
 
-function getCamundaInWithBusinessKey(extensionElements) {
-  var camundaIn = [];
-  if (extensionElements && extensionElements.values) {
-    forEach(extensionElements.values, function(value) {
-      if (is(value, 'flowable:In') && value.businessKey) {
-        camundaIn.push(value);
-      }
-    });
-  }
-  return camundaIn;
-}
-
 function selectVariableMapping(propertiesPanel, selectorId) {
   var inMappings = getSelect(propertiesPanel._container, selectorId);
 
@@ -71,8 +59,6 @@ function selectVariableMapping(propertiesPanel, selectorId) {
 
 var FLOWABLE_IN_EXTENSION_ELEMENT = 'flowable:In',
     FLOWABLE_OUT_EXTENSION_ELEMENT = 'flowable:Out';
-
-var BUSINESS_KEY_VALUE = '#{caseExecution.caseBusinessKey}';
 
 
 describe('variable-mapping-properties', function() {
@@ -159,50 +145,6 @@ describe('variable-mapping-properties', function() {
         }));
 
 
-        it('should fetch the local of a case task definition', inject(function(propertiesPanel) {
-
-          var field = getInput(propertiesPanel._container, 'local');
-
-          // when selecting element
-
-          // then
-          expect(field.checked).to.equal(variableMappings[0].get('local'));
-
-        }));
-
-      });
-
-      describe('# flowable:out variables', function() {
-
-        var variableMappings;
-
-        beforeEach(inject(function(elementRegistry, selection, propertiesPanel) {
-
-          // given
-          var item = elementRegistry.get('PlanItem_CaseTask_Out_All');
-          selection.select(item);
-
-          var bo = item.businessObject.definitionRef;
-          variableMappings = getVariableMappings(bo.get('extensionElements'), FLOWABLE_OUT_EXTENSION_ELEMENT);
-
-          // select existing in-mapping
-          selectVariableMapping(propertiesPanel, 'flowable-extensionElements-variableMapping-out');
-
-        }));
-
-
-        it('should fetch the variables of a case task definition', inject(function(propertiesPanel) {
-
-          var field = getSelect(propertiesPanel._container, 'flowable-variableMapping-inOutType-select');
-
-          // when selecting element
-
-          // then
-          expect(field.value).to.equal('variables');
-          expect(variableMappings[0].get('variables')).to.equal('all');
-
-        }));
-
       });
 
     });
@@ -251,47 +193,6 @@ describe('variable-mapping-properties', function() {
 
         }));
 
-
-        it('should fetch the local of a process task definition', inject(function(propertiesPanel) {
-
-          var field = getInput(propertiesPanel._container, 'local');
-
-          // when selecting element
-
-          // then
-          expect(field.checked).to.equal(variableMappings[0].get('local'));
-
-        }));
-
-      });
-
-      describe('# flowable:in businessKey', function() {
-
-        var variableMappings;
-
-        beforeEach(inject(function(elementRegistry, selection, propertiesPanel) {
-
-          // given
-          var item = elementRegistry.get('PlanItem_ProcessTask_BusinessKey');
-          selection.select(item);
-
-          var bo = item.businessObject.definitionRef;
-          variableMappings = getCamundaInWithBusinessKey(bo.get('extensionElements'));
-
-        }));
-
-
-        it('should fetch the business key of a process task definition', inject(function(propertiesPanel) {
-
-          var field = getInput(propertiesPanel._container, 'callableBusinessKey');
-
-          // when selecting element
-
-          // then
-          expect(field.checked).to.be.true;
-          expect(variableMappings[0].get('businessKey')).to.equal(BUSINESS_KEY_VALUE);
-
-        }));
 
       });
 
@@ -389,82 +290,6 @@ describe('variable-mapping-properties', function() {
 
 
   describe('set', function() {
-
-    describe('# business key', function() {
-
-      var bo, field;
-
-      beforeEach(inject(function(elementRegistry, selection, propertiesPanel) {
-
-        // given
-        var item = elementRegistry.get('PlanItem_CaseTask_Empty');
-        selection.select(item);
-
-        bo = item.businessObject.definitionRef;
-
-        field = getInput(propertiesPanel._container, 'callableBusinessKey');
-
-        // when
-
-        TestHelper.triggerEvent(field, 'click');
-
-      }));
-
-
-      describe('in the DOM', function() {
-
-        it('should execute', function() {
-          expect(field.checked).to.be.true;
-        });
-
-        it('should undo', inject(function(commandStack) {
-          // when
-          commandStack.undo();
-
-          // then
-          expect(field.checked).to.be.false;
-        }));
-
-        it('should redo', inject(function(commandStack) {
-          // when
-          commandStack.undo();
-          commandStack.redo();
-
-          // then
-          expect(field.checked).to.be.true;
-        }));
-
-      });
-
-      describe('on the business object', function() {
-
-        it('should execute', function() {
-          var variableMappings = getCamundaInWithBusinessKey(bo.get('extensionElements'));
-          expect(variableMappings[0].get('businessKey')).to.equal(BUSINESS_KEY_VALUE);
-        });
-
-        it('should undo', inject(function(commandStack) {
-          // when
-          commandStack.undo();
-
-          // then
-          var variableMappings = getCamundaInWithBusinessKey(bo.get('extensionElements'));
-          expect(variableMappings).is.empty;
-        }));
-
-        it('should redo', inject(function(commandStack) {
-          // when
-          commandStack.undo();
-          commandStack.redo();
-
-          // then
-          var variableMappings = getCamundaInWithBusinessKey(bo.get('extensionElements'));
-          expect(variableMappings[0].get('businessKey')).to.equal(BUSINESS_KEY_VALUE);
-        }));
-
-      });
-
-    });
 
     describe('# source', function() {
 
@@ -697,83 +522,6 @@ describe('variable-mapping-properties', function() {
 
     });
 
-    describe('# local', function() {
-
-      var field, variableMappings;
-
-      beforeEach(inject(function(elementRegistry, selection, propertiesPanel) {
-
-        // given
-        var item = elementRegistry.get('PlanItem_ProcessTask_Invalid');
-        selection.select(item);
-
-        var bo = item.businessObject.definitionRef;
-        variableMappings = getVariableMappings(bo.get('extensionElements'), FLOWABLE_IN_EXTENSION_ELEMENT);
-
-        // select existing in-mapping
-        selectVariableMapping(propertiesPanel, 'flowable-extensionElements-variableMapping-in');
-
-        field = getInput(propertiesPanel._container, 'local');
-
-        // when
-
-        TestHelper.triggerEvent(field, 'click');
-
-      }));
-
-
-      describe('in the DOM', function() {
-
-        it('should execute', function() {
-          expect(field.checked).to.be.true;
-        });
-
-        it('should undo', inject(function(commandStack) {
-          // when
-          commandStack.undo();
-
-          // then
-          expect(field.checked).to.be.false;
-        }));
-
-        it('should redo', inject(function(commandStack) {
-          // when
-          commandStack.undo();
-          commandStack.redo();
-
-          // then
-          expect(field.checked).to.be.true;
-        }));
-
-      });
-
-      describe('on the business object', function() {
-
-        it('should execute', function() {
-          expect(variableMappings[0].get('local')).to.be.true;
-        });
-
-        it('should undo', inject(function(commandStack) {
-          // when
-          commandStack.undo();
-
-          // then
-          expect(variableMappings[0].get('local')).to.be.false;
-        }));
-
-        it('should redo', inject(function(commandStack) {
-          // when
-          commandStack.undo();
-          commandStack.redo();
-
-          // then
-          expect(variableMappings[0].get('local')).to.be.true;
-        }));
-
-      });
-
-    });
-
     describe('# inOutType', function() {
 
       describe('source -> sourceExpression', function() {
@@ -851,87 +599,6 @@ describe('variable-mapping-properties', function() {
             // then
             expect(variableMappings[0].get('source')).to.be.undefined;
             expect(variableMappings[0].get('sourceExpression')).to.exist;
-          }));
-
-        });
-
-      });
-
-      describe('sourceExpression -> all', function() {
-
-        var field, variableMappings;
-
-        beforeEach(inject(function(elementRegistry, selection, propertiesPanel) {
-
-          // given
-          var item = elementRegistry.get('PlanItem_ProcessTask_Invalid');
-          selection.select(item);
-
-          var bo = item.businessObject.definitionRef;
-          variableMappings = getVariableMappings(bo.get('extensionElements'), FLOWABLE_IN_EXTENSION_ELEMENT);
-
-          // select existing in-mapping
-          selectVariableMapping(propertiesPanel, 'flowable-extensionElements-variableMapping-in');
-
-          field = getSelect(propertiesPanel._container, 'flowable-variableMapping-inOutType-select');
-
-          // when
-          // select 'all'
-          field.selectedIndex = 2;
-          TestHelper.triggerEvent(field, 'change');
-
-        }));
-
-
-        describe('in the DOM', function() {
-
-          it('should execute', function() {
-            expect(field.value).to.equal('variables');
-          });
-
-          it('should undo', inject(function(commandStack) {
-            // when
-            commandStack.undo();
-
-            // then
-            expect(field.value).to.equal('sourceExpression');
-          }));
-
-          it('should redo', inject(function(commandStack) {
-            // when
-            commandStack.undo();
-            commandStack.redo();
-
-            // then
-            expect(field.value).to.equal('variables');
-          }));
-
-        });
-
-        describe('on the business object', function() {
-
-          it('should execute', function() {
-            expect(variableMappings[0].get('sourceExpression')).to.be.undefined;
-            expect(variableMappings[0].get('variables')).to.exist;
-          });
-
-          it('should undo', inject(function(commandStack) {
-            // when
-            commandStack.undo();
-
-            // then
-            expect(variableMappings[0].get('sourceExpression')).to.exist;
-            expect(variableMappings[0].get('variables')).to.be.undefined;
-          }));
-
-          it('should redo', inject(function(commandStack) {
-            // when
-            commandStack.undo();
-            commandStack.redo();
-
-            // then
-            expect(variableMappings[0].get('sourceExpression')).to.be.undefined;
-            expect(variableMappings[0].get('variables')).to.exist;
           }));
 
         });
@@ -1302,7 +969,6 @@ describe('variable-mapping-properties', function() {
         it('type', expectVisible(true, getSelect, 'flowable-variableMapping-inOutType-select'));
         it('source', expectVisible(true, getInput, 'source'));
         it('target', expectVisible(true, getInput, 'target'));
-        it('local', expectVisible(true, getInput, 'local'));
 
       });
 
@@ -1322,22 +988,6 @@ describe('variable-mapping-properties', function() {
         it('type', expectVisible(false, getSelect, 'flowable-variableMapping-inOutType-select'));
         it('source', expectVisible(false, getInput, 'source', true));
         it('target', expectVisible(false, getInput, 'target', true));
-        it('local', expectVisible(false, getInput, 'local'));
-
-      });
-
-      describe('"local" checkbox when out variable mapping is selected', function() {
-
-        beforeEach(inject(function(elementRegistry, selection, propertiesPanel) {
-
-          var item = elementRegistry.get('PlanItem_CaseTask_Out_All');
-          selection.select(item);
-
-          selectVariableMapping(propertiesPanel, 'flowable-extensionElements-variableMapping-out');
-
-        }));
-
-        it('local', expectVisible(false, getInput, 'local'));
 
       });
 
