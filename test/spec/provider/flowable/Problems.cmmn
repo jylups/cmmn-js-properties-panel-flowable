@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cmmn:definitions xmlns:dc="http://www.omg.org/spec/CMMN/20151109/DC" xmlns:cmmndi="http://www.omg.org/spec/CMMN/20151109/CMMNDI" xmlns:cmmn="http://www.omg.org/spec/CMMN/20151109/MODEL" id="Problems" targetNamespace="http://bpmn.io/schema/cmmn">
+  <cmmn:case id="Case_1">
+    <cmmn:casePlanModel id="CasePlanModel_1" name="Plan">
+      <cmmn:planItem id="PI_Task" definitionRef="Task_1">
+        <cmmn:entryCriterion id="EntryCriterion_1" sentryRef="Sentry_Missing" />
+      </cmmn:planItem>
+      <cmmn:planItem id="PI_Unknown" definitionRef="Task_2" />
+      <cmmn:sentry id="Sentry_1" />
+      <cmmn:task id="Task_1" name="Review" />
+      <cmmn:task id="Task_2" name="Approve" unknownAttribute="1" />
+      <cmmn:unknownElement id="Unknown_1" />
+    </cmmn:casePlanModel>
+  </cmmn:case>
+  <cmmndi:CMMNDI>
+    <cmmndi:CMMNDiagram id="Diagram_1">
+      <cmmndi:CMMNShape id="DI_CasePlanModel_1" cmmnElementRef="CasePlanModel_1">
+        <dc:Bounds x="20" y="20" width="500" height="300" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_PI_Task" cmmnElementRef="PI_Task">
+        <dc:Bounds x="100" y="100" width="100" height="80" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_EntryCriterion_1" cmmnElementRef="EntryCriterion_1">
+        <dc:Bounds x="90" y="126" width="20" height="28" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_PI_Unknown" cmmnElementRef="PI_Unknown">
+        <dc:Bounds x="300" y="100" width="100" height="80" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_Missing" cmmnElementRef="Missing_1">
+        <dc:Bounds x="300" y="200" width="100" height="80" />
+      </cmmndi:CMMNShape>
+    </cmmndi:CMMNDiagram>
+  </cmmndi:CMMNDI>
+</cmmn:definitions>
