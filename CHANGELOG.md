@@ -6,6 +6,7 @@ All notable changes to [cmmn-js-properties-panel-flowable](https://github.com/jy
 
 ___Note:__ Yet to be released changes appear here._
 
+* `CHORE`: use `flowable-cmmn-moddle@1.3.0`, which has the case's `async` and the case plan model's `sameDeployment`
 * `FEAT`: edit the case and its start form with the case plan model selected ([jylups/cmmn-js-env#54](https://github.com/jylups/cmmn-js-env/issues/54)): a Case group with asynchronous start, initiator variable and candidate starter users and groups, and a Start Form group with form key, form field validation and same deployment
 
 ## 2.0.0
