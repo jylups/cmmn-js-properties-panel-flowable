@@ -6,6 +6,9 @@ All notable changes to [cmmn-js-properties-panel-flowable](https://github.com/jy
 
 ___Note:__ Yet to be released changes appear here._
 
+## 2.0.0
+
+* `CHORE`: require `@jylups/cmmn-js` 0.22 as peer dependency, and use `@jylups/cmmn-js@0.22.0` and `flowable-cmmn-moddle@1.2.0`
 * `CHORE`: use `flowable-cmmn-moddle@1.2.0-next.9`
 * `FEAT`: edit the remaining Flowable attributes ([jylups/cmmn-js-env#50](https://github.com/jylups/cmmn-js-env/issues/50)):
   * in Details of a stage or milestone: include in stage overview, display order and business status, the milestone variable of a milestone, and the auto complete condition of a stage or the case plan model
@@ -49,7 +52,7 @@ ___Note:__ Yet to be released changes appear here._
 ### Breaking Changes
 
 * The panel no longer offers case execution listeners, variable listeners, the Business Key checkbox of case and process tasks, or the All mapping type and Local checkbox of in and out mappings; Flowable reads none of them. Models that have them keep them on save, and they are reported as problems. Use lifecycle listeners, variable event listeners, and the business key expression, inherit business key and inherit variables of the task instead.
-* The peer dependency is now `@jylups/cmmn-js` (`>=0.21.0 <1.0`) instead of `cmmn-js`, and the panel loads its helpers from `@jylups/cmmn-js/lib`. Applications that use `cmmn-js` from bpmn.io must switch to `@jylups/cmmn-js`.
+* The peer dependency is now `@jylups/cmmn-js` (`^0.22.0`) instead of `cmmn-js`, and the panel loads its helpers from `@jylups/cmmn-js/lib`. Applications that use `cmmn-js` from bpmn.io must switch to `@jylups/cmmn-js` 0.22, whose `problems` service the Problems group uses.
 
 ## 0.9.0
 
