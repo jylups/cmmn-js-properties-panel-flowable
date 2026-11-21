@@ -55,7 +55,7 @@ describe('flowable - group rail', function() {
    */
   function shownGroups() {
     return Array.prototype.filter.call(
-      domQueryAll('.cpp-properties-rail .cpp-properties-tab-link', container),
+      domQueryAll('.cpp-properties-tabs-links .cpp-properties-tab-link', container),
       function(link) {
         return !domClasses(link).has('cpp-hidden');
       }

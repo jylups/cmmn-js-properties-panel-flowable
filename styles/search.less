@@ -1,0 +1,119 @@
+// searching the fields of the selected element
+
+ul.cpp-properties-rail-tools {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  padding: 8px 0 0;
+  border-top: 1px solid @cpp-color-gray-light;
+  list-style: none;
+
+  > li {
+    margin: 0;
+  }
+}
+
+.cpp-properties-panel .cpp-properties-header > .cpp-search-link {
+  position: static;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: auto;
+  height: auto;
+  margin: -6px 0 8px auto;
+  padding: 2px 4px;
+  overflow: visible;
+  border: none;
+  border-radius: 4px;
+  background-color: transparent;
+  font-size: 12px;
+  color: @cpp-color-gray;
+  cursor: pointer;
+
+  &::before {
+    content: none;
+  }
+
+  &:hover {
+    color: @cpp-color-gray-dark;
+  }
+
+  &:focus {
+    box-shadow: none;
+  }
+
+  &:focus-visible {
+    .focus();
+  }
+}
+
+.cpp-properties-search {
+  padding: 4px 15px 15px;
+
+  .cpp-search-field input {
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 34px;
+    padding: 7px 10px;
+    border-radius: 4px;
+    font-size: 13px;
+  }
+
+  .cpp-search-hint {
+    margin: 12px 0;
+    font-size: 12px;
+    color: @cpp-color-gray;
+  }
+}
+
+.cpp-search-result {
+  position: relative;
+  padding: 10px 40px 2px 0;
+
+  + .cpp-search-result {
+    border-top: 1px dotted @cpp-color-gray-light;
+  }
+
+  .cpp-search-where {
+    margin-bottom: 4px;
+    font-size: 11px;
+    color: @cpp-color-gray;
+  }
+}
+
+.cpp-properties-panel .cpp-search-result > .cpp-group-edit {
+  position: absolute;
+  top: 10px;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  overflow: visible;
+  border: none;
+  border-radius: 6px;
+  background-color: transparent;
+  color: @cpp-color-gray;
+  cursor: pointer;
+
+  &::before {
+    content: none;
+  }
+
+  &:hover {
+    color: @cpp-color-gray-dark;
+    background-color: @cpp-color-rail-hover;
+  }
+
+  &:focus {
+    box-shadow: none;
+  }
+
+  &:focus-visible {
+    .focus();
+  }
+}
