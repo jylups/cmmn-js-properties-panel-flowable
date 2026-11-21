@@ -192,6 +192,193 @@ describe('properties-panel', function() {
   });
 
 
+  describe('group rail', function() {
+
+    var domClasses = require('min-dom').classes,
+        domQueryAll = require('min-dom').queryAll;
+
+    function railButton(container, id) {
+      return domQuery('.cpp-properties-rail [data-tab-target="' + id + '"]', container);
+    }
+
+    function activeTabId(container) {
+      return domAttr(domQuery('.cpp-properties-tab.cpp-active', container), 'data-tab');
+    }
+
+    function keydown(node, key) {
+      var event = document.createEvent('Event');
+      event.initEvent('keydown', true, true);
+      event.key = key;
+      node.dispatchEvent(event);
+    }
+
+    beforeEach(inject(function(propertiesPanel, selection, elementRegistry) {
+      propertiesPanel.attachTo(container);
+
+      selection.select(elementRegistry.get('PlanItem_1'));
+    }));
+
+
+    it('should show a button per group, named by its label', function() {
+
+      // when
+      var buttons = domQueryAll('.cpp-properties-rail [role=tab]', container);
+
+      // then
+      expect(buttons.length).to.equal(3);
+
+      var button = railButton(container, 'tab2');
+
+      expect(domAttr(button, 'aria-label')).to.equal('Tab 2');
+      expect(domAttr(button, 'title')).to.equal('Tab 2');
+      expect(domQuery('.cpp-properties-tab-letter', button).textContent).to.equal('T');
+    });
+
+
+    it('should mark the open group', function() {
+
+      // then
+      expect(domAttr(railButton(container, 'tab1'), 'aria-selected')).to.equal('true');
+      expect(domAttr(railButton(container, 'tab1'), 'tabindex')).to.equal('0');
+      expect(domAttr(railButton(container, 'tab2'), 'aria-selected')).to.equal('false');
+      expect(domAttr(railButton(container, 'tab2'), 'tabindex')).to.equal('-1');
+
+      expect(domQuery('[data-tab-title]', container).textContent).to.equal('Tab 1');
+    });
+
+
+    it('should hide the button of a group without entries', function() {
+
+      // then
+      expect(domClasses(railButton(container, 'tab3').parentNode).has('cpp-hidden')).to.be.true;
+    });
+
+
+    it('should open a group on click', function() {
+
+      // when
+      railButton(container, 'tab2').click();
+
+      // then
+      expect(activeTabId(container)).to.equal('tab2');
+      expect(domQuery('[data-tab-title]', container).textContent).to.equal('Tab 2');
+    });
+
+
+    describe('keyboard', function() {
+
+      it('should open the next group on arrow down', function() {
+
+        // when
+        keydown(railButton(container, 'tab1'), 'ArrowDown');
+
+        // then
+        expect(activeTabId(container)).to.equal('tab2');
+        expect(document.activeElement).to.equal(railButton(container, 'tab2'));
+      });
+
+
+      it('should skip hidden groups and wrap around', function() {
+
+        // when
+        keydown(railButton(container, 'tab1'), 'ArrowUp');
+
+        // then
+        expect(activeTabId(container)).to.equal('tab2');
+
+        // when
+        keydown(railButton(container, 'tab2'), 'ArrowDown');
+
+        // then
+        expect(activeTabId(container)).to.equal('tab1');
+      });
+
+
+      it('should open the first and last group on Home and End', function() {
+
+        // when
+        keydown(railButton(container, 'tab1'), 'End');
+
+        // then
+        expect(activeTabId(container)).to.equal('tab2');
+
+        // when
+        keydown(railButton(container, 'tab2'), 'Home');
+
+        // then
+        expect(activeTabId(container)).to.equal('tab1');
+      });
+
+    });
+
+
+    describe('collapse', function() {
+
+      function toggle(container) {
+        return domQuery('[data-collapse-toggle]', container);
+      }
+
+      it('should collapse to the rail and open again', inject(function(propertiesPanel, eventBus) {
+
+        // given
+        var events = [];
+
+        eventBus.on('propertiesPanel.collapsed', function(e) {
+          events.push(e.panel.isCollapsed());
+        });
+
+        // when
+        toggle(container).click();
+
+        // then
+        expect(propertiesPanel.isCollapsed()).to.be.true;
+        expect(domClasses(propertiesPanel._container).has('cpp-collapsed')).to.be.true;
+        expect(domAttr(toggle(container), 'aria-expanded')).to.equal('false');
+
+        // when
+        toggle(container).click();
+
+        // then
+        expect(propertiesPanel.isCollapsed()).to.be.false;
+        expect(domAttr(toggle(container), 'aria-expanded')).to.equal('true');
+        expect(events).to.eql([ true, false ]);
+      }));
+
+
+      it('should stay collapsed when the selection changes',
+        inject(function(propertiesPanel, selection, elementRegistry) {
+
+          // given
+          propertiesPanel.setCollapsed(true);
+
+          // when
+          selection.select(elementRegistry.get('CasePlanModel_1'));
+
+          // then
+          expect(domClasses(propertiesPanel._container).has('cpp-collapsed')).to.be.true;
+          expect(domAttr(toggle(container), 'aria-expanded')).to.equal('false');
+        })
+      );
+
+
+      it('should open when a group is clicked', inject(function(propertiesPanel) {
+
+        // given
+        propertiesPanel.setCollapsed(true);
+
+        // when
+        railButton(container, 'tab2').click();
+
+        // then
+        expect(propertiesPanel.isCollapsed()).to.be.false;
+        expect(activeTabId(container)).to.equal('tab2');
+      }));
+
+    });
+
+  });
+
+
   describe('description for field entry', function() {
 
     function getDescriptionField(container, dataEntrySelector) {
