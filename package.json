@@ -28,7 +28,7 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@jylups/cmmn-js": "^0.22.0",
+    "@jylups/cmmn-js": "^0.23.0",
     "chai": "^4.1.2",
     "diagram-js": "^15.29.0",
     "eslint": "^5.2.0",
@@ -58,7 +58,7 @@
     "selection-update": "^0.1.2"
   },
   "peerDependencies": {
-    "@jylups/cmmn-js": "^0.22.0",
+    "@jylups/cmmn-js": "^0.22.0 || ^0.23.0",
     "diagram-js": ">=4.0.0"
   },
   "files": [

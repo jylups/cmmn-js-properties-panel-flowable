@@ -6,6 +6,8 @@ All notable changes to [cmmn-js-properties-panel-flowable](https://github.com/jy
 
 ___Note:__ Yet to be released changes appear here._
 
+* `CHORE`: accept `@jylups/cmmn-js` 0.23 as peer dependency too (`^0.22.0 || ^0.23.0`), and use `@jylups/cmmn-js@0.23.0` ([jylups/cmmn-js-env#57](https://github.com/jylups/cmmn-js-env/issues/57))
+
 ## 2.1.0
 
 * `CHORE`: use `flowable-cmmn-moddle@1.3.0`, which has the case's `async` and the case plan model's `sameDeployment`
