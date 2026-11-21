@@ -222,7 +222,7 @@ describe('properties-panel', function() {
     it('should show a button per group, named by its label', function() {
 
       // when
-      var buttons = domQueryAll('.cpp-properties-rail [role=tab]', container);
+      var buttons = domQueryAll('.cpp-properties-tabs-links [role=tab]', container);
 
       // then
       expect(buttons.length).to.equal(3);
