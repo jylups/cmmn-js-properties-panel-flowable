@@ -171,15 +171,16 @@ describe('flowable - stage, milestone, repetition rule and criterion attributes'
     });
 
 
-    it('should only show the auto complete condition of the case plan model', function() {
+    it('should show the stage attributes of the case plan model', function() {
 
       // when
       select('CasePlanModel_1');
 
       // then
       expect(getValue('stage-autoCompleteCondition')).to.eql('${planDone}');
-      expect(getEntry('stageOverview-includeInStageOverview')).not.to.exist;
-      expect(getEntry('stageOverview-displayOrder')).not.to.exist;
+      expect(getEntry('stageOverview-includeInStageOverview')).to.exist;
+      expect(getEntry('stageOverview-displayOrder')).to.exist;
+      expect(getEntry('stageOverview-businessStatus')).to.exist;
     });
 
 

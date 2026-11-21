@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cmmn:definitions xmlns:dc="http://www.omg.org/spec/CMMN/20151109/DC" xmlns:cmmndi="http://www.omg.org/spec/CMMN/20151109/CMMNDI" xmlns:cmmn="http://www.omg.org/spec/CMMN/20151109/MODEL" xmlns:flowable="http://flowable.org/cmmn" id="Test" author="Ana" targetNamespace="http://bpmn.io/schema/cmmn">
+  <cmmn:process id="Process_1" externalRef="orderProcess" />
+  <cmmn:case id="Case_1">
+    <cmmn:casePlanModel id="CasePlanModel_1" name="Orders" autoComplete="true" flowable:businessStatus="open">
+      <cmmn:planItem id="PI_Human" definitionRef="HumanTask_1" />
+      <cmmn:planItem id="PI_Plain" definitionRef="Task_Plain" />
+      <cmmn:planItem id="PI_Process" definitionRef="ProcessTask_1" />
+      <cmmn:planItem id="PI_Stage" definitionRef="Stage_1" />
+      <cmmn:planItem id="PI_Listener" definitionRef="UserEventListener_1">
+        <cmmn:itemControl id="ItemControl_Listener">
+          <cmmn:requiredRule id="RequiredRule_Listener" />
+          <cmmn:repetitionRule id="RepetitionRule_Listener" flowable:counterVariable="rounds" />
+        </cmmn:itemControl>
+      </cmmn:planItem>
+      <cmmn:planItem id="PI_Reactivate" definitionRef="Reactivate_1" />
+      <cmmn:humanTask id="HumanTask_1" name="Review" flowable:owner="kermit" flowable:category="orders"
+        flowable:taskIdVariableName="reviewTaskId" flowable:taskCompleterVariableName="reviewer"
+        flowable:formFieldValidation="true" />
+      <cmmn:task id="Task_Plain" name="Plain" isBlocking="false" />
+      <cmmn:processTask id="ProcessTask_1" name="Order" processRef="Process_1" />
+      <cmmn:stage id="Stage_1" name="Stage" />
+      <cmmn:userEventListener id="UserEventListener_1" name="Cancel" />
+      <cmmn:eventListener id="Reactivate_1" name="Reactivate" flowable:eventType="reactivate" />
+    </cmmn:casePlanModel>
+  </cmmn:case>
+  <cmmn:textAnnotation id="TextAnnotation_1" textFormat="text/plain">
+    <cmmn:text>A note</cmmn:text>
+  </cmmn:textAnnotation>
+  <cmmndi:CMMNDI>
+    <cmmndi:CMMNDiagram id="Diagram_1">
+      <cmmndi:CMMNShape id="DI_CasePlanModel_1" cmmnElementRef="CasePlanModel_1">
+        <dc:Bounds x="20" y="20" width="900" height="400" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_PI_Human" cmmnElementRef="PI_Human">
+        <dc:Bounds x="60" y="60" width="100" height="80" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_PI_Plain" cmmnElementRef="PI_Plain">
+        <dc:Bounds x="200" y="60" width="100" height="80" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_PI_Process" cmmnElementRef="PI_Process">
+        <dc:Bounds x="340" y="60" width="100" height="80" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_PI_Stage" cmmnElementRef="PI_Stage">
+        <dc:Bounds x="480" y="60" width="200" height="150" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_PI_Listener" cmmnElementRef="PI_Listener">
+        <dc:Bounds x="60" y="250" width="36" height="36" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_PI_Reactivate" cmmnElementRef="PI_Reactivate">
+        <dc:Bounds x="160" y="250" width="36" height="36" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_TextAnnotation_1" cmmnElementRef="TextAnnotation_1">
+        <dc:Bounds x="300" y="250" width="100" height="30" />
+      </cmmndi:CMMNShape>
+    </cmmndi:CMMNDiagram>
+  </cmmndi:CMMNDI>
+</cmmn:definitions>
