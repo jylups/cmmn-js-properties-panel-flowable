@@ -88,7 +88,8 @@ describe('flowable - group rail', function() {
 
     // then
     expect(shownGroups()).to.eql([
-      'general', 'assignment', 'control', 'repetition', 'advanced', 'listener', 'reactivation', 'definition'
+      'general', 'assignment', 'control', 'repetition', 'advancedForm', 'advanced', 'listener', 'reactivation',
+      'definition'
     ]);
   });
 

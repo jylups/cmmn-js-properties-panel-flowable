@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cmmn:definitions xmlns:dc="http://www.omg.org/spec/CMMN/20151109/DC" xmlns:cmmndi="http://www.omg.org/spec/CMMN/20151109/CMMNDI" xmlns:cmmn="http://www.omg.org/spec/CMMN/20151109/MODEL" xmlns:flowable="http://flowable.org/cmmn" id="Test" targetNamespace="http://flowable.org/cmmn">
+  <cmmn:case id="repeatingTask" name="repeatingTask" flowable:initiatorVariableName="initiator">
+    <cmmn:casePlanModel id="CasePlanModel_1" name="A CasePlanModel">
+      <cmmn:planItem id="PI_Aggregations" name="My Task" definitionRef="humanTask1">
+        <cmmn:itemControl id="ItemControl_1">
+          <cmmn:repetitionRule id="RepetitionRule_1">
+            <cmmn:extensionElements>
+              <flowable:variableAggregation target="reviews" createOverviewVariable="true">
+                <cmmn:variable sourceExpression="${task:get(taskId).assignee}" target="userId" />
+                <cmmn:variable source="approved" />
+                <cmmn:variable source="description" />
+              </flowable:variableAggregation>
+              <flowable:variableAggregation targetExpression="${target}" delegateExpression="${aggregator}" storeAsTransientVariable="true" />
+            </cmmn:extensionElements>
+            <cmmn:condition>${repetitionCounter &lt; nrOfLoops}</cmmn:condition>
+          </cmmn:repetitionRule>
+        </cmmn:itemControl>
+      </cmmn:planItem>
+      <cmmn:planItem id="PI_RuleOnly" name="Rule only" definitionRef="humanTask2">
+        <cmmn:itemControl id="ItemControl_2">
+          <cmmn:repetitionRule id="RepetitionRule_2" />
+        </cmmn:itemControl>
+      </cmmn:planItem>
+      <cmmn:planItem id="PI_NoRule" name="No rule" definitionRef="humanTask3">
+        <cmmn:itemControl id="ItemControl_3" />
+      </cmmn:planItem>
+      <cmmn:planItem id="PI_Default" name="Default control" definitionRef="humanTask4" />
+      <cmmn:humanTask id="humanTask1" name="My Task" flowable:taskIdVariableName="taskId" />
+      <cmmn:humanTask id="humanTask2" name="Rule only" />
+      <cmmn:humanTask id="humanTask3" name="No rule" />
+      <cmmn:humanTask id="humanTask4" name="Default control">
+        <cmmn:defaultControl id="DefaultControl_4">
+          <cmmn:repetitionRule id="RepetitionRule_4">
+            <cmmn:extensionElements>
+              <flowable:variableAggregation target="defaults">
+                <cmmn:variable source="value" />
+              </flowable:variableAggregation>
+            </cmmn:extensionElements>
+          </cmmn:repetitionRule>
+        </cmmn:defaultControl>
+      </cmmn:humanTask>
+    </cmmn:casePlanModel>
+  </cmmn:case>
+  <cmmndi:CMMNDI>
+    <cmmndi:CMMNDiagram id="Diagram_1">
+      <cmmndi:CMMNShape id="DI_CasePlanModel_1" cmmnElementRef="CasePlanModel_1">
+        <dc:Bounds x="20" y="20" width="620" height="200" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_PI_Aggregations" cmmnElementRef="PI_Aggregations">
+        <dc:Bounds x="60" y="60" width="100" height="80" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_PI_RuleOnly" cmmnElementRef="PI_RuleOnly">
+        <dc:Bounds x="200" y="60" width="100" height="80" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_PI_NoRule" cmmnElementRef="PI_NoRule">
+        <dc:Bounds x="340" y="60" width="100" height="80" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_PI_Default" cmmnElementRef="PI_Default">
+        <dc:Bounds x="480" y="60" width="100" height="80" />
+      </cmmndi:CMMNShape>
+    </cmmndi:CMMNDiagram>
+  </cmmndi:CMMNDI>
+</cmmn:definitions>

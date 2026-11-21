@@ -273,7 +273,8 @@ describe('flowable - lifecycle listeners', function() {
       expect(list.options.length).to.eql(1);
       expect(list.options[0].text).to.eql('active → completed : Java Class');
 
-      expect(getList('planItemLifecycleListeners')).not.to.exist;
+      // the case plan model is a stage, with lifecycle listeners of its own
+      expect(getList('planItemLifecycleListeners').options.length).to.eql(0);
     });
 
 
