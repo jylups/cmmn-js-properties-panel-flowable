@@ -1,0 +1,304 @@
+// groups shown read-only, edited in a pop-up
+
+.cpp-properties-panel .cpp-properties-group.cpp-read-view {
+
+  // fields are shown in the pop-up only
+  > .cpp-properties-entry,
+  > .cpp-dialog-header,
+  > .cpp-dialog-footer,
+  > .cpp-dialog-help {
+    display: none;
+  }
+
+  > .cpp-group-edit {
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    overflow: visible;
+    border: none;
+    border-radius: 6px;
+    background-color: transparent;
+    color: @cpp-color-gray;
+    cursor: pointer;
+
+    &::before {
+      content: none;
+    }
+
+    &:hover {
+      color: @cpp-color-gray-dark;
+      background-color: @cpp-color-rail-hover;
+    }
+
+    &:focus {
+      box-shadow: none;
+    }
+
+    &:focus-visible {
+      .focus();
+    }
+  }
+
+  > .group-label {
+    margin-right: 32px;
+  }
+}
+
+.cpp-group-summary {
+  margin: 0 0 4px;
+
+  .cpp-summary-row {
+    margin: 0 0 8px;
+  }
+
+  dt {
+    font-size: 12px;
+    font-weight: bold;
+    color: @cpp-color-gray-dark;
+
+    &::after {
+      content: ':';
+    }
+  }
+
+  dd {
+    margin: 2px 0 0 10px;
+    font-size: 12px;
+    color: @cpp-color-gray-dark;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+
+  .cpp-summary-empty dd {
+    color: @cpp-color-gray;
+  }
+
+  .cpp-summary-invalid dd {
+    color: @cpp-color-error;
+  }
+}
+
+// the pop-up
+.cpp-properties.cpp-dialog-open::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background-color: rgba(15, 23, 42, 0.4);
+}
+
+.cpp-properties-panel .cpp-properties-group.cpp-read-view.cpp-editing {
+  position: fixed;
+  z-index: 1001;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-sizing: border-box;
+  width: min(720px, calc(100vw - 32px));
+  max-height: calc(100vh - 48px);
+  overflow: auto;
+  padding: 0 24px;
+  border-top: none;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 12px 40px rgba(15, 23, 42, 0.3);
+  transition: none;
+  cursor: default;
+
+  > .cpp-properties-entry {
+    display: block;
+
+    &.cpp-hidden {
+      display: none;
+    }
+  }
+
+  > .cpp-dialog-header,
+  > .cpp-dialog-help {
+    display: block;
+  }
+
+  // the group's own label is part of the header in Flowable Design
+  > .cpp-group-summary {
+    display: none;
+  }
+
+  > .cpp-dialog-footer {
+    display: flex;
+  }
+
+  > .cpp-group-summary,
+  > .cpp-group-edit,
+  > .group-toggle {
+    display: none;
+  }
+
+  > .group-label {
+    margin: 16px 0 12px;
+    font-style: normal;
+    font-size: 14px;
+  }
+
+  // fields as in Flowable Design's pop-ups
+  > .cpp-properties-entry {
+    margin-bottom: 14px;
+
+    label {
+      font-size: 12px;
+      font-weight: bold;
+      color: @cpp-color-gray-dark;
+    }
+
+    input[type=text],
+    textarea,
+    select,
+    [contenteditable] {
+      box-sizing: border-box;
+      min-height: 34px;
+      padding: 7px 10px;
+      border-radius: 4px;
+      font-size: 13px;
+    }
+  }
+
+  // with a help text: fields on the left, help on the right
+  &.cpp-has-help {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 240px;
+    column-gap: 24px;
+    align-content: start;
+
+    > .cpp-dialog-header,
+    > .group-label,
+    > .cpp-dialog-footer {
+      grid-column: ~"1 / -1";
+    }
+
+    > .cpp-properties-entry {
+      grid-column: 1;
+    }
+
+    > .cpp-dialog-help {
+      grid-column: 2;
+      grid-row: ~"3 / span 40";
+      align-self: start;
+      margin-top: 0;
+    }
+  }
+}
+
+@media (max-width: 640px) {
+  .cpp-properties-panel .cpp-properties-group.cpp-read-view.cpp-editing.cpp-has-help {
+    display: block;
+  }
+}
+
+.cpp-dialog-header {
+  position: relative;
+  margin: 0 -24px;
+  padding: 18px 56px 14px;
+  border-bottom: 1px solid @cpp-color-gray-light;
+  text-align: center;
+
+  .cpp-dialog-title {
+    font-size: 17px;
+    color: @cpp-color-gray-dark;
+  }
+
+  .cpp-dialog-subtitle {
+    margin-top: 2px;
+    font-size: 13px;
+    color: @cpp-color-gray;
+  }
+}
+
+.cpp-dialog-help {
+  margin: 4px 0 16px;
+  padding: 12px 14px;
+  border-radius: 6px;
+  background-color: @cpp-color-rail;
+  font-size: 12px;
+  line-height: 1.5;
+  color: @cpp-color-gray-dark;
+}
+
+.cpp-dialog-footer {
+  position: sticky;
+  bottom: 0;
+  justify-content: flex-end;
+  gap: 8px;
+  margin: 16px -24px 0;
+  padding: 14px 24px;
+  border-top: 1px solid @cpp-color-gray-light;
+  background-color: #fff;
+}
+
+.cpp-properties-panel .cpp-properties-group .cpp-dialog-header .cpp-dialog-close,
+.cpp-properties-panel .cpp-properties-group .cpp-dialog-footer button {
+  position: static;
+  width: auto;
+  height: auto;
+  overflow: visible;
+  cursor: pointer;
+
+  &::before {
+    content: none;
+  }
+
+  &:focus {
+    box-shadow: none;
+  }
+
+  &:focus-visible {
+    .focus();
+  }
+}
+
+.cpp-properties-panel .cpp-properties-group .cpp-dialog-header .cpp-dialog-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  display: flex;
+  padding: 4px;
+  border: none;
+  border-radius: 6px;
+  background-color: transparent;
+  color: @cpp-color-gray;
+
+  &:hover {
+    color: @cpp-color-gray-dark;
+    background-color: @cpp-color-rail-hover;
+  }
+}
+
+.cpp-properties-panel .cpp-properties-group .cpp-dialog-footer button {
+  padding: 7px 16px;
+  border-radius: 6px;
+  font-size: 13px;
+
+  &.cpp-dialog-cancel {
+    border: 1px solid @cpp-color-gray-light;
+    background-color: #fff;
+    color: @cpp-color-gray-dark;
+
+    &:hover {
+      background-color: @cpp-color-gray-lighter;
+    }
+  }
+
+  &.cpp-dialog-finish {
+    border: 1px solid @cpp-color-primary;
+    background-color: @cpp-color-primary;
+    color: #fff;
+
+    &:hover {
+      background-color: darken(@cpp-color-primary, 6%);
+    }
+  }
+}
