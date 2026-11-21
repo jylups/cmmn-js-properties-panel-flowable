@@ -6,6 +6,8 @@ All notable changes to [cmmn-js-properties-panel-flowable](https://github.com/jy
 
 ___Note:__ Yet to be released changes appear here._
 
+## 2.1.1
+
 * `CHORE`: accept `@jylups/cmmn-js` 0.23 as peer dependency too (`^0.22.0 || ^0.23.0`), and use `@jylups/cmmn-js@0.23.0` ([jylups/cmmn-js-env#57](https://github.com/jylups/cmmn-js-env/issues/57))
 
 ## 2.1.0
