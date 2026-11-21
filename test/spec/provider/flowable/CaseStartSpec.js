@@ -52,7 +52,7 @@ describe('flowable - case and start form', function() {
 
 
   function getGroup(id) {
-    return domQuery('[data-tab="general"] [data-group="' + id + '"]', container);
+    return domQuery('[data-group="' + id + '"]', container);
   }
 
   function getField(entryId) {
@@ -69,7 +69,8 @@ describe('flowable - case and start form', function() {
     it('should show the case', function() {
 
       // then
-      expect(isShown(getGroup('case'))).to.be.true;
+      expect(isShown(getGroup('caseStart'))).to.be.true;
+      expect(isShown(getGroup('assignment'))).to.be.true;
       expect(getField('case-async').checked).to.be.false;
       expect(getField('case-initiatorVariableName').value).to.eql('initiator');
       expect(getField('case-candidateStarterUsers').value).to.eql('');
@@ -118,7 +119,8 @@ describe('flowable - case and start form', function() {
     it('should show the start form', function() {
 
       // then
-      expect(isShown(getGroup('startForm'))).to.be.true;
+      expect(isShown(getGroup('form'))).to.be.true;
+      expect(isShown(getGroup('formValidation'))).to.be.true;
       expect(getField('startForm-formKey').value).to.eql('orderForm');
       expect(getField('startForm-formFieldValidation').value).to.eql('');
       expect(getField('startForm-sameDeployment').checked).to.be.false;
@@ -161,8 +163,9 @@ describe('flowable - case and start form', function() {
     selection.select(elementRegistry.get('PI_Task'));
 
     // then
-    expect(isShown(getGroup('case'))).to.be.false;
-    expect(isShown(getGroup('startForm'))).to.be.false;
+    expect(isShown(getGroup('caseStart'))).to.be.false;
+    expect(getField('case-async')).not.to.exist;
+    expect(getField('startForm-formKey')).not.to.exist;
   }));
 
 });

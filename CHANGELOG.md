@@ -6,6 +6,7 @@ All notable changes to [cmmn-js-properties-panel-flowable](https://github.com/jy
 
 ___Note:__ Yet to be released changes appear here._
 
+* `FEAT`: group the fields as Flowable Design does: General, Assignment, Variable Mapping, Event Registry, Control, Repetition, Advanced Form, Details, Advanced, Listeners, Reactivation, Definition and Extensions, with Flowable's sections inside them (Common, Form, Process, Execution, ...); the add item control action shows in each group of rules ([jylups/cmmn-js-env#62](https://github.com/jylups/cmmn-js-env/issues/62))
 * `FEAT`: show the property groups as a vertical rail of icons on the left of the panel, in the style of Flowable Design, instead of tabs along the top; arrow keys move between groups, and the panel can be collapsed to its rail (`setCollapsed()`, `isCollapsed()`, `propertiesPanel.collapsed` event) ([jylups/cmmn-js-env#61](https://github.com/jylups/cmmn-js-env/issues/61))
 * `FEAT`: tabs take an optional `icon` (SVG markup); tabs without one show the first letter of their label
 * `CHORE`: drop the `scroll-tabs` dependency

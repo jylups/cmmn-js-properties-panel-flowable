@@ -52,6 +52,8 @@ getTabs: function(element) {
 
 Each tab contains groups, and each group contains entries that represent form fields.
 
+The parts still build their fields into these original tabs; `FlowableGroups.js` then moves them, by entry id, into the groups and sections Flowable Design uses (General, Assignment, Control, Repetition, Advanced, Listeners, ...). Fields it doesn't list stay in a group named after their original group, so a new field is never lost.
+
 The panel shows the tabs as a vertical rail of icon buttons on its left (one per tab, named by its `label`), with the open tab's groups on the right. A tab can give its icon as SVG markup in `icon`; without one the rail shows the first letter of its label. Tabs whose groups have no visible entries, or whose `enabled(element)` returns false, are hidden from the rail.
 
 ### 2. Entry Factory System
