@@ -6,6 +6,10 @@ All notable changes to [cmmn-js-properties-panel-flowable](https://github.com/jy
 
 ___Note:__ Yet to be released changes appear here._
 
+* `FEAT`: show the property groups as a vertical rail of icons on the left of the panel, in the style of Flowable Design, instead of tabs along the top; arrow keys move between groups, and the panel can be collapsed to its rail (`setCollapsed()`, `isCollapsed()`, `propertiesPanel.collapsed` event) ([jylups/cmmn-js-env#61](https://github.com/jylups/cmmn-js-env/issues/61))
+* `FEAT`: tabs take an optional `icon` (SVG markup); tabs without one show the first letter of their label
+* `CHORE`: drop the `scroll-tabs` dependency
+
 ## 2.1.1
 
 * `CHORE`: accept `@jylups/cmmn-js` 0.23 as peer dependency too (`^0.22.0 || ^0.23.0`), and use `@jylups/cmmn-js@0.23.0` ([jylups/cmmn-js-env#57](https://github.com/jylups/cmmn-js-env/issues/57))
