@@ -55,15 +55,15 @@ describe('flowable - item control rules', function() {
   }
 
   function getField(name) {
-    return domQuery('[data-tab="rules"] [name="' + name + '"]', container);
+    return domQuery('[name="' + name + '"]', container);
   }
 
   function getEntry(id) {
-    return domQuery('[data-tab="rules"] [data-entry="' + id + '"]', container);
+    return domQuery('[data-entry="' + id + '"]', container);
   }
 
   function getGroup(id) {
-    return domQuery('[data-tab="rules"] [data-group="' + id + '"]', container);
+    return domQuery('[data-group="' + id + '"]', container);
   }
 
   function isShown(node) {
@@ -275,6 +275,22 @@ describe('flowable - item control rules', function() {
     // then
     expect(isShown(getEntry('itemControlParentCompletionRule'))).to.be.true;
     expect(isShown(getField('itemControlParentCompletionRule'))).to.be.false;
+  });
+
+
+  it('should add the item control from the repetition group', function() {
+
+    // given
+    select('PI_NoControl');
+
+    var add = domQuery('[data-entry="itemControlControlAction-repetition"] [data-action="add"]', container);
+
+    // when
+    add.click();
+
+    // then
+    expect(item.itemControl).to.exist;
+    expect(isShown(getField('itemControlParentCompletionRule'))).to.be.true;
   });
 
 

@@ -95,7 +95,7 @@ describe('flowable - task attributes', function() {
     it('should show the type, implementation and java fields', function() {
 
       // then
-      expect(isShown(getGroup('taskImplementation'))).to.be.true;
+      expect(isShown(getGroup('implementation'))).to.be.true;
 
       expect(getField('taskType').value).to.eql('java');
       expect(getField('taskImplementation').value).to.eql('class');
@@ -278,8 +278,8 @@ describe('flowable - task attributes', function() {
       select('PI_Decision');
 
       // then
-      expect(isShown(getGroup('asynchronousContinuations'))).to.be.true;
-      expect(isShown(getGroup('taskImplementation'))).to.be.false;
+      expect(isShown(getGroup('execution'))).to.be.true;
+      expect(isShown(getGroup('implementation'))).to.be.false;
       expect(getEntry('taskSameDeployment')).not.to.exist;
     });
 
@@ -308,7 +308,7 @@ describe('flowable - task attributes', function() {
       // given
       select('PI_Human');
 
-      expect(isShown(getGroup('taskImplementation'))).to.be.false;
+      expect(isShown(getGroup('implementation'))).to.be.false;
       expect(getField('taskSameDeployment').checked).to.be.true;
 
       // when
