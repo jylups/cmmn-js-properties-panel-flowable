@@ -52,6 +52,8 @@ getTabs: function(element) {
 
 Each tab contains groups, and each group contains entries that represent form fields.
 
+The panel shows the tabs as a vertical rail of icon buttons on its left (one per tab, named by its `label`), with the open tab's groups on the right. A tab can give its icon as SVG markup in `icon`; without one the rail shows the first letter of its label. Tabs whose groups have no visible entries, or whose `enabled(element)` returns false, are hidden from the rail.
+
 ### 2. Entry Factory System
 **Location**: `EntryFactory.js`
 
