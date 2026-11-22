@@ -164,4 +164,63 @@ describe('flowable - variable mappings in the read view', function() {
 
   });
 
+
+
+  describe('in the pop-up', function() {
+
+    beforeEach(select('PI_Many'));
+
+    function inList() {
+      return domQuery('[data-entry="variableMapping-in"] select', container);
+    }
+
+    function selectRow(idx) {
+      var list = inList();
+
+      list.selectedIndex = idx;
+      TestHelper.triggerEvent(list, 'change');
+    }
+
+    function mappings(bo) {
+      return bo.extensionElements.values.filter(function(value) {
+        return value.$type === 'flowable:In';
+      }).map(function(value) {
+        return value.target || value.targetExpression || value.variables;
+      });
+    }
+
+
+    it('should show each mapping as source \u2192 target', function() {
+
+      // then
+      expect(inList().options[2].textContent).to.equal('caseId \u2192 caseInstanceId');
+      expect(inList().options[3].textContent).to.equal('all variables');
+    });
+
+
+    it('should move a mapping up and down, and undo it', inject(function(elementRegistry, commandStack) {
+
+      // given
+      var definition = elementRegistry.get('PI_Many').businessObject.definitionRef;
+
+      selectRow(2);
+
+      // when
+      TestHelper.triggerEvent(domQuery('[data-entry="variableMapping-in"] [data-action="moveUp"]', container), 'click');
+
+      // then
+      expect(mappings(definition).slice(0, 3)).to.eql([ 'firstName', 'caseInstanceId', 'lastName' ]);
+
+      // the out mapping keeps its place after the in mappings
+      expect(definition.extensionElements.values[6].$type).to.equal('flowable:Out');
+
+      // when
+      commandStack.undo();
+
+      // then
+      expect(mappings(definition).slice(0, 3)).to.eql([ 'firstName', 'lastName', 'caseInstanceId' ]);
+    }));
+
+  });
+
 });
