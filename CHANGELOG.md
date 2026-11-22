@@ -6,6 +6,8 @@ All notable changes to [cmmn-js-properties-panel-flowable](https://github.com/jy
 
 ___Note:__ Yet to be released changes appear here._
 
+* `FEAT`: read the attributes Flowable reads in two spellings ([jylups/cmmn-js-env#87](https://github.com/jylups/cmmn-js-env/issues/87)): auto complete and blocking also from `flowable:autoComplete` and `flowable:isBlocking`, writing the CMMN attribute instead; authorized roles of user event listeners as the comma list Flowable reads; on transaction of task and lifecycle listeners
+* `DEPS`: `flowable-cmmn-moddle` 1.5.0, which types `onTransaction` on task listeners
 * `FEAT`: a model hierarchy in the rail, under the search: the case plan model, its stages and plan items as a tree with their types; clicking one selects it on the canvas (`openHierarchy()`, `selectFromHierarchy(id)`) ([jylups/cmmn-js-env#68](https://github.com/jylups/cmmn-js-env/issues/68))
 * `FEAT`: the look of Flowable Design's side bar: white panel, slate colors, the header titled with the element type and the open group (such as "Human Task - General"), bold section names, labels with their values below ([jylups/cmmn-js-env#67](https://github.com/jylups/cmmn-js-env/issues/67))
 * `FEAT`: report in the problems what the Flowable engine rejects at deployment, as errors ([jylups/cmmn-js-env#86](https://github.com/jylups/cmmn-js-env/issues/86)): fields on a case page or external worker task, a max instance count of 0, a display order that is not a whole number, a script task without a script, an HTTP task without request method or URL, and more than one reactivate event listener

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cmmn:definitions xmlns:dc="http://www.omg.org/spec/CMMN/20151109/DC" xmlns:cmmndi="http://www.omg.org/spec/CMMN/20151109/CMMNDI" xmlns:cmmn="http://www.omg.org/spec/CMMN/20151109/MODEL" xmlns:flowable="http://flowable.org/cmmn" id="Test" targetNamespace="http://bpmn.io/schema/cmmn">
+  <cmmn:case id="Case_1">
+    <cmmn:casePlanModel id="CasePlanModel_1" name="Spellings">
+      <cmmn:planItem id="PI_Stage" definitionRef="Stage_1" />
+      <cmmn:planItem id="PI_Task" definitionRef="Task_1" />
+      <cmmn:planItem id="PI_Signal" definitionRef="Signal_1" />
+      <cmmn:planItem id="PI_User" definitionRef="User_1" />
+      <cmmn:stage id="Stage_1" name="Stage" flowable:autoComplete="true" />
+      <cmmn:humanTask id="Task_1" name="Task" flowable:isBlocking="false">
+        <cmmn:extensionElements>
+          <flowable:taskListener event="complete" class="org.example.Listener" onTransaction="committed" />
+        </cmmn:extensionElements>
+      </cmmn:humanTask>
+      <cmmn:eventListener id="Signal_1" name="Signal" eventType="signal" signalRef="go" />
+      <cmmn:userEventListener id="User_1" name="Cancel" authorizedRoleRefs="manager,clerk" />
+    </cmmn:casePlanModel>
+  </cmmn:case>
+  <cmmndi:CMMNDI>
+    <cmmndi:CMMNDiagram id="Diagram_1">
+      <cmmndi:CMMNShape id="DI_CasePlanModel_1" cmmnElementRef="CasePlanModel_1"><dc:Bounds x="20" y="20" width="700" height="300" /></cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_PI_Stage" cmmnElementRef="PI_Stage"><dc:Bounds x="40" y="60" width="200" height="150" /></cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_PI_Task" cmmnElementRef="PI_Task"><dc:Bounds x="280" y="60" width="100" height="80" /></cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_PI_Signal" cmmnElementRef="PI_Signal"><dc:Bounds x="420" y="60" width="36" height="36" /></cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_PI_User" cmmnElementRef="PI_User"><dc:Bounds x="500" y="60" width="36" height="36" /></cmmndi:CMMNShape>
+    </cmmndi:CMMNDiagram>
+  </cmmndi:CMMNDI>
+</cmmn:definitions>
