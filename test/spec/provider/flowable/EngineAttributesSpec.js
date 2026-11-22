@@ -127,6 +127,86 @@ describe('flowable - engine attributes', function() {
   });
 
 
+  describe('job category and multi-line name', function() {
+
+    function extensions(type) {
+      var extensionElements = definition().get('extensionElements');
+
+      return ((extensionElements && extensionElements.get('values')) || []).filter(function(value) {
+        return value.$type === type;
+      });
+    }
+
+    it('should show them', function() {
+
+      // when
+      select('PI_Human');
+
+      // then
+      expect(getInput('jobCategory').value).to.equal('orders');
+      expect(domQuery('[data-entry="elementName"] [contenteditable]', container).innerText).to.equal('Review\norder');
+    });
+
+
+    it('should change the job category', inject(function(commandStack) {
+
+      // given
+      select('PI_Human');
+
+      // when
+      TestHelper.triggerValue(getInput('jobCategory'), 'invoices', 'change');
+
+      // then
+      expect(extensions('flowable:JobCategory')[0].body).to.equal('invoices');
+
+      // when
+      commandStack.undo();
+
+      // then
+      expect(extensions('flowable:JobCategory')[0].body).to.equal('orders');
+    }));
+
+
+    it('should remove the job category when emptied', function() {
+
+      // given
+      select('PI_Human');
+
+      // when
+      TestHelper.triggerValue(getInput('jobCategory'), '', 'change');
+
+      // then
+      expect(extensions('flowable:JobCategory')).to.be.empty;
+      expect(extensions('flowable:Element-name')).to.have.length(1);
+    });
+
+
+    it('should add a job category', function() {
+
+      // given
+      select('PI_Plain');
+
+      // when
+      TestHelper.triggerValue(getInput('jobCategory'), 'batch', 'change');
+
+      // then
+      expect(extensions('flowable:JobCategory')[0].body).to.equal('batch');
+    });
+
+
+    it('should not offer them on the case plan model', function() {
+
+      // when
+      select('CasePlanModel_1');
+
+      // then
+      expect(getEntry('jobCategory')).not.to.exist;
+      expect(getEntry('elementName')).not.to.exist;
+    });
+
+  });
+
+
   describe('blocking', function() {
 
     it('should be checked when not written, as CMMN defaults it', function() {
