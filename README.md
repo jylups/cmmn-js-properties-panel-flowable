@@ -110,3 +110,5 @@ npm run all
 ## License
 
 MIT
+
+The icons of the side bar's rail (property groups, search, model hierarchy, collapse) are from [Font Awesome Free](https://fontawesome.com) by @fontawesome, under [CC BY 4.0](https://fontawesome.com/license/free); the `@fortawesome/free-solid-svg-icons` package is MIT.

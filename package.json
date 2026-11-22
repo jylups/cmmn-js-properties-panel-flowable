@@ -50,6 +50,7 @@
     "webpack": "^5.112.2"
   },
   "dependencies": {
+    "@fortawesome/free-solid-svg-icons": "^6.7.2",
     "ids": "^0.2.0",
     "inherits": "^2.0.1",
     "lodash": "^4.17.15",
