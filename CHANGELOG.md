@@ -6,6 +6,8 @@ All notable changes to [cmmn-js-properties-panel-flowable](https://github.com/jy
 
 ___Note:__ Yet to be released changes appear here._
 
+## 3.4.0
+
 * `FEAT`: variable mappings as rows with a delete button each, as Flowable Design ([Conscia-LLC/conscia-modeler#105](https://github.com/Conscia-LLC/conscia-modeler/issues/105)); a list of extension elements can show its items this way (`rowDelete: true`), its select keeping the state underneath
 * `DEPS`: `@jylups/cmmn-js` 0.25 allowed as peer (0.22 to 0.25), the version that copies and pastes
 * `FEAT`: the reactivation groups explain case reactivation and link to Flowable's page on its rules ([Conscia-LLC/conscia-modeler#108](https://github.com/Conscia-LLC/conscia-modeler/issues/108)); a group's help can end with a link (`helpLink: { label, url }`, https only)
