@@ -242,6 +242,18 @@ describe('flowable - item control rules', function() {
     });
 
 
+    it('should explain reactivation and link to its rules', function() {
+
+      // then
+      var help = domQuery('[data-group="reactivation"] .cpp-dialog-help', container),
+          link = help && domQuery('a', help);
+
+      expect(help.textContent).to.contain('Case reactivation reopens a finished case');
+      expect(link.href).to.equal('https://documentation.flowable.com/latest/howto/howto-case-reactivation');
+      expect(link.target).to.equal('_blank');
+    });
+
+
     it('should show each condition as one row: True, False or the expression', function() {
 
       // when
