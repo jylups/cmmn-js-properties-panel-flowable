@@ -84,6 +84,77 @@
   }
 }
 
+// a list shown as a table in the read view, such as variable mappings
+.cpp-group-summary .cpp-summary-table-row dd {
+  margin-left: 0;
+  white-space: normal;
+}
+
+.cpp-summary-table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  font-size: 12px;
+
+  th {
+    padding: 4px 8px;
+    text-align: left;
+    font-weight: normal;
+    color: @cpp-color-gray-dark;
+    border-bottom: 1px solid @cpp-color-divider;
+  }
+
+  td {
+    padding: 5px 8px;
+    color: @cpp-color-value;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  th + th,
+  td + td {
+    border-left: 1px solid @cpp-color-divider;
+  }
+}
+
+.cpp-summary-table-row:not(.cpp-expanded) .cpp-summary-extra {
+  display: none;
+}
+
+// undoes the panel's action button style
+.cpp-properties-panel .cpp-group-summary .cpp-summary-more {
+  position: static;
+  width: auto;
+  height: auto;
+  overflow: visible;
+  display: block;
+  margin: 2px auto 0;
+  padding: 4px 10px;
+  border: none;
+  border-radius: 4px;
+  background: none;
+  color: @cpp-color-gray;
+  cursor: pointer;
+
+  &:hover {
+    background-color: @cpp-color-rail;
+    color: @cpp-color-gray-dark;
+  }
+
+  &:before {
+    content: none;
+  }
+
+  svg {
+    transition: transform 0.15s;
+  }
+}
+
+.cpp-summary-table-row.cpp-expanded .cpp-summary-more svg {
+  transform: rotate(180deg);
+}
+
 // the pop-up
 .cpp-properties.cpp-dialog-open::after {
   content: '';

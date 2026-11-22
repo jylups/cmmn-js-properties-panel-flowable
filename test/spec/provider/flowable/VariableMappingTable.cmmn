@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cmmn:definitions xmlns:dc="http://www.omg.org/spec/CMMN/20151109/DC" xmlns:cmmndi="http://www.omg.org/spec/CMMN/20151109/CMMNDI" xmlns:cmmn="http://www.omg.org/spec/CMMN/20151109/MODEL" xmlns:flowable="http://flowable.org/cmmn" id="VariableMappingTable" targetNamespace="http://flowable.org/cmmn">
+  <cmmn:case id="Case_1">
+    <cmmn:casePlanModel id="CasePlanModel_1" name="Plan">
+      <cmmn:planItem id="PI_Many" definitionRef="ProcessTask_Many" />
+      <cmmn:planItem id="PI_None" definitionRef="ProcessTask_None" />
+      <cmmn:processTask id="ProcessTask_Many" name="Many">
+        <cmmn:extensionElements>
+          <flowable:in sourceExpression="${vars:exists('firstName') ? firstName : null}" target="firstName" />
+          <flowable:in sourceExpression="${vars:exists('lastName') ? lastName : null}" target="lastName" />
+          <flowable:in source="caseId" target="caseInstanceId" />
+          <flowable:in variables="all" />
+          <flowable:in sourceExpression="${initiator}" targetExpression="${starter}" />
+          <flowable:in source="ssn" target="ssn" />
+          <flowable:out sourceExpression="${roiApproved}" target="roiApproved" />
+        </cmmn:extensionElements>
+      </cmmn:processTask>
+      <cmmn:processTask id="ProcessTask_None" name="None" />
+    </cmmn:casePlanModel>
+  </cmmn:case>
+  <cmmndi:CMMNDI>
+    <cmmndi:CMMNDiagram id="Diagram_1">
+      <cmmndi:CMMNShape id="DI_CasePlanModel_1" cmmnElementRef="CasePlanModel_1">
+        <dc:Bounds x="20" y="20" width="500" height="300" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_PI_Many" cmmnElementRef="PI_Many">
+        <dc:Bounds x="80" y="80" width="100" height="80" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_PI_None" cmmnElementRef="PI_None">
+        <dc:Bounds x="240" y="80" width="100" height="80" />
+      </cmmndi:CMMNShape>
+    </cmmndi:CMMNDiagram>
+  </cmmndi:CMMNDI>
+</cmmn:definitions>

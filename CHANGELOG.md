@@ -6,6 +6,9 @@ All notable changes to [cmmn-js-properties-panel-flowable](https://github.com/jy
 
 ___Note:__ Yet to be released changes appear here._
 
+* `FEAT`: variable mappings in the read view as Flowable Design shows them ([Conscia-LLC/conscia-modeler#104](https://github.com/Conscia-LLC/conscia-modeler/issues/104)): In and Out as Source / Target tables with the first four rows and a chevron for the rest, a long value cut short with its full text as a tooltip, and no longer the counts and the fields of one selected mapping
+* `FEAT`: an entry can show a list as a table in the read view (`summaryTable(element)`), or stay out of the read view (`summary: false`)
+
 ## 3.1.0
 
 * `FEAT`: with nothing selected, the panel shows the case the diagram draws, as Flowable Design's case diagram ([Conscia-LLC/conscia-modeler#101](https://github.com/Conscia-LLC/conscia-modeler/issues/101)): the title "Case Diagram", and under Common the model key (the case's id), the case's name and documentation, and the category (the file's target namespace), instead of the id, name and documentation of the drawing; the case's start settings (asynchronous start, initiator variable, potential starter users and groups) show there too
