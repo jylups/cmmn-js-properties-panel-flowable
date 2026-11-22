@@ -262,7 +262,88 @@ describe('flowable - edit in a pop-up', function() {
     }));
 
 
-    it('should stay open when the panel is drawn again', inject(function(propertiesPanel, elementRegistry) {
+    describe('with the focus in a text field', function() {
+
+      function typeInName(text) {
+        var field = nameField();
+
+        field.focus();
+
+        // the caret at the end
+        var range = document.createRange();
+        range.selectNodeContents(field);
+        range.collapse(false);
+
+        var selection = window.getSelection();
+        selection.removeAllRanges();
+        selection.addRange(range);
+
+        TestHelper.triggerValue(field, field.innerText + text, 'input');
+      }
+
+
+      it('should show the old value again on Escape', inject(function(propertiesPanel, elementRegistry) {
+
+        // given
+        propertiesPanel.openGroup('common');
+
+        typeInName(' now');
+
+        // when
+        keydown(nameField(), 'Escape');
+
+        // then
+        expect(elementRegistry.get('PI_Human').businessObject.name).not.to.exist;
+        expect(nameField().innerText).to.equal('Human');
+        expect(summary('common')).to.include('Name=Human');
+      }));
+
+
+      it('should not save the cancelled text on a later Finish', inject(function(propertiesPanel, elementRegistry) {
+
+        // given
+        propertiesPanel.openGroup('common');
+
+        typeInName(' now');
+
+        keydown(nameField(), 'Escape');
+
+        // when
+        propertiesPanel.openGroup('common');
+
+        click(domQuery('[data-group="common"] [data-group-finish]', container));
+
+        // then
+        expect(elementRegistry.get('PI_Human').businessObject.name).not.to.exist;
+        expect(summary('common')).to.include('Name=Human');
+      }));
+
+
+      it('should keep the caret on undo', inject(function(propertiesPanel, commandStack) {
+
+        // given
+        propertiesPanel.openGroup('common');
+
+        typeInName(' now');
+
+        propertiesPanel._debouncedChange.flush();
+
+        // when
+        commandStack.undo();
+
+        // then
+        var field = nameField(),
+            selection = window.getSelection();
+
+        expect(field.innerText).to.equal('Human');
+        expect(field.contains(selection.focusNode)).to.be.true;
+        expect(selection.focusOffset).to.be.at.most('Human'.length);
+      }));
+
+    });
+
+
+    it('should stay open when the panel is drawn again',inject(function(propertiesPanel, elementRegistry) {
 
       // given
       propertiesPanel.openGroup('common');

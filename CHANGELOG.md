@@ -6,6 +6,8 @@ All notable changes to [cmmn-js-properties-panel-flowable](https://github.com/jy
 
 ___Note:__ Yet to be released changes appear here._
 
+* `FIX`: cancelling an edit pop-up (Cancel or Escape) while a text field such as Name has the focus shows the old value again in the pop-up and the read view, and a later Finish no longer saves the cancelled text ([jylups/cmmn-js-env#97](https://github.com/jylups/cmmn-js-env/issues/97)); undo and redo keep the caret in a focused text field
+
 ## 3.0.0
 
 The side bar of Flowable Design: a vertical rail of property groups, values shown read-only and edited in pop-ups, a property search and a model hierarchy, the fields of Flowable's engine attributes and task types, and the problems Flowable reports at deployment.
