@@ -81,7 +81,7 @@ describe('flowable - property search', function() {
     // then
     expect(activeTab()).to.equal('cpp-search');
     expect(document.activeElement).to.equal(searchInput());
-    expect(domQuery('[data-tab-title]', container).textContent).to.equal('Search Property');
+    expect(domQuery('[data-tab-title]', container).textContent).to.equal('Human Task - Search Property');
   });
 
 

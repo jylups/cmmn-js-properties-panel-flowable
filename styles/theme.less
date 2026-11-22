@@ -1,0 +1,92 @@
+// the look of Flowable Design's side bar: a white panel, a muted title,
+// bold section names, small labels with their values below
+
+.cpp-properties-panel {
+  background-color: #fff;
+  font-family: @cpp-font-family;
+  font-size: 13px;
+  color: @cpp-color-gray-dark;
+
+  input,
+  textarea,
+  select,
+  [contenteditable] {
+    border-radius: 4px;
+  }
+}
+
+.cpp-properties-header {
+  padding: 14px 16px 8px;
+
+  > .group-title {
+    margin-bottom: 2px;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0;
+    text-transform: none;
+    color: @cpp-color-text-subtle;
+  }
+
+  > .label {
+    font-size: 12px;
+    font-weight: normal;
+    color: @cpp-color-gray;
+    overflow-wrap: anywhere;
+  }
+}
+
+.cpp-properties-panel .cpp-properties-group {
+  padding: 10px 16px;
+
+  + .cpp-properties-group {
+    border-top: 1px solid @cpp-color-divider;
+  }
+
+  > .group-label {
+    margin: 2px 0 10px;
+    font-size: 14px;
+    font-weight: 600;
+    font-style: normal;
+    color: @cpp-color-gray-dark;
+  }
+
+  &:hover > .group-toggle {
+    background-color: transparent;
+  }
+
+  > .group-toggle:hover {
+    background-color: @cpp-color-rail-hover;
+  }
+}
+
+.cpp-group-summary {
+
+  dt {
+    font-size: 12.5px;
+    font-weight: 600;
+    color: @cpp-color-gray-dark;
+  }
+
+  dd {
+    font-size: 12.5px;
+    color: @cpp-color-value;
+  }
+
+  .cpp-summary-empty dd {
+    color: @cpp-color-text-subtle;
+  }
+}
+
+.cpp-properties-panel .cpp-properties-rail {
+  background-color: @cpp-color-rail;
+  border-right-color: @cpp-color-divider;
+}
+
+.cpp-properties-panel .cpp-properties-rail .cpp-properties-tab-link.cpp-active > button {
+  color: @cpp-color-gray-dark;
+  box-shadow: inset 0 0 0 1px @cpp-color-divider;
+}
+
+ul.cpp-properties-rail-tools {
+  border-top-color: @cpp-color-divider;
+}
