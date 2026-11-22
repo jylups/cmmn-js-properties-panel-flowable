@@ -16,7 +16,13 @@
       <cmmn:planItem id="PI_Reactivate" definitionRef="Reactivate_1" />
       <cmmn:humanTask id="HumanTask_1" name="Review" flowable:owner="kermit" flowable:category="orders"
         flowable:taskIdVariableName="reviewTaskId" flowable:taskCompleterVariableName="reviewer"
-        flowable:formFieldValidation="true" />
+        flowable:formFieldValidation="true">
+        <cmmn:extensionElements>
+          <flowable:jobCategory>orders</flowable:jobCategory>
+          <flowable:element-name>Review
+order</flowable:element-name>
+        </cmmn:extensionElements>
+      </cmmn:humanTask>
       <cmmn:task id="Task_Plain" name="Plain" isBlocking="false" />
       <cmmn:processTask id="ProcessTask_1" name="Order" processRef="Process_1" />
       <cmmn:stage id="Stage_1" name="Stage" />

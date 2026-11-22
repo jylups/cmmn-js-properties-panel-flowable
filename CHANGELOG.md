@@ -6,6 +6,8 @@ All notable changes to [cmmn-js-properties-panel-flowable](https://github.com/jy
 
 ___Note:__ Yet to be released changes appear here._
 
+* `FEAT`: job category (`flowable:jobCategory`) and multi-line name (`flowable:element-name`) of plan item definitions
+* `DEPS`: `flowable-cmmn-moddle` 1.4.0, which types `flowable:jobCategory`
 * `FEAT`: fields for the open-source engine attributes that had none ([jylups/cmmn-js-env#65](https://github.com/jylups/cmmn-js-env/issues/65)): owner, category, task ID and task completer variables and form field validation of human tasks; blocking of tasks; auto complete of stages and the case plan model; stage overview, author and lifecycle listeners of the case plan model; the key (externalRef) of the process or decision a task refers to; the text format of text annotations; variable aggregations of a repetition rule; and the item control of event listeners (required, repetition, completion neutral, parent completion, reactivation)
 * `FEAT`: search the fields of the selected element by their label, from the "Search for a property" link or the magnifier in the rail, as in Flowable Design; results show the field's group and value, and their edit button opens the field in its group's pop-up (`openSearch()`, `search(term)`, `openSearchResult(index)`) ([jylups/cmmn-js-env#64](https://github.com/jylups/cmmn-js-env/issues/64))
 * `FIX`: typing in a field could apply its change to no field when another delegated input handler ran in between
