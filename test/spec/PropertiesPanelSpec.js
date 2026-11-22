@@ -243,7 +243,7 @@ describe('properties-panel', function() {
       expect(domAttr(railButton(container, 'tab2'), 'aria-selected')).to.equal('false');
       expect(domAttr(railButton(container, 'tab2'), 'tabindex')).to.equal('-1');
 
-      expect(domQuery('[data-tab-title]', container).textContent).to.equal('Tab 1');
+      expect(domQuery('[data-tab-title]', container).textContent).to.equal('Task - Tab 1');
     });
 
 
@@ -261,7 +261,7 @@ describe('properties-panel', function() {
 
       // then
       expect(activeTabId(container)).to.equal('tab2');
-      expect(domQuery('[data-tab-title]', container).textContent).to.equal('Tab 2');
+      expect(domQuery('[data-tab-title]', container).textContent).to.equal('Task - Tab 2');
     });
 
 
