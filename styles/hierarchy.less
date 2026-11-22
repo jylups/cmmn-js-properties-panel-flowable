@@ -10,21 +10,109 @@
   }
 
   ul ul {
-    margin-left: 12px;
+    margin-left: 10px;
     padding-left: 8px;
     border-left: 1px solid @cpp-color-divider;
   }
+
+  // a collapsed branch hides its children
+  [aria-expanded=false] > ul {
+    display: none;
+  }
+}
+
+// expand all, collapse all
+.cpp-properties-panel .cpp-hierarchy-tools {
+  display: flex;
+  justify-content: flex-end;
+  gap: 4px;
+  margin: 0 0 6px;
+
+  button {
+    position: static;
+    width: 30px;
+    height: 30px;
+    display: grid;
+    place-items: center;
+    padding: 0;
+    border: none;
+    border-radius: 4px;
+    background: none;
+    color: @cpp-color-gray;
+    cursor: pointer;
+
+    &::before {
+      content: none;
+    }
+
+    &:hover {
+      background-color: @cpp-color-rail;
+      color: @cpp-color-gray-dark;
+    }
+  }
+}
+
+.cpp-hierarchy-row {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+// the chevron of a branch, turned down while it is open
+.cpp-properties-panel .cpp-hierarchy-toggle,
+.cpp-hierarchy-toggle-space {
+  flex: 0 0 auto;
+  width: 22px;
+  height: 22px;
+}
+
+.cpp-properties-panel .cpp-hierarchy-toggle {
+  position: static;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: none;
+  border-radius: 4px;
+  background: none;
+  color: @cpp-color-gray;
+  cursor: pointer;
+
+  &::before {
+    content: none;
+  }
+
+  &:hover {
+    background-color: @cpp-color-rail;
+  }
+
+  svg {
+    transition: transform 0.15s;
+  }
+}
+
+[aria-expanded=true] > .cpp-hierarchy-row .cpp-hierarchy-toggle svg {
+  transform: rotate(90deg);
+}
+
+.cpp-hierarchy-icon {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 16px;
+  color: @cpp-color-gray;
 }
 
 .cpp-properties-panel .cpp-properties-hierarchy .cpp-hierarchy-item {
   position: relative;
   display: flex;
-  align-items: baseline;
-  gap: 6px;
-  width: 100%;
+  align-items: center;
+  gap: 8px;
+  flex: 1 1 auto;
+  min-width: 0;
+  width: auto;
   height: auto;
-  margin: 1px 0;
-  padding: 4px 6px;
+  margin: 2px 0;
+  padding: 7px 8px;
   overflow: hidden;
   border: none;
   border-radius: 4px;
@@ -72,5 +160,18 @@
     font-size: 11px;
     font-weight: normal;
     color: @cpp-color-text-subtle;
+  }
+}
+
+// touch screens: rows and chevrons a finger can hit
+@media (pointer: coarse) {
+  .cpp-properties-panel .cpp-properties-hierarchy .cpp-hierarchy-item {
+    min-height: 44px;
+  }
+
+  .cpp-properties-panel .cpp-hierarchy-toggle,
+  .cpp-hierarchy-toggle-space {
+    width: 36px;
+    height: 44px;
   }
 }
