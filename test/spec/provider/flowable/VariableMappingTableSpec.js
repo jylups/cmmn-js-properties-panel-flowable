@@ -198,6 +198,43 @@ describe('flowable - variable mappings in the read view', function() {
     });
 
 
+    it('should show each mapping as a row with a delete button', function() {
+
+      // then
+      var rows = domQueryAll('[data-entry="variableMapping-in"] .cpp-list-row', container);
+
+      expect(rows).to.have.length(6);
+      expect(domQuery('.cpp-list-row-label', rows[2]).textContent).to.equal('caseId \u2192 caseInstanceId');
+      expect(domQuery('[data-list-row-delete]', rows[2])).to.exist;
+    });
+
+
+    it('should select a mapping by its row, and delete one by its button', inject(function(elementRegistry, commandStack) {
+
+      // given
+      var definition = elementRegistry.get('PI_Many').businessObject.definitionRef;
+
+      // when
+      TestHelper.triggerEvent(domQueryAll('[data-entry="variableMapping-in"] [data-list-row]', container)[1], 'click');
+
+      // then
+      expect(inList().selectedIndex).to.equal(1);
+
+      // when
+      TestHelper.triggerEvent(domQueryAll('[data-entry="variableMapping-in"] [data-list-row-delete]', container)[2], 'click');
+
+      // then
+      expect(mappings(definition)).to.eql([ 'firstName', 'lastName', 'all', '${starter}', 'ssn' ]);
+      expect(domQueryAll('[data-entry="variableMapping-in"] .cpp-list-row', container)).to.have.length(5);
+
+      // when
+      commandStack.undo();
+
+      // then
+      expect(mappings(definition)).to.have.length(6);
+    }));
+
+
     it('should move a mapping up and down, and undo it', inject(function(elementRegistry, commandStack) {
 
       // given
