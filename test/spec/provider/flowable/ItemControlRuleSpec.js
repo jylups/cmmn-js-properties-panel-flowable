@@ -8,6 +8,7 @@ var TestContainer = require('mocha-test-container-support');
 
 var propertiesPanelModule = require('lib'),
     domQuery = require('min-dom').query,
+    domQueryAll = require('min-dom').queryAll,
     domClasses = require('min-dom').classes,
     coreModule = require('@jylups/cmmn-js/lib/core'),
     selectionModule = require('diagram-js/lib/features/selection').default,
@@ -113,7 +114,9 @@ describe('flowable - item control rules', function() {
       expect(getField('itemControlCompletionNeutral').checked).to.be.true;
       expect(getField('itemControlCompletionNeutralCondition').value)
         .to.eql('${vars:getOrDefault(\'neutral\', false)}');
-      expect(getField('itemControlReactivationActivateCondition').value).to.eql('true');
+      expect(getField('itemControlReactivationActivateConditionTrue').checked).to.be.true;
+      expect(getField('itemControlReactivationActivateCondition').value).to.eql('');
+      expect(getField('itemControlReactivationIgnoreConditionTrue').checked).to.be.false;
       expect(getField('itemControlReactivationIgnoreCondition').value).to.eql('');
     });
 
@@ -195,7 +198,7 @@ describe('flowable - item control rules', function() {
       expect(rule.get('ignoreCondition')).to.eql('${ignore}');
 
       // when
-      TestHelper.triggerValue(getField('itemControlReactivationActivateCondition'), '', 'change');
+      click('itemControlReactivationActivateConditionTrue');
 
       // then
       expect(rule.get('activateCondition')).not.to.exist;
@@ -206,6 +209,54 @@ describe('flowable - item control rules', function() {
 
       // then
       expect(rules(item.itemControl)).not.to.include('flowable:ReactivationRule');
+    });
+
+  });
+
+
+  describe('reactivation conditions as Flowable Design', function() {
+
+    beforeEach(function() {
+      select('PI_Task');
+    });
+
+
+    it('should take a typed expression instead of the check', function() {
+
+      // given
+      var rule = getRule(item.itemControl, 'flowable:ReactivationRule');
+
+      // when
+      TestHelper.triggerValue(getField('itemControlReactivationActivateCondition'), '${reopen}', 'change');
+
+      // then
+      expect(rule.get('activateCondition')).to.eql('${reopen}');
+      expect(getField('itemControlReactivationActivateConditionTrue').checked).to.be.false;
+
+      // when
+      click('itemControlReactivationActivateConditionTrue');
+
+      // then
+      expect(rule.get('activateCondition')).to.eql('true');
+      expect(getField('itemControlReactivationActivateCondition').value).to.eql('');
+    });
+
+
+    it('should show each condition as one row: True, False or the expression', function() {
+
+      // when
+      TestHelper.triggerValue(getField('itemControlReactivationIgnoreCondition'), '${ignore}', 'change');
+
+      // then
+      var rows = Array.prototype.map.call(
+        domQueryAll('[data-group="reactivation"] [data-group-summary] .cpp-summary-row', container),
+        function(row) {
+          return domQuery('dt', row).textContent + '=' + domQuery('dd', row).textContent;
+        });
+
+      expect(rows).to.include('Direct activation condition=True');
+      expect(rows).to.include('Ignore condition=${ignore}');
+      expect(rows).to.include('Default condition=False');
     });
 
   });
@@ -258,7 +309,7 @@ describe('flowable - item control rules', function() {
     it('should add a reactivation rule', function() {
 
       // when
-      TestHelper.triggerValue(getField('itemControlReactivationDefaultCondition'), 'true', 'change');
+      click('itemControlReactivationDefaultConditionTrue');
 
       // then
       expect(getRule(item.itemControl, 'flowable:ReactivationRule').get('defaultCondition')).to.eql('true');
@@ -314,7 +365,7 @@ describe('flowable - item control rules', function() {
 
       // then
       expect(isShown(getGroup('defaultReactivationRule'))).to.be.true;
-      expect(getField('defaultReactivationIgnoreCondition').value).to.eql('true');
+      expect(getField('defaultReactivationIgnoreConditionTrue').checked).to.be.true;
     });
 
 

@@ -6,6 +6,9 @@ All notable changes to [cmmn-js-properties-panel-flowable](https://github.com/jy
 
 ___Note:__ Yet to be released changes appear here._
 
+* `FEAT`: reactivation conditions as Flowable Design shows them ([Conscia-LLC/conscia-modeler#108](https://github.com/Conscia-LLC/conscia-modeler/issues/108)): Direct activation condition, Ignore condition and Default condition, each True (a check) or an expression, with an explanation, and one row in the read view (True, False or the expression), for the item control's rule and the default reactivation rule
+* `FEAT`: an entry can work out its read-view row itself (`summaryValue(element)`)
+
 * `FEAT`: the Execution group as Flowable Design shows it ([Conscia-LLC/conscia-modeler#107](https://github.com/Conscia-LLC/conscia-modeler/issues/107)): Asynchronous and Leave asynchronously are a choice of No, Yes exclusive or Yes non-exclusive (written as `flowable:async` / `flowable:exclusive` and `flowable:asyncLeave` / `flowable:asyncLeaveExclusive`), instead of two pairs of checkboxes; Parent Completion is "Impact on parent completion", its types in words with a "Select…" placeholder and an explanation; the default control's parent completion moves to the Default Control group, so the Execution pop-up no longer shows its hint twice
 * `FEAT`: a select option can be a placeholder (`placeholder: true`), which the read view shows as not set
 
