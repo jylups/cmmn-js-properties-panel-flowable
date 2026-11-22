@@ -6,6 +6,8 @@ All notable changes to [cmmn-js-properties-panel-flowable](https://github.com/jy
 
 ___Note:__ Yet to be released changes appear here._
 
+* `FEAT`: a plan item without an item control (or a definition without a default control) gets one with its first rule, as Flowable Design does ([Conscia-LLC/conscia-modeler#107](https://github.com/Conscia-LLC/conscia-modeler/issues/107)): impact on parent completion, completion neutral and the reactivation conditions are no longer greyed out without one
+
 * `FEAT`: the model hierarchy as Flowable Design's tree ([Conscia-LLC/conscia-modeler#109](https://github.com/Conscia-LLC/conscia-modeler/issues/109)): more room per row (44 px on touch screens), branches that collapse and expand with a chevron, Expand all and Collapse all, an icon for each type (Font Awesome Free), the name and type as a tooltip, and the arrow keys of a tree; a newly selected element's branch opens (`collapseHierarchy(idOrAll, collapse)`)
 
 * `FEAT`: reactivation conditions as Flowable Design shows them ([Conscia-LLC/conscia-modeler#108](https://github.com/Conscia-LLC/conscia-modeler/issues/108)): Direct activation condition, Ignore condition and Default condition, each True (a check) or an expression, with an explanation, and one row in the read view (True, False or the expression), for the item control's rule and the default reactivation rule

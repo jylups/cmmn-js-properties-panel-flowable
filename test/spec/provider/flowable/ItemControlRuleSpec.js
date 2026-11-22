@@ -318,14 +318,41 @@ describe('flowable - item control rules', function() {
   });
 
 
-  it('should not offer rules without an item control', function() {
+  it('should create the item control with the first rule, as Flowable Design', function() {
 
-    // when
+    // given
     select('PI_NoControl');
 
+    expect(isShown(getField('itemControlParentCompletionRule'))).to.be.true;
+
+    // when
+    setValue('itemControlParentCompletionRule', 'ignore');
+
     // then
-    expect(isShown(getEntry('itemControlParentCompletionRule'))).to.be.true;
-    expect(isShown(getField('itemControlParentCompletionRule'))).to.be.false;
+    expect(item.itemControl).to.exist;
+    expect(item.itemControl.$parent).to.equal(item);
+    expect(getRule(item.itemControl, 'flowable:ParentCompletionRule').get('type')).to.eql('ignore');
+
+    // when
+    undo();
+
+    // then
+    expect(item.itemControl).not.to.exist;
+  });
+
+
+  it('should create the item control with a completion neutral rule or a reactivation condition', function() {
+
+    // given
+    select('PI_NoControl');
+
+    // when
+    click('itemControlCompletionNeutral');
+    click('itemControlReactivationIgnoreConditionTrue');
+
+    // then
+    expect(rules(item.itemControl)).to.eql([ 'flowable:CompletionNeutralRule', 'flowable:ReactivationRule' ]);
+    expect(getRule(item.itemControl, 'flowable:ReactivationRule').get('ignoreCondition')).to.eql('true');
   });
 
 
