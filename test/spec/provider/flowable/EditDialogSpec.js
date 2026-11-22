@@ -97,10 +97,11 @@ describe('flowable - edit in a pop-up', function() {
     });
 
 
-    it('should show check boxes as True or False', function() {
+    it('should show check boxes as True or False, and a choice by its label', function() {
 
       // then
-      expect(summary('execution')).to.include('Asynchronous=False');
+      expect(summary('execution')).to.include('Blocking=True');
+      expect(summary('execution')).to.include('Asynchronous=No');
     });
 
 

@@ -224,51 +224,71 @@ describe('flowable - task attributes', function() {
 
   describe('asynchronous continuations', function() {
 
-    it('should show the exclusive flag of an asynchronous task', function() {
+    function getChoice(name, value) {
+      return domQuery('[name="' + name + '"][value="' + value + '"]', container);
+    }
+
+
+    it('should show No, Yes exclusive or Yes non-exclusive, as Flowable Design', function() {
 
       // when
       select('PI_Async');
 
       // then
-      expect(getField('taskAsync').checked).to.be.true;
-      expect(getField('taskExclusive').checked).to.be.true;
-      expect(isShown(getEntry('taskExclusive'))).to.be.true;
-      expect(isShown(getEntry('taskAsyncLeaveExclusive'))).to.be.false;
+      expect(getChoice('taskAsync', 'exclusive').checked).to.be.true;
+      expect(getChoice('taskAsyncLeave', 'no').checked).to.be.true;
+      expect(getEntry('taskExclusive')).not.to.exist;
     });
 
 
-    it('should make a task asynchronous', function() {
+    it('should make a task asynchronous and non-exclusive', function() {
 
       // given
       select('PI_Plain');
 
-      expect(isShown(getEntry('taskExclusive'))).to.be.false;
+      expect(getChoice('taskAsync', 'no').checked).to.be.true;
 
       // when
-      click('taskAsync');
+      TestHelper.triggerEvent(getChoice('taskAsync', 'nonExclusive'), 'click');
 
       // then
       expect(definition.get('flowable:async')).to.be.true;
-      expect(isShown(getEntry('taskExclusive'))).to.be.true;
+      expect(definition.get('flowable:exclusive')).to.be.false;
 
       // when
       undo();
 
       // then
       expect(definition.get('flowable:async')).not.to.exist;
+      expect(definition.get('flowable:exclusive')).not.to.exist;
     });
 
 
-    it('should remove the attribute when unchecked', function() {
+    it('should leave asynchronously and exclusively, Flowable\'s default', function() {
+
+      // given
+      select('PI_Plain');
+
+      // when
+      TestHelper.triggerEvent(getChoice('taskAsyncLeave', 'exclusive'), 'click');
+
+      // then
+      expect(definition.get('flowable:asyncLeave')).to.be.true;
+      expect(definition.get('flowable:asyncLeaveExclusive')).not.to.exist;
+    });
+
+
+    it('should remove both attributes for No', function() {
 
       // given
       select('PI_Async');
 
       // when
-      click('taskAsync');
+      TestHelper.triggerEvent(getChoice('taskAsync', 'no'), 'click');
 
       // then
       expect(definition.get('flowable:async')).not.to.exist;
+      expect(definition.get('flowable:exclusive')).not.to.exist;
     });
 
 
