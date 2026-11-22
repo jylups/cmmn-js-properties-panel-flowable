@@ -140,4 +140,99 @@ describe('flowable - model hierarchy', function() {
     expect(activeTab()).not.to.equal('cpp-hierarchy');
   }));
 
+
+
+  describe('as Flowable Design', function() {
+
+    function treeItem(id) {
+      return item(id).parentNode.parentNode;
+    }
+
+    beforeEach(inject(function(propertiesPanel) {
+      propertiesPanel.openHierarchy();
+    }));
+
+
+    it('should show an icon for each type', function() {
+
+      // then
+      expect(domQuery('.cpp-hierarchy-icon svg', item('PI_Human'))).to.exist;
+      expect(domQuery('.cpp-hierarchy-icon svg', item('CasePlanModel_1'))).to.exist;
+      expect(item('PI_Human').title).to.contain('Human Task');
+    });
+
+
+    it('should collapse and expand a branch', function() {
+
+      // given
+      var plan = treeItem('CasePlanModel_1'),
+          toggle = domQuery('[data-hierarchy-toggle="CasePlanModel_1"]', container);
+
+      expect(plan.getAttribute('aria-expanded')).to.equal('true');
+
+      // when
+      TestHelper.triggerEvent(toggle, 'click');
+
+      // then
+      expect(treeItem('CasePlanModel_1').getAttribute('aria-expanded')).to.equal('false');
+
+      // when
+      TestHelper.triggerEvent(domQuery('[data-hierarchy-toggle="CasePlanModel_1"]', container), 'click');
+
+      // then
+      expect(treeItem('CasePlanModel_1').getAttribute('aria-expanded')).to.equal('true');
+    });
+
+
+    it('should collapse and expand all', function() {
+
+      // when
+      TestHelper.triggerEvent(domQuery('[data-hierarchy-all="collapse"]', container), 'click');
+
+      // then
+      expect(treeItem('CasePlanModel_1').getAttribute('aria-expanded')).to.equal('false');
+
+      // when
+      TestHelper.triggerEvent(domQuery('[data-hierarchy-all="expand"]', container), 'click');
+
+      // then
+      expect(treeItem('CasePlanModel_1').getAttribute('aria-expanded')).to.equal('true');
+    });
+
+
+    it('should open the branch of a newly selected element', inject(function(propertiesPanel, selection, elementRegistry) {
+
+      // given
+      propertiesPanel.collapseHierarchy(true);
+
+      expect(treeItem('CasePlanModel_1').getAttribute('aria-expanded')).to.equal('false');
+
+      // when
+      selection.select(elementRegistry.get('PI_Async'));
+
+      // then
+      expect(treeItem('CasePlanModel_1').getAttribute('aria-expanded')).to.equal('true');
+    }));
+
+
+    it('should close and open a branch with the arrow keys', function() {
+
+      // given
+      var plan = item('CasePlanModel_1');
+
+      // when
+      plan.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowLeft', bubbles: true }));
+
+      // then
+      expect(treeItem('CasePlanModel_1').getAttribute('aria-expanded')).to.equal('false');
+
+      // when
+      item('CasePlanModel_1').dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true }));
+
+      // then
+      expect(treeItem('CasePlanModel_1').getAttribute('aria-expanded')).to.equal('true');
+    });
+
+  });
+
 });
