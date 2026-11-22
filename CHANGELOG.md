@@ -6,6 +6,8 @@ All notable changes to [cmmn-js-properties-panel-flowable](https://github.com/jy
 
 ___Note:__ Yet to be released changes appear here._
 
+* `FIX`: plan item rules as Flowable Design shows them ([Conscia-LLC/conscia-modeler#106](https://github.com/Conscia-LLC/conscia-modeler/issues/106)): Required, Manual activation and Repetition are True or False, as CMMN reads them (a rule without a condition always applies, no rule never does), with their condition next to them; an empty `<requiredRule/>` no longer reads as not set. Clearing a condition keeps the rule instead of removing it, and checking a rule or typing a condition creates the item or default control when there is none
+
 * `FEAT`: variable mappings in the read view as Flowable Design shows them ([Conscia-LLC/conscia-modeler#104](https://github.com/Conscia-LLC/conscia-modeler/issues/104)): In and Out as Source / Target tables with the first four rows and a chevron for the rest, a long value cut short with its full text as a tooltip, and no longer the counts and the fields of one selected mapping
 * `FEAT`: an entry can show a list as a table in the read view (`summaryTable(element)`), or stay out of the read view (`summary: false`)
 

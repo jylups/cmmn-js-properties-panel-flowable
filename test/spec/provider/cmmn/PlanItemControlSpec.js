@@ -1937,9 +1937,9 @@ describe('plan-item-control-properties', function() {
           expect(isAddItemControlButtonHidden(container)).to.be.false;
           expect(isRemoveItemControlButtonHidden(container)).to.be.true;
 
-          expect(isItemControlRuleInputHidden(container, 'manualActivationRule')).to.be.true;
-          expect(isItemControlRuleInputHidden(container, 'requiredRule')).to.be.true;
-          expect(isItemControlRuleInputHidden(container, 'repetitionRule')).to.be.true;
+          expect(isItemControlRuleInputHidden(container, 'manualActivationRule')).to.be.false;
+          expect(isItemControlRuleInputHidden(container, 'requiredRule')).to.be.false;
+          expect(isItemControlRuleInputHidden(container, 'repetitionRule')).to.be.false;
         }));
 
 
@@ -2038,9 +2038,9 @@ describe('plan-item-control-properties', function() {
           expect(isAddDefaultControlButtonHidden(container)).to.be.false;
           expect(isRemoveDefaultControlButtonHidden(container)).to.be.true;
 
-          expect(isDefaultControlRuleInputHidden(container, 'manualActivationRule')).to.be.true;
-          expect(isDefaultControlRuleInputHidden(container, 'requiredRule')).to.be.true;
-          expect(isDefaultControlRuleInputHidden(container, 'repetitionRule')).to.be.true;
+          expect(isDefaultControlRuleInputHidden(container, 'manualActivationRule')).to.be.false;
+          expect(isDefaultControlRuleInputHidden(container, 'requiredRule')).to.be.false;
+          expect(isDefaultControlRuleInputHidden(container, 'repetitionRule')).to.be.false;
         }));
 
 
@@ -2142,9 +2142,9 @@ describe('plan-item-control-properties', function() {
           expect(isAddItemControlButtonHidden(container)).to.be.false;
           expect(isRemoveItemControlButtonHidden(container)).to.be.true;
 
-          expect(isItemControlRuleInputHidden(container, 'manualActivationRule')).to.be.true;
-          expect(isItemControlRuleInputHidden(container, 'requiredRule')).to.be.true;
-          expect(isItemControlRuleInputHidden(container, 'repetitionRule')).to.be.true;
+          expect(isItemControlRuleInputHidden(container, 'manualActivationRule')).to.be.false;
+          expect(isItemControlRuleInputHidden(container, 'requiredRule')).to.be.false;
+          expect(isItemControlRuleInputHidden(container, 'repetitionRule')).to.be.false;
         });
 
         it('should undo', inject(function(commandStack) {
@@ -2170,9 +2170,9 @@ describe('plan-item-control-properties', function() {
           expect(isAddItemControlButtonHidden(container)).to.be.false;
           expect(isRemoveItemControlButtonHidden(container)).to.be.true;
 
-          expect(isItemControlRuleInputHidden(container, 'manualActivationRule')).to.be.true;
-          expect(isItemControlRuleInputHidden(container, 'requiredRule')).to.be.true;
-          expect(isItemControlRuleInputHidden(container, 'repetitionRule')).to.be.true;
+          expect(isItemControlRuleInputHidden(container, 'manualActivationRule')).to.be.false;
+          expect(isItemControlRuleInputHidden(container, 'requiredRule')).to.be.false;
+          expect(isItemControlRuleInputHidden(container, 'repetitionRule')).to.be.false;
         }));
 
       });
@@ -2233,9 +2233,9 @@ describe('plan-item-control-properties', function() {
           expect(isAddDefaultControlButtonHidden(container)).to.be.false;
           expect(isRemoveDefaultControlButtonHidden(container)).to.be.true;
 
-          expect(isDefaultControlRuleInputHidden(container, 'manualActivationRule')).to.be.true;
-          expect(isDefaultControlRuleInputHidden(container, 'requiredRule')).to.be.true;
-          expect(isDefaultControlRuleInputHidden(container, 'repetitionRule')).to.be.true;
+          expect(isDefaultControlRuleInputHidden(container, 'manualActivationRule')).to.be.false;
+          expect(isDefaultControlRuleInputHidden(container, 'requiredRule')).to.be.false;
+          expect(isDefaultControlRuleInputHidden(container, 'repetitionRule')).to.be.false;
         });
 
         it('should undo', inject(function(commandStack) {
@@ -2261,9 +2261,9 @@ describe('plan-item-control-properties', function() {
           expect(isAddDefaultControlButtonHidden(container)).to.be.false;
           expect(isRemoveDefaultControlButtonHidden(container)).to.be.true;
 
-          expect(isDefaultControlRuleInputHidden(container, 'manualActivationRule')).to.be.true;
-          expect(isDefaultControlRuleInputHidden(container, 'requiredRule')).to.be.true;
-          expect(isDefaultControlRuleInputHidden(container, 'repetitionRule')).to.be.true;
+          expect(isDefaultControlRuleInputHidden(container, 'manualActivationRule')).to.be.false;
+          expect(isDefaultControlRuleInputHidden(container, 'requiredRule')).to.be.false;
+          expect(isDefaultControlRuleInputHidden(container, 'repetitionRule')).to.be.false;
         }));
 
       });
@@ -2313,7 +2313,7 @@ describe('plan-item-control-properties', function() {
         control = getItemControl(shape);
       });
 
-      describe('should remove', function() {
+      describe('should clear the condition but keep the rule', function() {
 
 
         describe('manualActivationRule', function() {
@@ -2362,9 +2362,9 @@ describe('plan-item-control-properties', function() {
 
             it('should execute', function() {
               // then
-              expect(control.get('manualActivationRule')).not.to.exist;
+              expect(control.get('manualActivationRule')).to.equal(rule);
 
-              expect(rule.$parent).not.to.exist;
+              expect(rule.$parent).to.equal(control);
               expect(rule.get('condition')).not.to.exist;
 
               expect(condition.$parent).not.to.exist;
@@ -2386,9 +2386,9 @@ describe('plan-item-control-properties', function() {
               commandStack.redo();
 
               // then
-              expect(control.get('manualActivationRule')).not.to.exist;
+              expect(control.get('manualActivationRule')).to.equal(rule);
 
-              expect(rule.$parent).not.to.exist;
+              expect(rule.$parent).to.equal(control);
               expect(rule.get('condition')).not.to.exist;
 
               expect(condition.$parent).not.to.exist;
@@ -2446,9 +2446,9 @@ describe('plan-item-control-properties', function() {
 
             it('should execute', function() {
               // then
-              expect(control.get('requiredRule')).not.to.exist;
+              expect(control.get('requiredRule')).to.equal(rule);
 
-              expect(rule.$parent).not.to.exist;
+              expect(rule.$parent).to.equal(control);
               expect(rule.get('condition')).not.to.exist;
 
               expect(condition.$parent).not.to.exist;
@@ -2470,9 +2470,9 @@ describe('plan-item-control-properties', function() {
               commandStack.redo();
 
               // then
-              expect(control.get('requiredRule')).not.to.exist;
+              expect(control.get('requiredRule')).to.equal(rule);
 
-              expect(rule.$parent).not.to.exist;
+              expect(rule.$parent).to.equal(control);
               expect(rule.get('condition')).not.to.exist;
 
               expect(condition.$parent).not.to.exist;
@@ -2530,9 +2530,9 @@ describe('plan-item-control-properties', function() {
 
             it('should execute', function() {
               // then
-              expect(control.get('repetitionRule')).not.to.exist;
+              expect(control.get('repetitionRule')).to.equal(rule);
 
-              expect(rule.$parent).not.to.exist;
+              expect(rule.$parent).to.equal(control);
               expect(rule.get('condition')).not.to.exist;
 
               expect(condition.$parent).not.to.exist;
@@ -2554,9 +2554,9 @@ describe('plan-item-control-properties', function() {
               commandStack.redo();
 
               // then
-              expect(control.get('repetitionRule')).not.to.exist;
+              expect(control.get('repetitionRule')).to.equal(rule);
 
-              expect(rule.$parent).not.to.exist;
+              expect(rule.$parent).to.equal(control);
               expect(rule.get('condition')).not.to.exist;
 
               expect(condition.$parent).not.to.exist;
@@ -2580,7 +2580,7 @@ describe('plan-item-control-properties', function() {
           control = getDefaultControl(shape);
         });
 
-        describe('should remove', function() {
+        describe('should clear the condition but keep the rule', function() {
 
 
           describe('manualActivationRule', function() {
@@ -2629,9 +2629,9 @@ describe('plan-item-control-properties', function() {
 
               it('should execute', function() {
                 // then
-                expect(control.get('manualActivationRule')).not.to.exist;
+                expect(control.get('manualActivationRule')).to.equal(rule);
 
-                expect(rule.$parent).not.to.exist;
+                expect(rule.$parent).to.equal(control);
                 expect(rule.get('condition')).not.to.exist;
 
                 expect(condition.$parent).not.to.exist;
@@ -2653,9 +2653,9 @@ describe('plan-item-control-properties', function() {
                 commandStack.redo();
 
                 // then
-                expect(control.get('manualActivationRule')).not.to.exist;
+                expect(control.get('manualActivationRule')).to.equal(rule);
 
-                expect(rule.$parent).not.to.exist;
+                expect(rule.$parent).to.equal(control);
                 expect(rule.get('condition')).not.to.exist;
 
                 expect(condition.$parent).not.to.exist;
@@ -2713,9 +2713,9 @@ describe('plan-item-control-properties', function() {
 
               it('should execute', function() {
                 // then
-                expect(control.get('requiredRule')).not.to.exist;
+                expect(control.get('requiredRule')).to.equal(rule);
 
-                expect(rule.$parent).not.to.exist;
+                expect(rule.$parent).to.equal(control);
                 expect(rule.get('condition')).not.to.exist;
 
                 expect(condition.$parent).not.to.exist;
@@ -2737,9 +2737,9 @@ describe('plan-item-control-properties', function() {
                 commandStack.redo();
 
                 // then
-                expect(control.get('requiredRule')).not.to.exist;
+                expect(control.get('requiredRule')).to.equal(rule);
 
-                expect(rule.$parent).not.to.exist;
+                expect(rule.$parent).to.equal(control);
                 expect(rule.get('condition')).not.to.exist;
 
                 expect(condition.$parent).not.to.exist;
@@ -2797,9 +2797,9 @@ describe('plan-item-control-properties', function() {
 
               it('should execute', function() {
                 // then
-                expect(control.get('repetitionRule')).not.to.exist;
+                expect(control.get('repetitionRule')).to.equal(rule);
 
-                expect(rule.$parent).not.to.exist;
+                expect(rule.$parent).to.equal(control);
                 expect(rule.get('condition')).not.to.exist;
 
                 expect(condition.$parent).not.to.exist;
@@ -2821,9 +2821,9 @@ describe('plan-item-control-properties', function() {
                 commandStack.redo();
 
                 // then
-                expect(control.get('repetitionRule')).not.to.exist;
+                expect(control.get('repetitionRule')).to.equal(rule);
 
-                expect(rule.$parent).not.to.exist;
+                expect(rule.$parent).to.equal(control);
                 expect(rule.get('condition')).not.to.exist;
 
                 expect(condition.$parent).not.to.exist;

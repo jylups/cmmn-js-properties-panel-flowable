@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cmmn:definitions xmlns:dc="http://www.omg.org/spec/CMMN/20151109/DC" xmlns:cmmndi="http://www.omg.org/spec/CMMN/20151109/CMMNDI" xmlns:cmmn="http://www.omg.org/spec/CMMN/20151109/MODEL" xmlns:flowable="http://flowable.org/cmmn" id="RuleTrueFalse" targetNamespace="http://flowable.org/cmmn">
+  <cmmn:case id="Case_1">
+    <cmmn:casePlanModel id="CasePlanModel_1" name="Plan">
+      <cmmn:planItem id="PI_Required" definitionRef="Task_Required">
+        <cmmn:itemControl>
+          <cmmn:requiredRule />
+        </cmmn:itemControl>
+      </cmmn:planItem>
+      <cmmn:planItem id="PI_Plain" definitionRef="Task_Plain" />
+      <cmmn:task id="Task_Required" name="Required" />
+      <cmmn:task id="Task_Plain" name="Plain" />
+    </cmmn:casePlanModel>
+  </cmmn:case>
+  <cmmndi:CMMNDI>
+    <cmmndi:CMMNDiagram id="Diagram_1">
+      <cmmndi:CMMNShape id="DI_CasePlanModel_1" cmmnElementRef="CasePlanModel_1">
+        <dc:Bounds x="20" y="20" width="500" height="300" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_PI_Required" cmmnElementRef="PI_Required">
+        <dc:Bounds x="80" y="80" width="100" height="80" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_PI_Plain" cmmnElementRef="PI_Plain">
+        <dc:Bounds x="240" y="80" width="100" height="80" />
+      </cmmndi:CMMNShape>
+    </cmmndi:CMMNDiagram>
+  </cmmndi:CMMNDI>
+</cmmn:definitions>
