@@ -6,6 +6,9 @@ All notable changes to [cmmn-js-properties-panel-flowable](https://github.com/jy
 
 ___Note:__ Yet to be released changes appear here._
 
+* `FEAT`: with nothing selected, the panel shows the case the diagram draws, as Flowable Design's case diagram ([Conscia-LLC/conscia-modeler#101](https://github.com/Conscia-LLC/conscia-modeler/issues/101)): the title "Case Diagram", and under Common the model key (the case's id), the case's name and documentation, and the category (the file's target namespace), instead of the id, name and documentation of the drawing; the case's start settings (asynchronous start, initiator variable, potential starter users and groups) show there too
+* `FEAT`: an entry's `reference` can be a function that returns the object to read and write
+
 ## 3.0.1
 
 * `FIX`: cancelling an edit pop-up (Cancel or Escape) while a text field such as Name has the focus shows the old value again in the pop-up and the read view, and a later Finish no longer saves the cancelled text ([jylups/cmmn-js-env#97](https://github.com/jylups/cmmn-js-env/issues/97)); undo and redo keep the caret in a focused text field
