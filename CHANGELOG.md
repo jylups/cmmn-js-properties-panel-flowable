@@ -6,6 +6,18 @@ All notable changes to [cmmn-js-properties-panel-flowable](https://github.com/jy
 
 ___Note:__ Yet to be released changes appear here._
 
+## 3.0.0
+
+The side bar of Flowable Design: a vertical rail of property groups, values shown read-only and edited in pop-ups, a property search and a model hierarchy, the fields of Flowable's engine attributes and task types, and the problems Flowable reports at deployment.
+
+Breaking changes:
+
+* the tabs are now Flowable Design's groups, with other ids: `general`, `assignment`, `variables`, `eventRegistry`, `control`, `repetition`, `advancedForm`, `details`, `advanced`, `listener`, `reactivation`, `definition`, `extensions` (`rules` is gone)
+* group values are read-only, with an edit button that opens a pop-up; `propertiesPanel: { editInDialog: false }` keeps every field editable in place
+* the fields of the Camunda version that Flowable does not read are removed (history time to live, follow-up date, case/process/decision binding, version and tenant, decision result mapping and result variable, repeat on standard event); models that have them get a note in the problems
+* `PropertiesPanel` also takes the `injector`
+* `@jylups/cmmn-js` 0.24 as dependency (0.22 to 0.24 as peer)
+
 * `FEAT`: filled icons in the side bar's rail, as Flowable Design's: the property groups, search, model hierarchy and collapse use Font Awesome Free solid glyphs (CC BY 4.0), each required on its own so that only these are bundled
 * `DEPS`: `@fortawesome/free-solid-svg-icons` 6.7.2
 
