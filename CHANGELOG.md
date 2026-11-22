@@ -6,6 +6,8 @@ All notable changes to [cmmn-js-properties-panel-flowable](https://github.com/jy
 
 ___Note:__ Yet to be released changes appear here._
 
+## 3.1.0
+
 * `FEAT`: with nothing selected, the panel shows the case the diagram draws, as Flowable Design's case diagram ([Conscia-LLC/conscia-modeler#101](https://github.com/Conscia-LLC/conscia-modeler/issues/101)): the title "Case Diagram", and under Common the model key (the case's id), the case's name and documentation, and the category (the file's target namespace), instead of the id, name and documentation of the drawing; the case's start settings (asynchronous start, initiator variable, potential starter users and groups) show there too
 * `FEAT`: an entry's `reference` can be a function that returns the object to read and write
 
