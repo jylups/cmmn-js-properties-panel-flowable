@@ -420,3 +420,57 @@
     margin: 0;
   }
 }
+
+// the variable mappings' pop-up as one screen, as Flowable Design: the lists,
+// the selected mapping's fields, and the help (the usual layout on narrower screens)
+@media (min-width: 900px) {
+  .cpp-properties-panel .cpp-properties-group[data-group="variables"].cpp-read-view.cpp-editing.cpp-has-help {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) 220px;
+    grid-auto-flow: row dense;
+
+    > [data-entry="variableMapping-in"] {
+      grid-column: 1;
+      grid-row: ~"3 / 8";
+    }
+
+    > [data-entry="variableMapping-out"] {
+      grid-column: 1;
+      grid-row: ~"8 / 14";
+    }
+
+    > .cpp-properties-entry:not([data-entry="variableMapping-in"]):not([data-entry="variableMapping-out"]) {
+      grid-column: 2;
+    }
+
+    > .cpp-dialog-help {
+      grid-column: 3;
+      grid-row: ~"3 / 14";
+    }
+
+    > .cpp-dialog-footer {
+      grid-row: 14;
+    }
+  }
+}
+
+// the move buttons of a list, next to its add and remove buttons
+.cpp-properties-panel .cpp-element-list button.cpp-move {
+  top: -23px;
+  border-bottom: none;
+
+  &::before {
+    content: none;
+  }
+
+  > span {
+    display: inline;
+  }
+}
+
+.cpp-properties-panel .cpp-element-list button.cpp-move-up {
+  right: 46px;
+}
+
+.cpp-properties-panel .cpp-element-list button.cpp-move-down {
+  right: 69px;
+}

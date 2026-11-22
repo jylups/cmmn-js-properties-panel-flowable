@@ -6,6 +6,9 @@ All notable changes to [cmmn-js-properties-panel-flowable](https://github.com/jy
 
 ___Note:__ Yet to be released changes appear here._
 
+* `FEAT`: variable mappings edited on one screen, as Flowable Design ([Conscia-LLC/conscia-modeler#105](https://github.com/Conscia-LLC/conscia-modeler/issues/105)): on a wide screen the pop-up shows the In and Out lists, the selected mapping's fields and an explanation side by side; each list row reads "source → target"; mappings move up and down (the other extension elements keep their place); the fields are named Source variable, Source expression and Target variable
+* `FEAT`: a list of extension elements can move its items (`moveExtensionElement`)
+
 ## 3.2.0
 
 * `FEAT`: a plan item without an item control (or a definition without a default control) gets one with its first rule, as Flowable Design does ([Conscia-LLC/conscia-modeler#107](https://github.com/Conscia-LLC/conscia-modeler/issues/107)): impact on parent completion, completion neutral and the reactivation conditions are no longer greyed out without one
