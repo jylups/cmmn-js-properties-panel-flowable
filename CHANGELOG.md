@@ -6,6 +6,9 @@ All notable changes to [cmmn-js-properties-panel-flowable](https://github.com/jy
 
 ___Note:__ Yet to be released changes appear here._
 
+* `FEAT`: filled icons in the side bar's rail, as Flowable Design's: the property groups, search, model hierarchy and collapse use Font Awesome Free solid glyphs (CC BY 4.0), each required on its own so that only these are bundled
+* `DEPS`: `@fortawesome/free-solid-svg-icons` 6.7.2
+
 * `FEAT`: read the attributes Flowable reads in two spellings ([jylups/cmmn-js-env#87](https://github.com/jylups/cmmn-js-env/issues/87)): auto complete and blocking also from `flowable:autoComplete` and `flowable:isBlocking`, writing the CMMN attribute instead; authorized roles of user event listeners as the comma list Flowable reads; on transaction of task and lifecycle listeners
 * `DEPS`: `flowable-cmmn-moddle` 1.5.0, which types `onTransaction` on task listeners
 * `FEAT`: a model hierarchy in the rail, under the search: the case plan model, its stages and plan items as a tree with their types; clicking one selects it on the canvas (`openHierarchy()`, `selectFromHierarchy(id)`) ([jylups/cmmn-js-env#68](https://github.com/jylups/cmmn-js-env/issues/68))
