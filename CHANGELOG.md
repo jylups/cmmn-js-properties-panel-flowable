@@ -6,6 +6,8 @@ All notable changes to [cmmn-js-properties-panel-flowable](https://github.com/jy
 
 ___Note:__ Yet to be released changes appear here._
 
+* `FEAT`: configure Flowable's task types and timer listeners ([jylups/cmmn-js-env#84](https://github.com/jylups/cmmn-js-env/issues/84)): the script of script tasks, the request fields and handlers of HTTP tasks, the fields of mail tasks, the options of decision tasks (written as `flowable:field`, a value as string, an expression as expression), class fields of service tasks, input variables of script tasks, variables to and from external workers, and the timer expression and start trigger of timer event listeners
+* `FIX`: the HTTP task's "Behavior Class" wrote `flowable:class`, which Flowable ignores; it now writes the field `httpActivityBehaviorClass`
 * `FEAT`: job category (`flowable:jobCategory`) and multi-line name (`flowable:element-name`) of plan item definitions
 * `DEPS`: `flowable-cmmn-moddle` 1.4.0, which types `flowable:jobCategory`
 * `FEAT`: fields for the open-source engine attributes that had none ([jylups/cmmn-js-env#65](https://github.com/jylups/cmmn-js-env/issues/65)): owner, category, task ID and task completer variables and form field validation of human tasks; blocking of tasks; auto complete of stages and the case plan model; stage overview, author and lifecycle listeners of the case plan model; the key (externalRef) of the process or decision a task refers to; the text format of text annotations; variable aggregations of a repetition rule; and the item control of event listeners (required, repetition, completion neutral, parent completion, reactivation)

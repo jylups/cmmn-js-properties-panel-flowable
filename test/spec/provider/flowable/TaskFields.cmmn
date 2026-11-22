@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cmmn:definitions xmlns:dc="http://www.omg.org/spec/CMMN/20151109/DC" xmlns:cmmndi="http://www.omg.org/spec/CMMN/20151109/CMMNDI" xmlns:cmmn="http://www.omg.org/spec/CMMN/20151109/MODEL" xmlns:flowable="http://flowable.org/cmmn" id="Test" targetNamespace="http://bpmn.io/schema/cmmn">
+  <cmmn:case id="Case_1">
+    <cmmn:casePlanModel id="CasePlanModel_1" name="Tasks">
+      <cmmn:planItem id="PI_Http" definitionRef="Task_Http" />
+      <cmmn:planItem id="PI_Mail" definitionRef="Task_Mail" />
+      <cmmn:planItem id="PI_Script" definitionRef="Task_Script" />
+      <cmmn:planItem id="PI_Decision" definitionRef="DecisionTask_1" />
+      <cmmn:planItem id="PI_Java" definitionRef="Task_Java" />
+      <cmmn:planItem id="PI_Worker" definitionRef="Task_Worker" />
+      <cmmn:task id="Task_Http" name="Call" flowable:type="http">
+        <cmmn:extensionElements>
+          <flowable:field name="requestMethod" stringValue="GET" />
+          <flowable:field name="requestUrl">
+            <flowable:expression>${baseUrl}/orders</flowable:expression>
+          </flowable:field>
+          <flowable:field name="disallowRedirects">
+            <flowable:string>true</flowable:string>
+          </flowable:field>
+          <flowable:httpRequestHandler class="org.example.RequestHandler" />
+        </cmmn:extensionElements>
+      </cmmn:task>
+      <cmmn:task id="Task_Mail" name="Mail" flowable:type="mail">
+        <cmmn:extensionElements>
+          <flowable:field name="to">
+            <cmmn:string>orders@example.com</cmmn:string>
+          </flowable:field>
+          <flowable:field name="subject" expression="${subject}" />
+        </cmmn:extensionElements>
+      </cmmn:task>
+      <cmmn:task id="Task_Script" name="Script" flowable:type="script" flowable:scriptFormat="groovy">
+        <cmmn:extensionElements>
+          <flowable:field name="script">
+            <flowable:string>total = a + b</flowable:string>
+          </flowable:field>
+          <flowable:in source="a" target="a" />
+        </cmmn:extensionElements>
+      </cmmn:task>
+      <cmmn:decisionTask id="DecisionTask_1" name="Decide" decisionRef="Decision_1" />
+      <cmmn:task id="Task_Java" name="Java" flowable:type="java" flowable:class="org.example.Delegate">
+        <cmmn:extensionElements>
+          <flowable:field name="greeting" stringValue="hello" />
+        </cmmn:extensionElements>
+      </cmmn:task>
+      <cmmn:task id="Task_Worker" name="Worker" flowable:type="external-worker" flowable:topic="orders" />
+    </cmmn:casePlanModel>
+  </cmmn:case>
+  <cmmndi:CMMNDI>
+    <cmmndi:CMMNDiagram id="Diagram_1">
+      <cmmndi:CMMNShape id="DI_CasePlanModel_1" cmmnElementRef="CasePlanModel_1">
+        <dc:Bounds x="20" y="20" width="900" height="300" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_PI_Http" cmmnElementRef="PI_Http">
+        <dc:Bounds x="60" y="60" width="100" height="80" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_PI_Mail" cmmnElementRef="PI_Mail">
+        <dc:Bounds x="200" y="60" width="100" height="80" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_PI_Script" cmmnElementRef="PI_Script">
+        <dc:Bounds x="340" y="60" width="100" height="80" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_PI_Decision" cmmnElementRef="PI_Decision">
+        <dc:Bounds x="480" y="60" width="100" height="80" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_PI_Java" cmmnElementRef="PI_Java">
+        <dc:Bounds x="620" y="60" width="100" height="80" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_PI_Worker" cmmnElementRef="PI_Worker">
+        <dc:Bounds x="760" y="60" width="100" height="80" />
+      </cmmndi:CMMNShape>
+    </cmmndi:CMMNDiagram>
+  </cmmndi:CMMNDI>
+</cmmn:definitions>

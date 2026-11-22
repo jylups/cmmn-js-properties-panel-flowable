@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cmmn:definitions xmlns:dc="http://www.omg.org/spec/CMMN/20151109/DC" xmlns:cmmndi="http://www.omg.org/spec/CMMN/20151109/CMMNDI" xmlns:cmmn="http://www.omg.org/spec/CMMN/20151109/MODEL" xmlns:flowable="http://flowable.org/cmmn" id="Timer" targetNamespace="http://www.flowable.org/casedef">
+  <cmmn:case id="Case_1" name="testStartTrigger">
+    <cmmn:casePlanModel id="CasePlanModel_1" name="Plan">
+      <cmmn:planItem id="PI_Stage" name="Stage" definitionRef="Stage_1" />
+      <cmmn:planItem id="PI_TaskC" definitionRef="HumanTask_C" />
+      <cmmn:planItem id="PI_Timer_1" name="After the stage" definitionRef="Timer_1" />
+      <cmmn:planItem id="PI_Timer_2" definitionRef="Timer_2" />
+      <cmmn:stage id="Stage_1" name="Stage">
+        <cmmn:planItem id="PI_TaskA" name="A" definitionRef="HumanTask_A" />
+        <cmmn:planItem id="PI_TaskB" definitionRef="HumanTask_B" />
+        <cmmn:humanTask id="HumanTask_A" name="A" />
+        <cmmn:humanTask id="HumanTask_B" />
+      </cmmn:stage>
+      <cmmn:humanTask id="HumanTask_C" name="C" />
+      <cmmn:timerEventListener id="Timer_1">
+        <cmmn:timerExpression><![CDATA[PT3H]]></cmmn:timerExpression>
+        <cmmn:planItemStartTrigger sourceRef="PI_Stage">
+          <cmmn:standardEvent><![CDATA[complete]]></cmmn:standardEvent>
+        </cmmn:planItemStartTrigger>
+      </cmmn:timerEventListener>
+      <cmmn:timerEventListener id="Timer_2" />
+    </cmmn:casePlanModel>
+  </cmmn:case>
+  <cmmndi:CMMNDI>
+    <cmmndi:CMMNDiagram id="Diagram_1">
+      <cmmndi:CMMNShape id="DI_CasePlanModel_1" cmmnElementRef="CasePlanModel_1">
+        <dc:Bounds x="40" y="40" width="718" height="400" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_PI_Stage" cmmnElementRef="PI_Stage">
+        <dc:Bounds x="90" y="180" width="370" height="170" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_PI_TaskA" cmmnElementRef="PI_TaskA">
+        <dc:Bounds x="135" y="225" width="100" height="80" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_PI_TaskB" cmmnElementRef="PI_TaskB">
+        <dc:Bounds x="315" y="225" width="100" height="80" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_PI_TaskC" cmmnElementRef="PI_TaskC">
+        <dc:Bounds x="540" y="270" width="100" height="80" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_PI_Timer_1" cmmnElementRef="PI_Timer_1">
+        <dc:Bounds x="690" y="210" width="36" height="36" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_PI_Timer_2" cmmnElementRef="PI_Timer_2">
+        <dc:Bounds x="690" y="100" width="36" height="36" />
+      </cmmndi:CMMNShape>
+    </cmmndi:CMMNDiagram>
+  </cmmndi:CMMNDI>
+</cmmn:definitions>
