@@ -136,18 +136,6 @@ describe('human-task-properties', function() {
     }));
 
 
-    it('should fetch the followUpDate of a human task definition', inject(function(propertiesPanel) {
-
-      var field = getInput(propertiesPanel._container, 'followUpDate');
-
-      // when selecting element
-
-      // then
-      expect(field.value).to.equal(bo.get('followUpDate'));
-
-    }));
-
-
     it('should fetch the priority of a human task definition', inject(function(propertiesPanel) {
 
       var field = getInput(propertiesPanel._container, 'priority');
@@ -541,83 +529,6 @@ describe('human-task-properties', function() {
 
           // then
           expect(bo.get('dueDate')).to.equal('FOO');
-        }));
-
-      });
-
-    });
-
-
-    describe('# followUpDate', function() {
-
-      var bo, field;
-
-      beforeEach(inject(function(elementRegistry, selection, propertiesPanel) {
-
-        // given
-        var item = elementRegistry.get('PlanItem_WITH_PROPERTIES');
-        selection.select(item);
-
-        bo = item.businessObject.definitionRef;
-
-        field = getInput(propertiesPanel._container, 'followUpDate');
-
-        // when
-        TestHelper.triggerValue(field, 'FOO', 'change');
-
-      }));
-
-
-      describe('in the DOM', function() {
-
-        it('should execute', function() {
-          // then
-          expect(field.value).to.equal('FOO');
-        });
-
-        it('should undo', inject(function(commandStack) {
-          // when
-          commandStack.undo();
-
-          // then
-          expect(field.value).to.equal('${followUpDateVar}');
-        }));
-
-
-        it('should redo', inject(function(commandStack) {
-          // when
-          commandStack.undo();
-          commandStack.redo();
-
-          // then
-          expect(field.value).to.equal('FOO');
-        }));
-
-      });
-
-      describe('on the business object', function() {
-
-        it('should execute', function() {
-          // then
-          expect(bo.get('followUpDate')).to.equal('FOO');
-        });
-
-        it('should undo', inject(function(commandStack) {
-          // when
-          commandStack.undo();
-
-          // then
-          expect(bo.get('followUpDate')).to.equal('${followUpDateVar}');
-        }));
-
-
-        it('should redo', inject(function(commandStack) {
-          // when
-          commandStack.undo();
-          commandStack.redo();
-
-          // then
-          expect(bo.get('followUpDate')).to.equal('FOO');
         }));
 
       });

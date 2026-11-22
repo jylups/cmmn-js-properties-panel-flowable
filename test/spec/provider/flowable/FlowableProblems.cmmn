@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cmmn:definitions xmlns:dc="http://www.omg.org/spec/CMMN/20151109/DC" xmlns:cmmndi="http://www.omg.org/spec/CMMN/20151109/CMMNDI" xmlns:cmmn="http://www.omg.org/spec/CMMN/20151109/MODEL" xmlns:flowable="http://flowable.org/cmmn" id="Test" targetNamespace="http://bpmn.io/schema/cmmn">
+  <cmmn:case id="Case_1" flowable:historyTimeToLive="5">
+    <cmmn:casePlanModel id="CasePlanModel_1" name="Problems">
+      <cmmn:planItem id="PI_Human" definitionRef="HumanTask_1" />
+      <cmmn:planItem id="PI_Process" definitionRef="ProcessTask_1" />
+      <cmmn:planItem id="PI_Decision" definitionRef="DecisionTask_1" />
+      <cmmn:planItem id="PI_Repeat" definitionRef="Task_Repeat">
+        <cmmn:itemControl id="ItemControl_1">
+          <cmmn:repetitionRule id="RepetitionRule_1" flowable:maxInstanceCount="0" flowable:repeatOnStandardEvent="complete" />
+        </cmmn:itemControl>
+      </cmmn:planItem>
+      <cmmn:planItem id="PI_CasePage" definitionRef="Task_CasePage" />
+      <cmmn:planItem id="PI_Worker" definitionRef="Task_Worker" />
+      <cmmn:planItem id="PI_Script" definitionRef="Task_Script" />
+      <cmmn:planItem id="PI_ScriptOk" definitionRef="Task_ScriptOk" />
+      <cmmn:planItem id="PI_Http" definitionRef="Task_Http" />
+      <cmmn:planItem id="PI_HttpOk" definitionRef="Task_HttpOk" />
+      <cmmn:planItem id="PI_Stage" definitionRef="Stage_1" />
+      <cmmn:planItem id="PI_Milestone" definitionRef="Milestone_1" />
+      <cmmn:planItem id="PI_Reactivate1" definitionRef="Reactivate_1" />
+      <cmmn:planItem id="PI_Reactivate2" definitionRef="Reactivate_2" />
+      <cmmn:humanTask id="HumanTask_1" name="Review" flowable:followUpDate="${later}">
+        <cmmn:extensionElements>
+          <flowable:taskListener event="create">
+            <flowable:script scriptFormat="groovy" resource="myScript.groovy" />
+          </flowable:taskListener>
+        </cmmn:extensionElements>
+      </cmmn:humanTask>
+      <cmmn:processTask id="ProcessTask_1" name="Order" flowable:processBinding="latest" />
+      <cmmn:decisionTask id="DecisionTask_1" name="Decide" flowable:mapDecisionResult="singleEntry" />
+      <cmmn:task id="Task_Repeat" name="Repeat" />
+      <cmmn:task id="Task_CasePage" name="Page" flowable:type="casePage" flowable:formKey="page">
+        <cmmn:extensionElements>
+          <flowable:field name="x" stringValue="y" />
+        </cmmn:extensionElements>
+      </cmmn:task>
+      <cmmn:task id="Task_Worker" name="Worker" flowable:type="external-worker" flowable:topic="orders">
+        <cmmn:extensionElements>
+          <flowable:field name="x" stringValue="y" />
+        </cmmn:extensionElements>
+      </cmmn:task>
+      <cmmn:task id="Task_Script" name="Empty script" flowable:type="script" flowable:scriptFormat="groovy" />
+      <cmmn:task id="Task_ScriptOk" name="Script" flowable:type="script" flowable:scriptFormat="groovy">
+        <cmmn:extensionElements>
+          <flowable:field name="script">
+            <flowable:string>total = 1</flowable:string>
+          </flowable:field>
+        </cmmn:extensionElements>
+      </cmmn:task>
+      <cmmn:task id="Task_Http" name="Call" flowable:type="http">
+        <cmmn:extensionElements>
+          <flowable:field name="requestUrl" stringValue="https://example.com" />
+        </cmmn:extensionElements>
+      </cmmn:task>
+      <cmmn:task id="Task_HttpOk" name="Call ok" flowable:type="http">
+        <cmmn:extensionElements>
+          <flowable:field name="requestMethod" stringValue="GET" />
+          <flowable:field name="requestUrl">
+            <flowable:expression>${url}</flowable:expression>
+          </flowable:field>
+        </cmmn:extensionElements>
+      </cmmn:task>
+      <cmmn:stage id="Stage_1" name="Stage" flowable:displayOrder="first" />
+      <cmmn:milestone id="Milestone_1" name="Done" flowable:displayOrder="2" />
+      <cmmn:eventListener id="Reactivate_1" name="Reactivate" flowable:eventType="reactivate" />
+      <cmmn:eventListener id="Reactivate_2" name="Reactivate again" flowable:eventType="reactivate" />
+    </cmmn:casePlanModel>
+  </cmmn:case>
+  <cmmndi:CMMNDI>
+    <cmmndi:CMMNDiagram id="Diagram_1">
+      <cmmndi:CMMNShape id="DI_CasePlanModel_1" cmmnElementRef="CasePlanModel_1">
+        <dc:Bounds x="20" y="20" width="1000" height="400" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_PI_Human" cmmnElementRef="PI_Human"><dc:Bounds x="40" y="60" width="100" height="80" /></cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_PI_Process" cmmnElementRef="PI_Process"><dc:Bounds x="160" y="60" width="100" height="80" /></cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_PI_Decision" cmmnElementRef="PI_Decision"><dc:Bounds x="280" y="60" width="100" height="80" /></cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_PI_Repeat" cmmnElementRef="PI_Repeat"><dc:Bounds x="400" y="60" width="100" height="80" /></cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_PI_CasePage" cmmnElementRef="PI_CasePage"><dc:Bounds x="520" y="60" width="100" height="80" /></cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_PI_Worker" cmmnElementRef="PI_Worker"><dc:Bounds x="640" y="60" width="100" height="80" /></cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_PI_Script" cmmnElementRef="PI_Script"><dc:Bounds x="760" y="60" width="100" height="80" /></cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_PI_ScriptOk" cmmnElementRef="PI_ScriptOk"><dc:Bounds x="880" y="60" width="100" height="80" /></cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_PI_Http" cmmnElementRef="PI_Http"><dc:Bounds x="40" y="200" width="100" height="80" /></cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_PI_HttpOk" cmmnElementRef="PI_HttpOk"><dc:Bounds x="160" y="200" width="100" height="80" /></cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_PI_Stage" cmmnElementRef="PI_Stage"><dc:Bounds x="280" y="200" width="200" height="120" /></cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_PI_Milestone" cmmnElementRef="PI_Milestone"><dc:Bounds x="520" y="200" width="100" height="40" /></cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_PI_Reactivate1" cmmnElementRef="PI_Reactivate1"><dc:Bounds x="660" y="200" width="36" height="36" /></cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_PI_Reactivate2" cmmnElementRef="PI_Reactivate2"><dc:Bounds x="740" y="200" width="36" height="36" /></cmmndi:CMMNShape>
+    </cmmndi:CMMNDiagram>
+  </cmmndi:CMMNDI>
+</cmmn:definitions>
