@@ -1,5 +1,40 @@
 // groups shown read-only, edited in a pop-up
 
+// the pencil that opens the pop-up
+.cpp-edit-button() {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  overflow: visible;
+  border: none;
+  border-radius: 6px;
+  background-color: transparent;
+  color: @cpp-color-gray;
+  cursor: pointer;
+
+  &::before {
+    content: none;
+  }
+
+  &:hover {
+    color: @cpp-color-gray-dark;
+    background-color: @cpp-color-rail-hover;
+  }
+
+  &:focus {
+    box-shadow: none;
+  }
+
+  &:focus-visible {
+    .focus();
+  }
+}
+
+
 .cpp-properties-panel .cpp-properties-group.cpp-read-view {
 
   // fields are shown in the pop-up only
@@ -11,38 +46,9 @@
   }
 
   > .cpp-group-edit {
-    position: absolute;
+    .cpp-edit-button();
     top: 8px;
     right: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 28px;
-    height: 28px;
-    padding: 0;
-    overflow: visible;
-    border: none;
-    border-radius: 6px;
-    background-color: transparent;
-    color: @cpp-color-gray;
-    cursor: pointer;
-
-    &::before {
-      content: none;
-    }
-
-    &:hover {
-      color: @cpp-color-gray-dark;
-      background-color: @cpp-color-rail-hover;
-    }
-
-    &:focus {
-      box-shadow: none;
-    }
-
-    &:focus-visible {
-      .focus();
-    }
   }
 
   > .group-label {
@@ -81,6 +87,30 @@
 
   .cpp-summary-invalid dd {
     color: @cpp-color-error;
+  }
+}
+
+// with editPerField: each field with its own pencil, as in Flowable Design
+.cpp-properties-panel .cpp-properties-group.cpp-read-view.cpp-edit-per-field {
+
+  > .group-label {
+    margin-right: 0;
+  }
+
+  .cpp-summary-unit {
+    position: relative;
+    min-height: 28px;
+    padding-right: 34px;
+
+    > .cpp-summary-unit-rows {
+      margin: 0;
+    }
+
+    > .cpp-unit-edit {
+      .cpp-edit-button();
+      top: -4px;
+      right: 0;
+    }
   }
 }
 
@@ -185,7 +215,8 @@
   > .cpp-properties-entry {
     display: block;
 
-    &.cpp-hidden {
+    &.cpp-hidden,
+    &.cpp-unit-other {
       display: none;
     }
   }
