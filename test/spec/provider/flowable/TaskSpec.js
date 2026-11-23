@@ -8,6 +8,7 @@ var TestContainer = require('mocha-test-container-support');
 
 var propertiesPanelModule = require('lib'),
     domQuery = require('min-dom').query,
+    domQueryAll = require('min-dom').queryAll,
     domClasses = require('min-dom').classes,
     coreModule = require('@jylups/cmmn-js/lib/core'),
     selectionModule = require('diagram-js/lib/features/selection').default,
@@ -238,6 +239,24 @@ describe('flowable - task attributes', function() {
       expect(getChoice('taskAsync', 'exclusive').checked).to.be.true;
       expect(getChoice('taskAsyncLeave', 'no').checked).to.be.true;
       expect(getEntry('taskExclusive')).not.to.exist;
+    });
+
+
+    it('should be the same radio groups for every kind of task', function() {
+
+      [ 'PI_Plain', 'PI_Human', 'PI_Process', 'PI_Decision', 'PI_Java', 'PI_CasePage' ].forEach(function(id) {
+
+        // when
+        select(id);
+
+        // then
+        [ 'Asynchronous', 'Leave asynchronously' ].forEach(function(label) {
+          var radioGroup = domQuery('[role=radiogroup][aria-label="' + label + '"]', container);
+
+          expect(radioGroup, id + ': ' + label).to.exist;
+          expect(domQueryAll('input[type=radio]', radioGroup).length).to.equal(3);
+        });
+      });
     });
 
 
