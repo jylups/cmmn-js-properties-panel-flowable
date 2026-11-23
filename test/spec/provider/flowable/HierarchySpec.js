@@ -153,13 +153,58 @@ describe('flowable - model hierarchy', function() {
     }));
 
 
+    function icon(id) {
+      return domQuery('.cpp-hierarchy-icon', item(id)).firstChild;
+    }
+
+
     it('should show an icon for each type', function() {
 
       // then
-      expect(domQuery('.cpp-hierarchy-icon svg', item('PI_Human'))).to.exist;
-      expect(domQuery('.cpp-hierarchy-icon svg', item('CasePlanModel_1'))).to.exist;
+      expect(icon('PI_Human')).to.exist;
+      expect(icon('CasePlanModel_1')).to.exist;
       expect(item('PI_Human').title).to.contain('Human Task');
     });
+
+
+    it('should show the palette\'s icons of CMMN types', function() {
+
+      // then
+      expect(icon('CasePlanModel_1').classList.contains('cmmn-icon-case-plan-model')).to.be.true;
+      expect(icon('PI_Human').classList.contains('cmmn-icon-human-blocking-task')).to.be.true;
+      expect(icon('PI_Process').classList.contains('cmmn-icon-process-task')).to.be.true;
+      expect(icon('PI_Decision').classList.contains('cmmn-icon-decision-task')).to.be.true;
+      expect(icon('PI_Plain').classList.contains('cmmn-icon-task')).to.be.true;
+    });
+
+
+    it('should show the canvas\'s line icons and the palette\'s names of Flowable task types', function() {
+
+      // then
+      expect(icon('PI_Java').tagName.toLowerCase()).to.equal('svg');
+      expect(domQuery('rect', icon('PI_Java'))).to.exist;
+      expect(items()).to.include('Java (Service Task)');
+      expect(items()).to.include('Case Page (Case Page)');
+      expect(items()).to.include('Plain (Task)');
+    });
+
+
+    it('should show Flowable event listener types', inject(function(propertiesPanel, elementFactory, modeling, elementRegistry) {
+
+      // given
+      var shape = elementFactory.createPlanItemShape('cmmn:EventListener');
+
+      shape.businessObject.definitionRef.set('flowable:eventType', 'variable');
+
+      // when
+      var listener = modeling.createShape(shape, { x: 500, y: 400 }, elementRegistry.get('CasePlanModel_1'));
+
+      propertiesPanel.openHierarchy();
+
+      // then
+      expect(domQuery('circle', icon(listener.id))).to.exist;
+      expect(domQuery('.cpp-hierarchy-type', item(listener.id)).textContent).to.equal('Variable Event Listener');
+    }));
 
 
     it('should collapse and expand a branch', function() {

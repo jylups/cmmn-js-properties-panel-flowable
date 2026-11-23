@@ -98,8 +98,22 @@
   flex: 0 0 auto;
   display: grid;
   place-items: center;
-  width: 16px;
+  width: 18px;
+  height: 18px;
   color: @cpp-color-gray;
+}
+
+// the palette's icons: the cmmn font's, and the canvas's line icons for
+// Flowable's types
+.cpp-properties-panel .cpp-hierarchy-item .cpp-hierarchy-font-icon {
+  display: block;
+  font-size: 18px;
+  line-height: 1;
+
+  &::before {
+    display: block;
+    margin: 0;
+  }
 }
 
 .cpp-properties-panel .cpp-properties-hierarchy .cpp-hierarchy-item {
@@ -148,8 +162,19 @@
     display: inline;
   }
 
+  // the name, then its type: under the name when both don't fit
+  .cpp-hierarchy-text {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    column-gap: 8px;
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
   .cpp-hierarchy-label {
     flex: 0 1 auto;
+    max-width: 100%;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -157,6 +182,10 @@
 
   .cpp-hierarchy-type {
     flex: 0 0 auto;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     font-size: 11px;
     font-weight: normal;
     color: @cpp-color-text-subtle;

@@ -6,6 +6,8 @@ All notable changes to [cmmn-js-properties-panel-flowable](https://github.com/jy
 
 ___Note:__ Yet to be released changes appear here._
 
+* `FEAT`: the model hierarchy shows each element with the palette's icon for its type ([Conscia-LLC/conscia-modeler#109](https://github.com/Conscia-LLC/conscia-modeler/issues/109)), so a type looks the same in both places: the cmmn font's icons for CMMN's types (discretionary items with their discretionary variant), and the canvas's line icons for Flowable's task and event listener types. The type reads as the palette names it (Service Task, Variable Event Listener…), and goes under the name when both don't fit. The host loads cmmn-js's `cmmn-font` CSS, as it does for the palette
+
 ## 3.9.0
 
 * `FEAT`: the event correlation parameters and a service task's class fields show as Name / Value tables in the read view, as the mappings do ([Conscia-LLC/conscia-modeler#104](https://github.com/Conscia-LLC/conscia-modeler/issues/104)); their lists have a delete button on each row and move up and down. `parameterList` takes `summary: { columns, cells(item) }`
