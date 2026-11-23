@@ -6,6 +6,8 @@ All notable changes to [cmmn-js-properties-panel-flowable](https://github.com/jy
 
 ___Note:__ Yet to be released changes appear here._
 
+* `FEAT`: the event correlation parameters and a service task's class fields show as Name / Value tables in the read view, as the mappings do ([Conscia-LLC/conscia-modeler#104](https://github.com/Conscia-LLC/conscia-modeler/issues/104)); their lists have a delete button on each row and move up and down. `parameterList` takes `summary: { columns, cells(item) }`
+
 ## 3.8.0
 
 * `FEAT`: one editor for every variable mapping ([Conscia-LLC/conscia-modeler#105](https://github.com/Conscia-LLC/conscia-modeler/issues/105), [#104](https://github.com/Conscia-LLC/conscia-modeler/issues/104)): the script task's input variables, the external worker's variables and the event payload mappings now look and work as the process and case task mappings. Each row reads "source → target" with a delete button, and the list can be reordered. The selected mapping's fields sit beside the list in the pop-up, where filling in the Source variable or the Source expression clears the other. The worker's output gets a Target Type (variable or expression), and the read view shows each list as a Source / Target table. The shared parts are in `implementation/VariableMapping` (`mappingList`, `sourceEntries`, `targetEntries`, `transientEntry`, `summaryTable`, `moveMapping`, `rowLabel`)

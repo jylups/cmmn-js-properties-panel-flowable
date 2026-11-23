@@ -8,6 +8,7 @@ var TestContainer = require('mocha-test-container-support');
 
 var propertiesPanelModule = require('lib'),
     domQuery = require('min-dom').query,
+    domQueryAll = require('min-dom').queryAll,
     domClasses = require('min-dom').classes,
     coreModule = require('@jylups/cmmn-js/lib/core'),
     selectionModule = require('diagram-js/lib/features/selection').default,
@@ -297,6 +298,26 @@ describe('flowable - task fields', function() {
 
       expect(list.options.length).to.equal(1);
       expect(list.options[0].text).to.equal('greeting = hello');
+    });
+
+
+    it('should show the class fields as a Name / Value table (#104)', function() {
+
+      // when
+      select('PI_Java');
+
+      // then
+      var table = domQuery('[data-group="classFields"] [data-group-summary] .cpp-summary-table', container);
+
+      expect(Array.prototype.map.call(domQueryAll('th', table), function(th) {
+        return th.textContent;
+      })).to.eql([ 'Name', 'Value' ]);
+
+      expect(Array.prototype.map.call(domQueryAll('tbody td', table), function(td) {
+        return td.textContent;
+      })).to.eql([ 'greeting', 'hello' ]);
+
+      expect(domQuery('#flowable-extensionElements-taskClassFields', container).hasAttribute('data-row-delete')).to.be.true;
     });
 
   });
