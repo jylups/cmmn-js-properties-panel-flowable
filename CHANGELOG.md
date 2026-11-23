@@ -6,6 +6,8 @@ All notable changes to [cmmn-js-properties-panel-flowable](https://github.com/jy
 
 ___Note:__ Yet to be released changes appear here._
 
+* `FEAT`: one editor for every variable mapping ([Conscia-LLC/conscia-modeler#105](https://github.com/Conscia-LLC/conscia-modeler/issues/105), [#104](https://github.com/Conscia-LLC/conscia-modeler/issues/104)): the script task's input variables, the external worker's variables and the event payload mappings now look and work as the process and case task mappings. Each row reads "source → target" with a delete button, and the list can be reordered. The selected mapping's fields sit beside the list in the pop-up, where filling in the Source variable or the Source expression clears the other. The worker's output gets a Target Type (variable or expression), and the read view shows each list as a Source / Target table. The shared parts are in `implementation/VariableMapping` (`mappingList`, `sourceEntries`, `targetEntries`, `transientEntry`, `summaryTable`, `moveMapping`, `rowLabel`)
+
 ## 3.7.0
 
 * `FEAT`: a variable picker and a code field in the variable mappings, as Flowable Design ([Conscia-LLC/conscia-modeler#105](https://github.com/Conscia-LLC/conscia-modeler/issues/105)): Source variable and Target variable offer the case's variables (those the mappings read and write and those the model names, such as result, initiator and repetition variables), and Source expression is always in sight as a monospaced field with syntax colours that grows with its text; filling in the variable or the expression clears the other, replacing the Source select. The script task's input variables, the external worker's variables and the event payload mappings use the same fields

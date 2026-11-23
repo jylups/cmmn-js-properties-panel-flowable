@@ -551,6 +551,45 @@
   }
 }
 
+// the pop-up of any other list of mappings, such as a script task's input
+// variables, as the variable mappings': the list, the selected mapping's
+// fields beside it, and the help (the usual layout on narrower screens) (#105)
+@media (min-width: 900px) {
+  .cpp-properties-panel .cpp-properties-group.cpp-read-view.cpp-editing.cpp-editing-mapping-list {
+    display: grid;
+    width: min(900px, calc(100vw - 32px));
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-auto-flow: row dense;
+    column-gap: 24px;
+    align-content: start;
+
+    > .cpp-dialog-header,
+    > .group-label,
+    > .cpp-dialog-help,
+    > .cpp-dialog-footer {
+      grid-column: ~"1 / -1";
+    }
+
+    > .cpp-properties-entry {
+      grid-column: 2;
+    }
+
+    > .cpp-mapping-list {
+      grid-column: 1;
+      grid-row: span 8;
+    }
+
+    &.cpp-has-help {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) 220px;
+
+      > .cpp-dialog-help {
+        grid-column: 3;
+        grid-row: span 8;
+      }
+    }
+  }
+}
+
 // the move buttons of a list, next to its add and remove buttons
 .cpp-properties-panel .cpp-element-list button.cpp-move {
   top: -23px;
