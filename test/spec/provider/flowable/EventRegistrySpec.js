@@ -8,6 +8,7 @@ var TestContainer = require('mocha-test-container-support');
 
 var propertiesPanelModule = require('lib'),
     domQuery = require('min-dom').query,
+    domQueryAll = require('min-dom').queryAll,
     domClasses = require('min-dom').classes,
     coreModule = require('@jylups/cmmn-js/lib/core'),
     selectionModule = require('diagram-js/lib/features/selection').default,
@@ -207,6 +208,25 @@ describe('flowable - event registry and event listeners', function() {
 
       // then
       expect(parameter.get('value')).to.eql('${order.id}');
+    });
+
+
+    it('should show the correlation parameters as a Name / Value table with a delete button per row (#104)', function() {
+
+      // given
+      var table = domQuery('[data-group="eventRegistryCorrelation"] [data-group-summary] .cpp-summary-table', container);
+
+      // then
+      expect(Array.prototype.map.call(domQueryAll('th', table), function(th) {
+        return th.textContent;
+      })).to.eql([ 'Name', 'Value' ]);
+
+      expect(Array.prototype.map.call(domQueryAll('tbody td', table), function(td) {
+        return td.textContent;
+      })).to.eql([ 'orderId', '${orderId}' ]);
+
+      expect(getList('eventCorrelationParameters').hasAttribute('data-row-delete')).to.be.true;
+      expect(getEntry('eventCorrelationParameters').querySelector('[data-action="moveUp"]')).to.exist;
     });
 
 
