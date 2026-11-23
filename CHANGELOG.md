@@ -6,6 +6,9 @@ All notable changes to [cmmn-js-properties-panel-flowable](https://github.com/jy
 
 ___Note:__ Yet to be released changes appear here._
 
+* `FEAT`: Flowable Design's T / ⚡ switch for conditions ([Conscia-LLC/conscia-modeler#108](https://github.com/Conscia-LLC/conscia-modeler/issues/108)): the reactivation conditions and the Required, Manual activation and Repetition rules show either a check (T) or an expression field (⚡), not both; a condition with an expression opens under ⚡. Switching a reactivation condition clears what the other side had; switching a rule to ⚡ keeps the rule until a condition is typed, and back to T removes the condition and keeps the rule (True). The read view is unchanged
+* `FEAT`: an entry can update its own view on every update (`updateView(element, node)`); a control named with `aria-labelledby` takes that name in the read view and search; an entry action refreshes the other fields of its group
+
 ## 3.5.0
 
 * `FEAT`: one pencil per field, as Flowable Design ([Conscia-LLC/conscia-modeler#107](https://github.com/Conscia-LLC/conscia-modeler/issues/107)): with `propertiesPanel: { editPerField: true }` each field of a read-only group has its own edit button, whose pop-up shows only that field; In and Out mappings each have one ([#104](https://github.com/Conscia-LLC/conscia-modeler/issues/104)), and so do each rule ([#106](https://github.com/Conscia-LLC/conscia-modeler/issues/106)) and reactivation condition ([#108](https://github.com/Conscia-LLC/conscia-modeler/issues/108)). Fields edited together: an entry's `editWith: <entry id>` (a rule and its condition, Asynchronous and Leave asynchronously, Blocking and its expression); an entry shown only for another's value (`hideEntry`) or left out of the read view (`summary: false`) goes with the field before it. New `openGroup(groupId, unit)` and `getEditedUnit()`; a search result opens its own field
