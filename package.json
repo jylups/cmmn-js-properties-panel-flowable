@@ -1,6 +1,6 @@
 {
   "name": "cmmn-js-properties-panel-flowable",
-  "version": "3.6.0",
+  "version": "3.7.0",
   "description": "A simple properties panel for cmmn-js with flowable namespaces",
   "scripts": {
     "lint": "eslint .",

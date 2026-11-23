@@ -6,6 +6,8 @@ All notable changes to [cmmn-js-properties-panel-flowable](https://github.com/jy
 
 ___Note:__ Yet to be released changes appear here._
 
+## 3.7.0
+
 * `FEAT`: a variable picker and a code field in the variable mappings, as Flowable Design ([Conscia-LLC/conscia-modeler#105](https://github.com/Conscia-LLC/conscia-modeler/issues/105)): Source variable and Target variable offer the case's variables (those the mappings read and write and those the model names, such as result, initiator and repetition variables), and Source expression is always in sight as a monospaced field with syntax colours that grows with its text; filling in the variable or the expression clears the other, replacing the Source select. The script task's input variables, the external worker's variables and the event payload mappings use the same fields
 * `FEAT`: a field for an expression with syntax colours (`entryFactory.codeField`), and text fields with values to pick from (`suggestions(element)`) and a `placeholder`
 
