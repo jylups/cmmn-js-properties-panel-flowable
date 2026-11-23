@@ -666,3 +666,68 @@
   color: @cpp-color-primary;
   text-decoration: underline;
 }
+
+// a field for an expression, as Flowable Design's code editor (#105): the text
+// area is clear, a copy of its text behind it shows the syntax colours; both
+// share one cell of a grid, so the field grows with its text
+.cpp-properties-panel .cpp-code-field {
+  display: grid;
+  position: relative;
+
+  > .cpp-code-highlight,
+  > textarea {
+    grid-area: ~"1 / 1";
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 56px;
+    margin: 0;
+    padding: 7px 10px;
+    border: 1px solid @cpp-color-gray-light;
+    border-radius: 4px;
+    font-family: @cpp-font-family-code;
+    font-size: 13px;
+    line-height: 1.5;
+    letter-spacing: 0;
+    tab-size: 2;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    word-break: normal;
+  }
+
+  > .cpp-code-highlight {
+    overflow: hidden;
+    background-color: #fff;
+    color: @cpp-color-gray-dark;
+    pointer-events: none;
+  }
+
+  > textarea {
+    overflow: hidden;
+    resize: none;
+    background: transparent;
+    color: transparent;
+    caret-color: @cpp-color-gray-dark;
+
+    &::placeholder {
+      color: @cpp-color-gray;
+    }
+
+    &::selection {
+      color: transparent;
+      background-color: fade(@cpp-color-primary, 25%);
+    }
+
+    &.invalid {
+      .invalid();
+      background: transparent;
+    }
+  }
+
+  .cpp-code-delimiter { color: @cpp-color-gray; font-weight: bold; }
+  .cpp-code-variable { color: #0e7490; }
+  .cpp-code-function { color: #7c3aed; }
+  .cpp-code-keyword { color: #b45309; font-weight: bold; }
+  .cpp-code-string { color: #15803d; }
+  .cpp-code-number { color: #c2410c; }
+  .cpp-code-operator { color: #be185d; }
+}
