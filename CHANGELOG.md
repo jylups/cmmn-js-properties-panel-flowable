@@ -6,6 +6,9 @@ All notable changes to [cmmn-js-properties-panel-flowable](https://github.com/jy
 
 ___Note:__ Yet to be released changes appear here._
 
+* `FEAT`: a variable picker and a code field in the variable mappings, as Flowable Design ([Conscia-LLC/conscia-modeler#105](https://github.com/Conscia-LLC/conscia-modeler/issues/105)): Source variable and Target variable offer the case's variables (those the mappings read and write and those the model names, such as result, initiator and repetition variables), and Source expression is always in sight as a monospaced field with syntax colours that grows with its text; filling in the variable or the expression clears the other, replacing the Source select. The script task's input variables, the external worker's variables and the event payload mappings use the same fields
+* `FEAT`: a field for an expression with syntax colours (`entryFactory.codeField`), and text fields with values to pick from (`suggestions(element)`) and a `placeholder`
+
 ## 3.6.0
 
 * `FEAT`: Flowable Design's T / ⚡ switch for conditions ([Conscia-LLC/conscia-modeler#108](https://github.com/Conscia-LLC/conscia-modeler/issues/108)): the reactivation conditions and the Required, Manual activation and Repetition rules show either a check (T) or an expression field (⚡), not both; a condition with an expression opens under ⚡. Switching a reactivation condition clears what the other side had; switching a rule to ⚡ keeps the rule until a condition is typed, and back to T removes the condition and keeps the rule (True). The read view is unchanged

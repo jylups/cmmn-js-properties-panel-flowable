@@ -22,6 +22,10 @@ function getInput(container, selector) {
   return domQuery('input[name="' + selector + '"]', container);
 }
 
+function getTextarea(container, name) {
+  return domQuery('textarea[name="' + name + '"]', container);
+}
+
 function getSelect(container, selector) {
   return domQuery('select[id="' + selector + '"]', container);
 }
@@ -172,12 +176,13 @@ describe('variable-mapping-properties', function() {
 
         it('should fetch the sourceExpression of a process task definition', inject(function(propertiesPanel) {
 
-          var field = getInput(propertiesPanel._container, 'source');
+          var field = getTextarea(propertiesPanel._container, 'sourceExpression');
 
           // when selecting element
 
           // then
           expect(field.value).to.equal(variableMappings[0].get('sourceExpression'));
+          expect(getInput(propertiesPanel._container, 'source').value).to.equal('');
 
         }));
 
@@ -217,28 +222,26 @@ describe('variable-mapping-properties', function() {
 
       }));
 
-      it('should be shown if source is selected and source is empty', inject(function(propertiesPanel) {
+      it('should be shown if the source variable and expression are empty', inject(function(propertiesPanel) {
 
-        var inOutType = getSelect(propertiesPanel._container, 'flowable-variableMapping-inOutType-select');
-        var field = getInput(propertiesPanel._container, 'source');
+        var field = getInput(propertiesPanel._container, 'source'),
+            expression = getTextarea(propertiesPanel._container, 'sourceExpression');
 
         // when selecting element
 
         // then
-        expect(inOutType.value).to.equal('source');
         expect(domClasses(field).has('invalid')).to.be.true;
+        expect(domClasses(expression).has('invalid')).to.be.true;
 
       }));
 
-      it('should be shown if source is selected and target is empty', inject(function(propertiesPanel) {
+      it('should be shown if the target is empty', inject(function(propertiesPanel) {
 
-        var inOutType = getSelect(propertiesPanel._container, 'flowable-variableMapping-inOutType-select');
         var field = getInput(propertiesPanel._container, 'target');
 
         // when selecting element
 
         // then
-        expect(inOutType.value).to.equal('source');
         expect(domClasses(field).has('invalid')).to.be.true;
 
       }));
@@ -258,28 +261,24 @@ describe('variable-mapping-properties', function() {
 
       }));
 
-      it('should be shown if sourceExpression is selected and sourceExpression is empty', inject(function(propertiesPanel) {
+      it('should be shown if an empty source expression is the only source', inject(function(propertiesPanel) {
 
-        var inOutType = getSelect(propertiesPanel._container, 'flowable-variableMapping-inOutType-select');
-        var field = getInput(propertiesPanel._container, 'source');
+        var field = getTextarea(propertiesPanel._container, 'sourceExpression');
 
         // when selecting element
 
         // then
-        expect(inOutType.value).to.equal('sourceExpression');
         expect(domClasses(field).has('invalid')).to.be.true;
 
       }));
 
-      it('should be shown if sourceExpression is selected and target is empty', inject(function(propertiesPanel) {
+      it('should be shown if the target of an expression mapping is empty', inject(function(propertiesPanel) {
 
-        var inOutType = getSelect(propertiesPanel._container, 'flowable-variableMapping-inOutType-select');
         var field = getInput(propertiesPanel._container, 'target');
 
         // when selecting element
 
         // then
-        expect(inOutType.value).to.equal('sourceExpression');
         expect(domClasses(field).has('invalid')).to.be.true;
 
       }));
@@ -384,7 +383,7 @@ describe('variable-mapping-properties', function() {
         // select existing in-mapping
         selectVariableMapping(propertiesPanel, 'flowable-extensionElements-variableMapping-in');
 
-        field = getInput(propertiesPanel._container, 'source');
+        field = getTextarea(propertiesPanel._container, 'sourceExpression');
 
         // when
 
@@ -522,88 +521,127 @@ describe('variable-mapping-properties', function() {
 
     });
 
-    describe('# inOutType', function() {
+    describe('# a variable or an expression', function() {
 
-      describe('source -> sourceExpression', function() {
+      function mappingOf(elementRegistry, id) {
+        var bo = elementRegistry.get(id).businessObject.definitionRef;
 
-        var field, variableMappings;
+        return getVariableMappings(bo.get('extensionElements'), FLOWABLE_IN_EXTENSION_ELEMENT)[0];
+      }
 
-        beforeEach(inject(function(elementRegistry, selection, propertiesPanel) {
+
+      it('should replace the variable with an expression', inject(
+        function(elementRegistry, selection, propertiesPanel, commandStack) {
 
           // given
-          var item = elementRegistry.get('PlanItem_CaseTask_Invalid');
-          selection.select(item);
-
-          var bo = item.businessObject.definitionRef;
-          variableMappings = getVariableMappings(bo.get('extensionElements'), FLOWABLE_IN_EXTENSION_ELEMENT);
-
-          // select existing in-mapping
+          selection.select(elementRegistry.get('PlanItem_CaseTask_Source'));
           selectVariableMapping(propertiesPanel, 'flowable-extensionElements-variableMapping-in');
 
-          field = getSelect(propertiesPanel._container, 'flowable-variableMapping-inOutType-select');
+          var mapping = mappingOf(elementRegistry, 'PlanItem_CaseTask_Source');
 
           // when
-          // select 'sourceExpression'
-          field.selectedIndex = 1;
-          TestHelper.triggerEvent(field, 'change');
+          TestHelper.triggerValue(getTextarea(propertiesPanel._container, 'sourceExpression'), '${amount * 2}', 'change');
 
-        }));
+          // then
+          expect(mapping.get('source')).not.to.exist;
+          expect(mapping.get('sourceExpression')).to.equal('${amount * 2}');
+          expect(getInput(propertiesPanel._container, 'source').value).to.equal('');
+
+          // when
+          commandStack.undo();
+
+          // then
+          expect(mapping.get('source')).to.equal('mySource');
+          expect(mapping.get('sourceExpression')).not.to.exist;
+        }
+      ));
 
 
-        describe('in the DOM', function() {
+      it('should replace the expression with a variable', inject(
+        function(elementRegistry, selection, propertiesPanel) {
 
-          it('should execute', function() {
-            expect(field.value).to.equal('sourceExpression');
-          });
+          // given
+          selection.select(elementRegistry.get('PlanItem_ProcessTask_SourceExpression'));
+          selectVariableMapping(propertiesPanel, 'flowable-extensionElements-variableMapping-in');
 
-          it('should undo', inject(function(commandStack) {
-            // when
-            commandStack.undo();
+          var mapping = mappingOf(elementRegistry, 'PlanItem_ProcessTask_SourceExpression');
 
-            // then
-            expect(field.value).to.equal('source');
-          }));
+          // when
+          TestHelper.triggerValue(getInput(propertiesPanel._container, 'source'), 'amount', 'change');
 
-          it('should redo', inject(function(commandStack) {
-            // when
-            commandStack.undo();
-            commandStack.redo();
+          // then
+          expect(mapping.get('source')).to.equal('amount');
+          expect(mapping.get('sourceExpression')).not.to.exist;
+          expect(getTextarea(propertiesPanel._container, 'sourceExpression').value).to.equal('');
+        }
+      ));
 
-            // then
-            expect(field.value).to.equal('sourceExpression');
-          }));
 
-        });
+      it('should keep the other side when one is cleared', inject(
+        function(elementRegistry, selection, propertiesPanel) {
 
-        describe('on the business object', function() {
+          // given
+          selection.select(elementRegistry.get('PlanItem_ProcessTask_SourceExpression'));
+          selectVariableMapping(propertiesPanel, 'flowable-extensionElements-variableMapping-in');
 
-          it('should execute', function() {
-            expect(variableMappings[0].get('source')).to.be.undefined;
-            expect(variableMappings[0].get('sourceExpression')).to.exist;
-          });
+          var mapping = mappingOf(elementRegistry, 'PlanItem_ProcessTask_SourceExpression');
 
-          it('should undo', inject(function(commandStack) {
-            // when
-            commandStack.undo();
+          // when
+          TestHelper.triggerValue(getInput(propertiesPanel._container, 'source'), '', 'change');
 
-            // then
-            expect(variableMappings[0].get('source')).to.exist;
-            expect(variableMappings[0].get('sourceExpression')).to.be.undefined;
-          }));
+          // then
+          expect(mapping.get('sourceExpression')).to.equal('${mySourceExpression}');
+        }
+      ));
 
-          it('should redo', inject(function(commandStack) {
-            // when
-            commandStack.undo();
-            commandStack.redo();
 
-            // then
-            expect(variableMappings[0].get('source')).to.be.undefined;
-            expect(variableMappings[0].get('sourceExpression')).to.exist;
-          }));
+      it('should colour the expression', inject(function(elementRegistry, selection, propertiesPanel) {
 
-        });
+        // given
+        selection.select(elementRegistry.get('PlanItem_ProcessTask_SourceExpression'));
 
-      });
+        // when
+        selectVariableMapping(propertiesPanel, 'flowable-extensionElements-variableMapping-in');
+
+        // then
+        var copy = domQuery('[data-entry="variableMapping-sourceExpression"] .cpp-code-highlight', propertiesPanel._container);
+
+        expect(copy.textContent).to.equal('${mySourceExpression}');
+        expect(domQuery('.cpp-code-variable', copy).textContent).to.equal('mySourceExpression');
+
+        // when
+        var field = getTextarea(propertiesPanel._container, 'sourceExpression');
+
+        TestHelper.triggerValue(field, '${a and b}', 'input');
+
+        // then
+        expect(domQuery('.cpp-code-keyword', copy).textContent).to.equal('and');
+      }));
+
+
+      it('should offer the case variables', inject(function(elementRegistry, selection, propertiesPanel) {
+
+        // given
+        selection.select(elementRegistry.get('PlanItem_CaseTask_Source'));
+
+        // when
+        selectVariableMapping(propertiesPanel, 'flowable-extensionElements-variableMapping-in');
+
+        // then
+        var input = getInput(propertiesPanel._container, 'source'),
+            list = domQuery('#' + input.getAttribute('list'), propertiesPanel._container);
+
+        expect(Array.prototype.map.call(list.options, function(option) {
+          return option.value;
+        })).to.eql([ 'mySource' ]);
+
+        // a new variable is offered at once
+        TestHelper.triggerValue(input, 'claimAmount', 'change');
+
+        expect(Array.prototype.map.call(list.options, function(option) {
+          return option.value;
+        })).to.eql([ 'claimAmount' ]);
+      }));
 
     });
 
@@ -966,7 +1004,7 @@ describe('variable-mapping-properties', function() {
 
         }));
 
-        it('type', expectVisible(true, getSelect, 'flowable-variableMapping-inOutType-select'));
+        it('expression', expectVisible(true, getTextarea, 'sourceExpression'));
         it('source', expectVisible(true, getInput, 'source'));
         it('target', expectVisible(true, getInput, 'target'));
 
@@ -985,7 +1023,7 @@ describe('variable-mapping-properties', function() {
 
         }));
 
-        it('type', expectVisible(false, getSelect, 'flowable-variableMapping-inOutType-select'));
+        it('expression', expectVisible(false, getTextarea, 'sourceExpression', true));
         it('source', expectVisible(false, getInput, 'source', true));
         it('target', expectVisible(false, getInput, 'target', true));
 

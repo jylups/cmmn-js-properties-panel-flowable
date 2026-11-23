@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cmmn:definitions xmlns:dc="http://www.omg.org/spec/CMMN/20151109/DC" xmlns:cmmndi="http://www.omg.org/spec/CMMN/20151109/CMMNDI" xmlns:cmmn="http://www.omg.org/spec/CMMN/20151109/MODEL" xmlns:flowable="http://flowable.org/cmmn" id="CaseVariables" targetNamespace="http://flowable.org/cmmn">
+  <cmmn:case id="Case_1" flowable:initiatorVariableName="initiator">
+    <cmmn:casePlanModel id="CasePlanModel_1" name="Plan">
+      <cmmn:planItem id="PI_Process" definitionRef="Task_Process">
+        <cmmn:itemControl>
+          <cmmn:repetitionRule flowable:collectionVariable="items" />
+        </cmmn:itemControl>
+      </cmmn:planItem>
+      <cmmn:planItem id="PI_Human" definitionRef="Task_Human" />
+      <cmmn:processTask id="Task_Process" name="Review">
+        <cmmn:extensionElements>
+          <flowable:in source="claimId" target="id" />
+          <flowable:in sourceExpression="${amount * 2}" target="amount" />
+          <flowable:out source="result" target="decision" />
+          <flowable:out source="ok" target="approved" />
+          <flowable:out source="ok" targetExpression="${claim.ok}" />
+        </cmmn:extensionElements>
+      </cmmn:processTask>
+      <cmmn:humanTask id="Task_Human" name="Check" flowable:taskIdVariableName="taskId" flowable:taskCompleterVariableName="reviewer" />
+    </cmmn:casePlanModel>
+  </cmmn:case>
+  <cmmndi:CMMNDI>
+    <cmmndi:CMMNDiagram id="Diagram_1">
+      <cmmndi:CMMNShape id="DI_CasePlanModel_1" cmmnElementRef="CasePlanModel_1">
+        <dc:Bounds x="20" y="20" width="500" height="300" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_PI_Process" cmmnElementRef="PI_Process">
+        <dc:Bounds x="80" y="80" width="100" height="80" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_PI_Human" cmmnElementRef="PI_Human">
+        <dc:Bounds x="240" y="80" width="100" height="80" />
+      </cmmndi:CMMNShape>
+    </cmmndi:CMMNDiagram>
+  </cmmndi:CMMNDI>
+</cmmn:definitions>

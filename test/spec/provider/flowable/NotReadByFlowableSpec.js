@@ -191,11 +191,9 @@ describe('flowable - parts Flowable does not read', function() {
     it('should offer source and source expression only', function() {
 
       // then
-      var options = Array.prototype.map.call(getField('inOutType').options, function(option) {
-        return option.value;
-      });
-
-      expect(options).to.eql([ 'source', 'sourceExpression' ]);
+      expect(getField('source')).to.exist;
+      expect(getField('sourceExpression')).to.exist;
+      expect(getField('inOutType')).not.to.exist;
       expect(getField('local')).not.to.exist;
     });
 
