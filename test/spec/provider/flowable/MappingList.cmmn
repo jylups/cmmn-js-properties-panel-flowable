@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cmmn:definitions xmlns:dc="http://www.omg.org/spec/CMMN/20151109/DC" xmlns:cmmndi="http://www.omg.org/spec/CMMN/20151109/CMMNDI" xmlns:cmmn="http://www.omg.org/spec/CMMN/20151109/MODEL" xmlns:flowable="http://flowable.org/cmmn" id="MappingList" targetNamespace="http://flowable.org/cmmn">
+  <cmmn:case id="Case_1">
+    <cmmn:casePlanModel id="CasePlanModel_1" name="Plan">
+      <cmmn:planItem id="PI_Script" definitionRef="Task_Script" />
+      <cmmn:planItem id="PI_Worker" definitionRef="Task_Worker" />
+      <cmmn:planItem id="PI_Send" definitionRef="Task_Send" />
+      <cmmn:task id="Task_Script" name="Script" flowable:type="script" flowable:scriptFormat="groovy">
+        <cmmn:extensionElements>
+          <flowable:in source="amount" target="a" />
+          <flowable:field name="script">
+            <flowable:string>total = a + b</flowable:string>
+          </flowable:field>
+          <flowable:in sourceExpression="${fee * 2}" target="b" />
+        </cmmn:extensionElements>
+      </cmmn:task>
+      <cmmn:task id="Task_Worker" name="Worker" flowable:type="external-worker" flowable:topic="orders" flowable:resultVariableName="workerResult">
+        <cmmn:extensionElements>
+          <flowable:externalWorkerInParameter source="amount" target="amount" />
+          <flowable:externalWorkerOutParameter source="status" target="orderStatus" />
+        </cmmn:extensionElements>
+      </cmmn:task>
+      <cmmn:task id="Task_Send" name="Send" flowable:type="send-event">
+        <cmmn:extensionElements>
+          <flowable:eventType>orderShipped</flowable:eventType>
+          <flowable:eventInParameter sourceExpression="${order.id}" target="orderId" />
+        </cmmn:extensionElements>
+      </cmmn:task>
+    </cmmn:casePlanModel>
+  </cmmn:case>
+  <cmmndi:CMMNDI>
+    <cmmndi:CMMNDiagram id="Diagram_1">
+      <cmmndi:CMMNShape id="DI_CasePlanModel_1" cmmnElementRef="CasePlanModel_1">
+        <dc:Bounds x="20" y="20" width="500" height="300" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_PI_Script" cmmnElementRef="PI_Script">
+        <dc:Bounds x="60" y="60" width="100" height="80" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_PI_Worker" cmmnElementRef="PI_Worker">
+        <dc:Bounds x="200" y="60" width="100" height="80" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_PI_Send" cmmnElementRef="PI_Send">
+        <dc:Bounds x="340" y="60" width="100" height="80" />
+      </cmmndi:CMMNShape>
+    </cmmndi:CMMNDiagram>
+  </cmmndi:CMMNDI>
+</cmmn:definitions>
