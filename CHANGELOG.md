@@ -6,6 +6,8 @@ All notable changes to [cmmn-js-properties-panel-flowable](https://github.com/jy
 
 ___Note:__ Yet to be released changes appear here._
 
+## 3.9.0
+
 * `FEAT`: the event correlation parameters and a service task's class fields show as Name / Value tables in the read view, as the mappings do ([Conscia-LLC/conscia-modeler#104](https://github.com/Conscia-LLC/conscia-modeler/issues/104)); their lists have a delete button on each row and move up and down. `parameterList` takes `summary: { columns, cells(item) }`
 
 ## 3.8.0
