@@ -435,6 +435,73 @@
   }
 }
 
+// the part of a condition the T / ⚡ switch doesn't show
+.cpp-properties-panel .cpp-condition-off,
+.cpp-properties-panel .cpp-properties-group .cpp-properties-entry.cpp-condition-off {
+  display: none !important;
+}
+
+// a condition's name and its T / ⚡ switch: a value (a check) or an expression, as Flowable Design
+.cpp-properties-panel .cpp-condition-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 6px;
+
+  > label {
+    margin: 0;
+  }
+}
+
+.cpp-properties-panel .cpp-condition-switch {
+  display: inline-flex;
+  flex: none;
+  border: 1px solid @cpp-color-gray-light;
+  border-radius: 6px;
+  overflow: hidden;
+
+  // undoes the panel's action button style
+  .cpp-condition-switch-option {
+    position: static;
+    width: 28px;
+    height: 24px;
+    padding: 0;
+    overflow: visible;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    color: @cpp-color-gray;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 24px;
+    text-align: center;
+    cursor: pointer;
+
+    &::before {
+      content: none;
+    }
+
+    & + .cpp-condition-switch-option {
+      border-left: 1px solid @cpp-color-gray-light;
+    }
+
+    &:hover {
+      color: @cpp-color-gray-dark;
+      background-color: @cpp-color-rail-hover;
+    }
+
+    &.cpp-active {
+      color: #fff;
+      background-color: @cpp-color-gray-dark;
+    }
+
+    &:focus-visible {
+      .focus();
+    }
+  }
+}
+
 // a condition that is True (a check) or an expression, such as a reactivation condition
 .cpp-properties-panel .cpp-condition-choice {
   display: flex;
