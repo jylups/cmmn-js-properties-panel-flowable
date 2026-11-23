@@ -6,6 +6,8 @@ All notable changes to [cmmn-js-properties-panel-flowable](https://github.com/jy
 
 ___Note:__ Yet to be released changes appear here._
 
+* `FEAT`: one pencil per field, as Flowable Design ([Conscia-LLC/conscia-modeler#107](https://github.com/Conscia-LLC/conscia-modeler/issues/107)): with `propertiesPanel: { editPerField: true }` each field of a read-only group has its own edit button, whose pop-up shows only that field; In and Out mappings each have one ([#104](https://github.com/Conscia-LLC/conscia-modeler/issues/104)), and so do each rule ([#106](https://github.com/Conscia-LLC/conscia-modeler/issues/106)) and reactivation condition ([#108](https://github.com/Conscia-LLC/conscia-modeler/issues/108)). Fields edited together: an entry's `editWith: <entry id>` (a rule and its condition, Asynchronous and Leave asynchronously, Blocking and its expression); an entry shown only for another's value (`hideEntry`) or left out of the read view (`summary: false`) goes with the field before it. New `openGroup(groupId, unit)` and `getEditedUnit()`; a search result opens its own field
+
 ## 3.4.0
 
 * `FEAT`: variable mappings as rows with a delete button each, as Flowable Design ([Conscia-LLC/conscia-modeler#105](https://github.com/Conscia-LLC/conscia-modeler/issues/105)); a list of extension elements can show its items this way (`rowDelete: true`), its select keeping the state underneath
