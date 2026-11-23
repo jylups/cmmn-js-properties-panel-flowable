@@ -6,6 +6,8 @@ All notable changes to [cmmn-js-properties-panel-flowable](https://github.com/jy
 
 ___Note:__ Yet to be released changes appear here._
 
+## 3.6.0
+
 * `FEAT`: Flowable Design's T / ⚡ switch for conditions ([Conscia-LLC/conscia-modeler#108](https://github.com/Conscia-LLC/conscia-modeler/issues/108)): the reactivation conditions and the Required, Manual activation and Repetition rules show either a check (T) or an expression field (⚡), not both; a condition with an expression opens under ⚡. Switching a reactivation condition clears what the other side had; switching a rule to ⚡ keeps the rule until a condition is typed, and back to T removes the condition and keeps the rule (True). The read view is unchanged
 * `FEAT`: an entry can update its own view on every update (`updateView(element, node)`); a control named with `aria-labelledby` takes that name in the read view and search; an entry action refreshes the other fields of its group
 
