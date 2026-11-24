@@ -6,6 +6,8 @@ All notable changes to [cmmn-js-properties-panel-flowable](https://github.com/jy
 
 ___Note:__ Yet to be released changes appear here._
 
+* `FEAT`: the model hierarchy has two views ([Conscia-LLC/conscia-modeler#109](https://github.com/Conscia-LLC/conscia-modeler/issues/109)). **Models**, shown first as in Flowable Design, lists the models the case refers to under the case: the processes, cases and decisions its tasks start, the forms of its tasks and of its start, and its event registry events and channels, each with an icon for its kind. A model used by several elements is listed once; clicking it selects them one after the other. **Outline** is the tree of the plan items as before. A host can say more about each model through an optional `referencedModels` service (`lookup(models)` returns names, where each was found and whether it opens, and a notice with an action; `open(model)`; `runNoticeAction()`), and fires `referencedModels.changed` to have them looked up again. `propertiesPanel.getReferencedModels()`, `getHierarchyView()` and `setHierarchyView('models' | 'outline')`
+
 ## 3.11.0
 
 * `FEAT`: the task listeners and lifecycle listeners show in the Advanced tab, after Execution, as in Flowable Design ([Conscia-LLC/conscia-modeler#107](https://github.com/Conscia-LLC/conscia-modeler/issues/107)); the Listeners tab is gone
