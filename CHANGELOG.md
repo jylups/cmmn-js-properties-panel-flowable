@@ -6,6 +6,8 @@ All notable changes to [cmmn-js-properties-panel-flowable](https://github.com/jy
 
 ___Note:__ Yet to be released changes appear here._
 
+* `FEAT`: the task listeners and lifecycle listeners show in the Advanced tab, after Execution, as in Flowable Design ([Conscia-LLC/conscia-modeler#107](https://github.com/Conscia-LLC/conscia-modeler/issues/107)); the Listeners tab is gone
+
 ## 3.10.0
 
 * `FEAT`: a reusable radio group entry (`entryFactory.radioGroup`, with `choices: [ { value, name } ]`), as Flowable Design shows a choice between a few options ([Conscia-LLC/conscia-modeler#107](https://github.com/Conscia-LLC/conscia-modeler/issues/107)); every task's Asynchronous and Leave asynchronously use it

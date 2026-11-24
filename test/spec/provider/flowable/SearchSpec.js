@@ -249,7 +249,7 @@ describe('flowable - property search', function() {
 
       // then
       expect(propertiesPanel.getEditedGroup()).to.be.null;
-      expect(activeTab()).to.equal('listener');
+      expect(activeTab()).to.equal('advanced');
       expect(domClasses(document.activeElement.parentNode).has('cpp-hidden')).to.be.false;
     }));
 
