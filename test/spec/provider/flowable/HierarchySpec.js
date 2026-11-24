@@ -38,12 +38,15 @@ describe('flowable - model hierarchy', function() {
   beforeEach(inject(function(propertiesPanel, elementRegistry, selection) {
     propertiesPanel.attachTo(container);
 
+    // the outline of the plan items (the models are in ReferencedModelsSpec)
+    propertiesPanel.setHierarchyView('outline');
+
     selection.select(elementRegistry.get('PI_Human'));
   }));
 
 
   function items() {
-    return Array.prototype.map.call(domQueryAll('.cpp-hierarchy-item', container), function(item) {
+    return Array.prototype.map.call(domQueryAll('[data-hierarchy] .cpp-hierarchy-item', container), function(item) {
       return domQuery('.cpp-hierarchy-label', item).textContent + ' (' +
         domQuery('.cpp-hierarchy-type', item).textContent + ')';
     });
@@ -91,7 +94,7 @@ describe('flowable - model hierarchy', function() {
     propertiesPanel.openHierarchy();
 
     // then
-    expect(domQueryAll('.cpp-hierarchy-item.cpp-selected', container)).to.have.length(1);
+    expect(domQueryAll('[data-hierarchy] .cpp-hierarchy-item.cpp-selected', container)).to.have.length(1);
     expect(item('PI_Human').classList.contains('cpp-selected')).to.be.true;
   }));
 

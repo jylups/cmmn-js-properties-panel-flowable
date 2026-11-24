@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cmmn:definitions xmlns:dc="http://www.omg.org/spec/CMMN/20151109/DC" xmlns:cmmndi="http://www.omg.org/spec/CMMN/20151109/CMMNDI" xmlns:cmmn="http://www.omg.org/spec/CMMN/20151109/MODEL" xmlns:flowable="http://flowable.org/cmmn" id="Test" targetNamespace="http://bpmn.io/schema/cmmn">
+  <cmmn:case id="Case_1" name="Orders">
+    <cmmn:extensionElements>
+      <flowable:eventType>orderReceived</flowable:eventType>
+    </cmmn:extensionElements>
+    <cmmn:casePlanModel id="CasePlanModel_1" name="Orders" flowable:formKey="startOrder">
+      <cmmn:planItem id="PI_Lead" definitionRef="ProcessTask_Lead" />
+      <cmmn:planItem id="PI_Lead2" definitionRef="ProcessTask_Lead2" />
+      <cmmn:planItem id="PI_Invoice" definitionRef="ProcessTask_Invoice" />
+      <cmmn:planItem id="PI_SubCase" definitionRef="CaseTask_Sub" />
+      <cmmn:planItem id="PI_LocalCase" definitionRef="CaseTask_Local" />
+      <cmmn:planItem id="PI_Decision" definitionRef="DecisionTask_1" />
+      <cmmn:planItem id="PI_Review" definitionRef="HumanTask_Review" />
+      <cmmn:planItem id="PI_Send" definitionRef="Task_Send" />
+      <cmmn:planItem id="PI_Plain" definitionRef="Task_Plain" />
+      <cmmn:processTask id="ProcessTask_Lead" name="Lead">
+        <cmmn:processRefExpression><![CDATA[leadProcess]]></cmmn:processRefExpression>
+      </cmmn:processTask>
+      <cmmn:processTask id="ProcessTask_Lead2" name="Lead again">
+        <cmmn:processRefExpression><![CDATA[leadProcess]]></cmmn:processRefExpression>
+      </cmmn:processTask>
+      <cmmn:processTask id="ProcessTask_Invoice" name="Invoice" processRef="Process_Invoice" />
+      <cmmn:caseTask id="CaseTask_Sub" name="Sub case">
+        <cmmn:caseRefExpression><![CDATA[subCase]]></cmmn:caseRefExpression>
+      </cmmn:caseTask>
+      <cmmn:caseTask id="CaseTask_Local" name="Local case" caseRef="Case_2" />
+      <cmmn:decisionTask id="DecisionTask_1" name="Decide">
+        <cmmn:decisionRefExpression><![CDATA[${decisionKey}]]></cmmn:decisionRefExpression>
+      </cmmn:decisionTask>
+      <cmmn:humanTask id="HumanTask_Review" name="Review" flowable:formKey="reviewForm" />
+      <cmmn:task id="Task_Send" name="Send" flowable:type="send-event">
+        <cmmn:extensionElements>
+          <flowable:eventType>orderShipped</flowable:eventType>
+          <flowable:channelKey>orderChannel</flowable:channelKey>
+        </cmmn:extensionElements>
+      </cmmn:task>
+      <cmmn:task id="Task_Plain" name="Plain" />
+    </cmmn:casePlanModel>
+  </cmmn:case>
+  <cmmn:case id="Case_2">
+    <cmmn:casePlanModel id="CasePlanModel_2" />
+  </cmmn:case>
+  <cmmn:process id="Process_Invoice" externalRef="invoiceProcess" />
+  <cmmndi:CMMNDI>
+    <cmmndi:CMMNDiagram id="Diagram_1">
+      <cmmndi:CMMNShape id="DI_CasePlanModel_1" cmmnElementRef="CasePlanModel_1">
+        <dc:Bounds x="20" y="20" width="760" height="300" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_PI_Lead" cmmnElementRef="PI_Lead">
+        <dc:Bounds x="60" y="60" width="100" height="80" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_PI_Lead2" cmmnElementRef="PI_Lead2">
+        <dc:Bounds x="180" y="60" width="100" height="80" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_PI_Invoice" cmmnElementRef="PI_Invoice">
+        <dc:Bounds x="300" y="60" width="100" height="80" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_PI_SubCase" cmmnElementRef="PI_SubCase">
+        <dc:Bounds x="420" y="60" width="100" height="80" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_PI_LocalCase" cmmnElementRef="PI_LocalCase">
+        <dc:Bounds x="540" y="60" width="100" height="80" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_PI_Decision" cmmnElementRef="PI_Decision">
+        <dc:Bounds x="60" y="180" width="100" height="80" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_PI_Review" cmmnElementRef="PI_Review">
+        <dc:Bounds x="180" y="180" width="100" height="80" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_PI_Send" cmmnElementRef="PI_Send">
+        <dc:Bounds x="300" y="180" width="100" height="80" />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="DI_PI_Plain" cmmnElementRef="PI_Plain">
+        <dc:Bounds x="420" y="180" width="100" height="80" />
+      </cmmndi:CMMNShape>
+    </cmmndi:CMMNDiagram>
+  </cmmndi:CMMNDI>
+</cmmn:definitions>

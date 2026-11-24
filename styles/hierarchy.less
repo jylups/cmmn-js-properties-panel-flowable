@@ -1,4 +1,5 @@
-// the model hierarchy: the case plan model, its stages and plan items
+// the model hierarchy: the models the case refers to (Models), and the case
+// plan model, its stages and plan items (Outline)
 
 .cpp-properties-hierarchy {
   padding: 4px 10px 15px;
@@ -18,6 +19,137 @@
   // a collapsed branch hides its children
   [aria-expanded=false] > ul {
     display: none;
+  }
+}
+
+// the Models and Outline views: one shows at a time
+.cpp-properties-hierarchy[data-hierarchy-shown=models] {
+  .cpp-hierarchy-tools,
+  [data-hierarchy] {
+    display: none;
+  }
+}
+
+.cpp-properties-hierarchy[data-hierarchy-shown=outline] [data-hierarchy-models] {
+  display: none;
+}
+
+.cpp-properties-panel .cpp-hierarchy-views {
+  display: flex;
+  margin: 2px 0 8px;
+  padding: 2px;
+  border-radius: 6px;
+  background-color: @cpp-color-rail;
+
+  button {
+    position: static;
+    flex: 1 1 0;
+    min-width: 0;
+    height: 28px;
+    padding: 0 8px;
+    border: none;
+    border-radius: 4px;
+    background: none;
+    font-size: 12px;
+    color: @cpp-color-gray;
+    cursor: pointer;
+
+    &::before {
+      content: none;
+    }
+
+    &:hover {
+      color: @cpp-color-gray-dark;
+    }
+
+    &:focus {
+      box-shadow: none;
+    }
+
+    &:focus-visible {
+      .focus();
+    }
+
+    &[aria-pressed=true] {
+      background-color: @cpp-color-rail-hover;
+      font-weight: 600;
+      color: @cpp-color-gray-dark;
+    }
+  }
+}
+
+// a note of the host above the models, such as for access to a folder
+.cpp-properties-panel .cpp-hierarchy-notice {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 10px;
+  margin: 0 0 8px;
+  padding: 8px 10px;
+  border-radius: 4px;
+  background-color: @cpp-color-rail;
+  font-size: 12px;
+  color: @cpp-color-gray-dark;
+
+  &[hidden] {
+    display: none;
+  }
+
+  button {
+    position: static;
+    padding: 4px 10px;
+    border: 1px solid @cpp-color-divider;
+    border-radius: 4px;
+    background: none;
+    font-size: 12px;
+    color: @cpp-color-primary;
+    cursor: pointer;
+
+    &::before {
+      content: none;
+    }
+
+    &[hidden] {
+      display: none;
+    }
+
+    &:focus-visible {
+      .focus();
+    }
+  }
+}
+
+// the open case, as Flowable Design shows the open model
+.cpp-properties-panel .cpp-properties-hierarchy .cpp-hierarchy-item.cpp-hierarchy-current .cpp-hierarchy-label {
+  font-weight: 600;
+}
+
+// open a referenced model
+.cpp-properties-panel .cpp-hierarchy-open {
+  position: static;
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: none;
+  border-radius: 4px;
+  background: none;
+  color: @cpp-color-gray;
+  cursor: pointer;
+
+  &::before {
+    content: none;
+  }
+
+  &:hover {
+    background-color: @cpp-color-rail;
+    color: @cpp-color-gray-dark;
+  }
+
+  &:focus-visible {
+    .focus();
   }
 }
 
@@ -202,5 +334,14 @@
   .cpp-hierarchy-toggle-space {
     width: 36px;
     height: 44px;
+  }
+
+  .cpp-properties-panel .cpp-hierarchy-open {
+    width: 44px;
+    height: 44px;
+  }
+
+  .cpp-properties-panel .cpp-hierarchy-views button {
+    height: 36px;
   }
 }
