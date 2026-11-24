@@ -204,7 +204,28 @@ describe('flowable - groups', function() {
       ], shape('cmmn:HumanTask'), translate);
 
       // then
-      expect(group(tab(tabs, 'listener'), 'listenerDetails')).to.equal(listenerDetails);
+      expect(group(tab(tabs, 'advanced'), 'listenerDetails')).to.equal(listenerDetails);
+    });
+
+
+    it('should put the listeners in the Advanced tab, after Execution, as Flowable Design does', function() {
+
+      // given
+      var taskListeners = { id: 'taskListeners', entries: entries('taskListeners-list') },
+          lifecycleListeners = { id: 'lifecycleListeners', entries: entries('lifecycleListeners-list') };
+
+      // when
+      var tabs = regroup([
+        { id: 'general', groups: [ { id: 'asynchronousContinuations', entries: entries('taskAsync') } ] },
+        { id: 'listener', groups: [ taskListeners, lifecycleListeners ] }
+      ], shape('cmmn:HumanTask'), translate);
+
+      // then
+      expect(tab(tabs, 'listener')).not.to.exist;
+      expect(tab(tabs, 'advanced').groups.map(function(g) {
+        return g.id;
+      })).to.eql([ 'execution', 'taskListeners', 'lifecycleListeners' ]);
+      expect(taskListeners.editInline).to.be.true;
     });
 
 

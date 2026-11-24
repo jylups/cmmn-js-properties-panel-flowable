@@ -68,7 +68,7 @@ describe('flowable - lifecycle listeners', function() {
   }
 
   function getGroup(id) {
-    return domQuery('[data-tab="listener"] [data-group="' + id + '"]', container);
+    return domQuery('[data-tab="advanced"] [data-group="' + id + '"]', container);
   }
 
   function isShown(node) {

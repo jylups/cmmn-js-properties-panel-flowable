@@ -88,7 +88,7 @@ describe('flowable - group rail', function() {
 
     // then
     expect(shownGroups()).to.eql([
-      'general', 'assignment', 'control', 'repetition', 'advancedForm', 'advanced', 'listener', 'reactivation',
+      'general', 'assignment', 'control', 'repetition', 'advancedForm', 'advanced', 'reactivation',
       'definition'
     ]);
   });
@@ -101,7 +101,7 @@ describe('flowable - group rail', function() {
 
     // then
     expect(shownGroups()).to.eql([
-      'general', 'variables', 'control', 'repetition', 'advanced', 'listener', 'reactivation', 'definition', 'extensions'
+      'general', 'variables', 'control', 'repetition', 'advanced', 'reactivation', 'definition', 'extensions'
     ]);
   });
 
@@ -113,7 +113,7 @@ describe('flowable - group rail', function() {
 
     // then
     expect(shownGroups()).to.eql([
-      'general', 'assignment', 'eventRegistry', 'advancedForm', 'details', 'advanced', 'listener'
+      'general', 'assignment', 'eventRegistry', 'advancedForm', 'details', 'advanced'
     ]);
   });
 
