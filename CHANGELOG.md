@@ -6,6 +6,8 @@ All notable changes to [cmmn-js-properties-panel-flowable](https://github.com/jy
 
 ___Note:__ Yet to be released changes appear here._
 
+## 3.12.1
+
 * `FIX`: the button of the model hierarchy's notice (such as Choose Folder…) shows its whole text, instead of the width of the panel's icon buttons ([Conscia-LLC/conscia-modeler#109](https://github.com/Conscia-LLC/conscia-modeler/issues/109))
 
 ## 3.12.0
