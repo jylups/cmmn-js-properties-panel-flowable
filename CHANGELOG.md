@@ -6,6 +6,8 @@ All notable changes to [cmmn-js-properties-panel-flowable](https://github.com/jy
 
 ___Note:__ Yet to be released changes appear here._
 
+## 3.13.0
+
 * `FEAT`: values to pick, and Open, in the fields that refer to models, users or groups ([jylups/cmmn-js-env#90](https://github.com/jylups/cmmn-js-env/issues/90)): the process, case and decision keys of callable tasks, the form keys of human tasks, case pages, Java tasks and the case's start form, the event and channel keys of the event registry, and the assignee, owner, candidate users and groups, and candidate starter users and groups. A text field declares what it holds with `pick` (`'case'`, `'process'`, `'decision'`, `'form'`, `'event'`, `'channel'`, `'user'` or `'group'`) and `pickMultiple` for a comma separated list. A host offers the values through an optional `fieldOptions` service: `options(kind, { element })` returns (a promise of) `[ { value, label, data } ]`, or nothing while it doesn't know yet, and the host fires `fieldOptions.changed` to have them asked for again. The field stores only `value`; `data` is the host's own, such as where the model's file is. A field that holds a model's key shows **Open** when the host's `referencedModels.lookup` says it can open that model, and `referencedModels.open` gets `{ kind, key, expression: false, data }`. In a list, the values are offered after the ones typed already. Without a host, the fields stay plain text fields and still take expressions
 
 ## 3.12.1
