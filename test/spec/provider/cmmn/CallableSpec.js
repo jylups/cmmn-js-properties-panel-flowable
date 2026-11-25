@@ -16,6 +16,11 @@ var propertiesPanelModule = require('lib'),
     camundaModdlePackage = require('flowable-cmmn-moddle/resources/flowable');
 
 
+// the Type of a task that refers to an element of the file
+function refType(container) {
+  return domQuery('[data-entry="callableRefType"] select', container);
+}
+
 function getInput(container, selector) {
   return domQuery('input[name="' + selector + '"]', container);
 }
@@ -159,14 +164,13 @@ describe('callable-properties', function() {
       }));
 
 
-      it('should fetch the callableRefType of a process task definition', inject(function(propertiesPanel) {
-
-        var field = getSelect(propertiesPanel._container, 'type');
+      it('should show a Process reference instead of a type (jylups/cmmn-js-env#98)', inject(function(propertiesPanel) {
 
         // when selecting element
 
         // then
-        expect(field.value).to.equal('expression');
+        expect(refType(propertiesPanel._container)).not.to.exist;
+        expect(domQuery('[data-model-reference="process"]', propertiesPanel._container)).to.exist;
 
       }));
 
@@ -196,14 +200,13 @@ describe('callable-properties', function() {
       }));
 
 
-      it('should fetch the callableRefType of a case task definition without properties', inject(function(propertiesPanel) {
-
-        var field = getSelect(propertiesPanel._container, 'type');
+      it('should offer a Case reference (jylups/cmmn-js-env#98)', inject(function(propertiesPanel) {
 
         // when selecting element
 
         // then
-        expect(field.value).to.equal('ref');
+        expect(refType(propertiesPanel._container)).not.to.exist;
+        expect(getInput(propertiesPanel._container, 'caseRefExpression').value).to.equal('');
 
       }));
 
@@ -277,15 +280,13 @@ describe('callable-properties', function() {
       }));
 
 
-      it('should be shown if callableRefType is set and processRefExpression is empty', inject(function(propertiesPanel) {
+      it('should be shown if processRefExpression is empty', inject(function(propertiesPanel) {
 
-        var callableRefType = getSelect(propertiesPanel._container, 'type');
         var ref = getInput(propertiesPanel._container, 'processRefExpression');
 
         // when selecting element
 
         // then
-        expect(callableRefType.value).to.equal('expression');
         expect(domClasses(ref).has('invalid')).to.be.true;
 
       }));
@@ -536,86 +537,6 @@ describe('callable-properties', function() {
 
       var bo, field;
 
-      describe(' expression -> reference', function() {
-
-        beforeEach(inject(function(elementRegistry, selection, propertiesPanel) {
-
-          // given
-          var item = elementRegistry.get('PlanItem_ProcessTask_Valid');
-          selection.select(item);
-
-          bo = item.businessObject.definitionRef;
-
-          field = getSelect(propertiesPanel._container, 'type');
-
-          // when
-
-          // select 'Reference'
-          field[0].selected = 'selected';
-          TestHelper.triggerEvent(field, 'change');
-
-        }));
-
-
-        describe('in the DOM', function() {
-
-          it('should execute', function() {
-            expect(field.value).to.equal('ref');
-          });
-
-          it('should undo', inject(function(commandStack) {
-            // when
-            commandStack.undo();
-
-            // then
-            expect(field.value).to.equal('expression');
-          }));
-
-
-          it('should redo', inject(function(commandStack) {
-            // when
-            commandStack.undo();
-            commandStack.redo();
-
-            // then
-            expect(field.value).to.equal('ref');
-          }));
-
-        });
-
-
-        describe('on the business object', function() {
-
-          it('should execute', function() {
-            expect(bo.get('processRefExpression')).to.be.undefined;
-            expect(bo.get('processRef')).to.exist;
-          });
-
-          it('should undo', inject(function(commandStack) {
-            // when
-            commandStack.undo();
-
-            // then
-            expect(bo.get('processRefExpression')).to.exist;
-            expect(bo.get('processRef')).to.be.undefined;
-          }));
-
-
-          it('should redo', inject(function(commandStack) {
-            // when
-            commandStack.undo();
-            commandStack.redo();
-
-            // then
-            expect(bo.get('processRefExpression')).to.be.undefined;
-            expect(bo.get('processRef')).to.exist;
-          }));
-
-        });
-
-      });
-
-
       describe(' reference -> expression', function() {
 
         beforeEach(inject(function(elementRegistry, selection, propertiesPanel) {
@@ -639,26 +560,28 @@ describe('callable-properties', function() {
 
         describe('in the DOM', function() {
 
-          it('should execute', function() {
-            expect(field.value).to.equal('expression');
-          });
+          // an expression is a Case reference (jylups/cmmn-js-env#98)
+          it('should execute', inject(function(propertiesPanel) {
+            expect(refType(propertiesPanel._container)).not.to.exist;
+            expect(getInput(propertiesPanel._container, 'caseRefExpression')).to.exist;
+          }));
 
-          it('should undo', inject(function(commandStack) {
+          it('should undo', inject(function(commandStack, propertiesPanel) {
             // when
             commandStack.undo();
 
             // then
-            expect(field.value).to.equal('ref');
+            expect(refType(propertiesPanel._container).value).to.equal('ref');
           }));
 
 
-          it('should redo', inject(function(commandStack) {
+          it('should redo', inject(function(commandStack, propertiesPanel) {
             // when
             commandStack.undo();
             commandStack.redo();
 
             // then
-            expect(field.value).to.equal('expression');
+            expect(refType(propertiesPanel._container)).not.to.exist;
           }));
 
         });

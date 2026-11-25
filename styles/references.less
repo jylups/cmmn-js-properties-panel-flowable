@@ -1,0 +1,329 @@
+// a reference to a model, as Flowable Design shows a process task's Process
+// reference (jylups/cmmn-js-env#98): a required field whose value links to
+// the model, and a pop-up to link an existing model, create one, or enter an
+// expression
+
+.cpp-properties-panel {
+
+  .cpp-required {
+    color: @cpp-color-error;
+    font-weight: normal;
+  }
+
+  .cpp-summary-required dt {
+    color: @cpp-color-error;
+  }
+
+  // the read view: the model's icon and name (key), which opens it
+  .cpp-summary-row button.cpp-summary-link,
+  .cpp-summary-row .cpp-summary-model {
+    position: static;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    padding: 0;
+    border: none;
+    background: none;
+    font: inherit;
+    text-align: left;
+
+    &::before {
+      content: none;
+    }
+  }
+
+  .cpp-summary-row button.cpp-summary-link {
+    color: @cpp-color-primary;
+    text-decoration: underline;
+    cursor: pointer;
+
+    &:focus-visible {
+      .focus();
+    }
+  }
+
+  .cpp-summary-icon {
+    display: inline-flex;
+    color: @cpp-color-primary;
+  }
+
+  // the pop-up
+  .cpp-model-reference-entry > label {
+    display: none;
+  }
+
+  .cpp-model-reference {
+
+    button {
+      position: static;
+      width: auto;
+      height: auto;
+      overflow: visible;
+      font: inherit;
+
+      &::before {
+        content: none;
+      }
+
+      > span {
+        display: inline;
+      }
+    }
+
+    .cpp-model-reference-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .cpp-model-reference-prompt {
+      margin: 0;
+      color: @cpp-color-gray;
+      font-size: 14px;
+      line-height: 1.5;
+
+      b {
+        color: @cpp-color-gray-dark;
+      }
+    }
+
+    &.cpp-can-create [data-ref-prompt="link"],
+    &:not(.cpp-can-create) [data-ref-prompt="create"] {
+      display: none;
+    }
+
+    button.cpp-link-button {
+      display: inline;
+      padding: 0;
+      border: none;
+      background: none;
+      color: @cpp-color-primary;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    // the pane that shows is not a link any more
+    &[data-ref-mode="create"] button.cpp-link-button[data-ref-show="create"],
+    &[data-ref-mode="link"] button.cpp-link-button[data-ref-show="link"] {
+      color: @cpp-color-gray-dark;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: default;
+    }
+
+    // T / ⚡: a model or an expression
+    .cpp-model-reference-switch {
+      display: inline-flex;
+      flex: 0 0 auto;
+      border: 1px solid @cpp-color-gray-light;
+      border-radius: 4px;
+      overflow: hidden;
+
+      button {
+        display: grid;
+        place-items: center;
+        width: 30px;
+        height: 26px;
+        padding: 0;
+        border: none;
+        background: @cpp-color-gray-lighter;
+        color: @cpp-color-gray;
+        cursor: pointer;
+
+        + button {
+          border-left: 1px solid @cpp-color-gray-light;
+        }
+
+        &.cpp-active {
+          background: #fff;
+          color: @cpp-color-primary;
+        }
+      }
+    }
+
+    .cpp-model-reference-required {
+      margin: 6px 0 0;
+      color: @cpp-color-error;
+      font-size: 14px;
+    }
+
+    .cpp-model-reference-pane {
+      margin-top: 16px;
+    }
+
+    .cpp-model-reference-current {
+      margin: 0 0 8px;
+      color: @cpp-color-value;
+    }
+
+    input.cpp-model-reference-filter {
+      width: 100%;
+      max-width: 320px;
+      margin-bottom: 12px;
+      padding: 6px 2px;
+      border: none;
+      border-bottom: 2px solid @cpp-color-primary;
+      border-radius: 0;
+      background: none;
+    }
+
+    .cpp-model-reference-table {
+      width: 100%;
+      border-collapse: collapse;
+      border: 1px solid @cpp-color-divider;
+      font-size: 13px;
+
+      th {
+        padding: 8px 10px;
+        background: @cpp-color-gray-lighter;
+        color: @cpp-color-gray;
+        font-weight: 600;
+        font-size: 11px;
+        letter-spacing: 0.06em;
+        text-align: left;
+        text-transform: uppercase;
+      }
+
+      td {
+        padding: 8px 10px;
+        border-top: 1px solid @cpp-color-divider;
+        vertical-align: middle;
+      }
+
+      tbody tr {
+        cursor: pointer;
+
+        &:hover {
+          background: @cpp-color-rail;
+        }
+
+        &:focus-visible {
+          .focus();
+        }
+
+        &.cpp-selected {
+          background: mix(@cpp-color-primary, #fff, 12%);
+        }
+      }
+    }
+
+    .cpp-model-reference-model {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .cpp-model-reference-icon {
+      display: inline-flex;
+      flex: 0 0 auto;
+      color: @cpp-color-gray;
+    }
+
+    .cpp-model-reference-names {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    .cpp-model-reference-name {
+      color: @cpp-color-gray-dark;
+      font-size: 14px;
+    }
+
+    .cpp-model-reference-key,
+    .cpp-model-reference-modified,
+    .cpp-model-reference-where {
+      color: @cpp-color-gray;
+    }
+
+    .cpp-model-reference-empty {
+      color: @cpp-color-gray;
+    }
+
+    .cpp-model-reference-fields {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px 20px;
+
+      label {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        color: @cpp-color-gray-dark;
+        font-weight: 600;
+      }
+
+      input,
+      textarea {
+        width: 100%;
+        font-weight: normal;
+      }
+
+      .cpp-model-reference-description {
+        grid-column: ~"1 / -1";
+      }
+    }
+
+    button.cpp-model-reference-create {
+      margin-top: 14px;
+      padding: 7px 18px;
+      border: none;
+      border-radius: 4px;
+      background: @cpp-color-primary;
+      color: #fff;
+      cursor: pointer;
+
+      &:disabled {
+        opacity: 0.5;
+        cursor: default;
+      }
+    }
+
+    .cpp-model-reference-error {
+      margin: 8px 0 0;
+      color: @cpp-color-error;
+    }
+
+    .cpp-hidden,
+    .cpp-ref-pane-off {
+      display: none;
+    }
+  }
+
+  // the host's note in the info box, such as where the models come from
+  .cpp-dialog-help-note {
+    margin: 10px 0 0;
+  }
+}
+
+@media (pointer: coarse) {
+  .cpp-properties-panel .cpp-model-reference {
+
+    .cpp-model-reference-switch button {
+      width: 44px;
+      height: 36px;
+    }
+
+    .cpp-model-reference-table td {
+      padding: 12px 10px;
+    }
+  }
+}
+
+@media (max-width: 640px) {
+  .cpp-properties-panel .cpp-model-reference {
+
+    .cpp-model-reference-fields {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .cpp-model-reference-where,
+    .cpp-model-reference-table th:last-child {
+      display: none;
+    }
+  }
+}
