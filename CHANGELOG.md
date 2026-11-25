@@ -6,6 +6,11 @@ All notable changes to [cmmn-js-properties-panel-flowable](https://github.com/jy
 
 ___Note:__ Yet to be released changes appear here._
 
+## 3.14.1
+
+* `FIX`: a reference's list of models keeps to its column, beside the info box, and long file names wrap ([jylups/cmmn-js-env#98](https://github.com/jylups/cmmn-js-env/issues/98))
+* `FIX`: the required mark of the create form's Name and Key stays on the label's line
+
 ## 3.14.0
 
 * `FEAT`: process, case and decision tasks have a **Process reference**, **Case reference** or **Decision reference** as in Flowable Design ([jylups/cmmn-js-env#98](https://github.com/jylups/cmmn-js-env/issues/98)), in place of the Type and Expression fields:

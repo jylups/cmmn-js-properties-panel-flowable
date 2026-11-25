@@ -173,9 +173,20 @@
 
     .cpp-model-reference-table {
       width: 100%;
+      // the columns share the pop-up's width, and long file names wrap
+      table-layout: fixed;
+      overflow-wrap: anywhere;
       border-collapse: collapse;
       border: 1px solid @cpp-color-divider;
       font-size: 13px;
+
+      th:nth-child(1) {
+        width: 42%;
+      }
+
+      th:nth-child(2) {
+        width: 24%;
+      }
 
       th {
         padding: 8px 10px;
