@@ -102,13 +102,13 @@ describe('flowable - values to pick and open (#90)', function() {
   describe('without a host', function() {
 
     beforeEach(bootstrap(false));
-    beforeEach(select('PI_Lead'));
+    beforeEach(select('PI_Invoice'));
 
 
     it('should keep a plain text field', function() {
 
       // given
-      var field = input('processRefExpression');
+      var field = input('externalRef');
 
       // then
       expect(field.getAttribute('data-pick')).to.equal('process');
@@ -134,13 +134,13 @@ describe('flowable - values to pick and open (#90)', function() {
       ];
 
       // when
-      select('PI_Lead')();
+      select('PI_Invoice')();
 
       // then
-      var field = input('processRefExpression');
+      var field = input('externalRef');
 
       expect(listOf(field)).to.eql([ 'leadProcess · Lead Process', 'invoiceProcess' ]);
-      expect(fieldOptions.asked).to.deep.include({ kind: 'process', element: 'PI_Lead' });
+      expect(fieldOptions.asked).to.deep.include({ kind: 'process', element: 'PI_Invoice' });
     });
 
 
@@ -203,25 +203,25 @@ describe('flowable - values to pick and open (#90)', function() {
     it('should open the model a field links to, with the host\'s data', function() {
 
       // given
-      fieldOptions.answers.process = [ { value: 'leadProcess', data: { file: 'processes/lead.bpmn' } } ];
-      referencedModels.openable = [ 'leadProcess' ];
+      fieldOptions.answers.process = [ { value: 'invoiceProcess', data: { file: 'processes/invoice.bpmn' } } ];
+      referencedModels.openable = [ 'invoiceProcess' ];
 
       // when
-      select('PI_Lead')();
+      select('PI_Invoice')();
 
       // then
-      var field = input('processRefExpression'),
+      var field = input('externalRef'),
           button = openButton(field);
 
       expect(isShown(button)).to.be.true;
-      expect(button.getAttribute('aria-label')).to.equal('Open leadProcess');
+      expect(button.getAttribute('aria-label')).to.equal('Open invoiceProcess');
 
       // when
       TestHelper.triggerEvent(button, 'click');
 
       // then
       expect(referencedModels.opened).to.eql([
-        { kind: 'process', key: 'leadProcess', expression: false, data: { file: 'processes/lead.bpmn' } }
+        { kind: 'process', key: 'invoiceProcess', expression: false, data: { file: 'processes/invoice.bpmn' } }
       ]);
     });
 
@@ -229,24 +229,27 @@ describe('flowable - values to pick and open (#90)', function() {
     it('should not offer to open a model the host can\'t open', function() {
 
       // when
-      select('PI_Lead')();
+      select('PI_Invoice')();
 
       // then
-      expect(isShown(openButton(input('processRefExpression')))).to.be.false;
+      expect(isShown(openButton(input('externalRef')))).to.be.false;
     });
 
 
-    it('should not ask about an expression', function() {
+    it('should not offer to open an expression', function() {
+
+      // given
+      referencedModels.openable = [ 'reviewForm', '${formKey}' ];
+
+      select('PI_Review')();
+
+      expect(isShown(openButton(input('formKey')))).to.be.true;
 
       // when
-      select('PI_Decision')();
+      TestHelper.triggerValue(input('formKey'), '${formKey}', 'change');
 
       // then
-      var field = input('decisionRefExpression');
-
-      expect(field.value).to.equal('${decisionKey}');
-      expect(isShown(openButton(field))).to.be.false;
-      expect(referencedModels.looked).to.eql([]);
+      expect(isShown(openButton(input('formKey')))).to.be.false;
     });
 
 
@@ -255,7 +258,7 @@ describe('flowable - values to pick and open (#90)', function() {
       // given
       fieldOptions.answers.process = [ { value: 'leadProcess' } ];
 
-      select('PI_Lead')();
+      select('PI_Invoice')();
 
       fieldOptions.answers.process = [ { value: 'leadProcess' }, { value: 'newProcess' } ];
 
@@ -263,7 +266,7 @@ describe('flowable - values to pick and open (#90)', function() {
       eventBus.fire('fieldOptions.changed');
 
       // then
-      expect(listOf(input('processRefExpression'))).to.eql([ 'leadProcess', 'newProcess' ]);
+      expect(listOf(input('externalRef'))).to.eql([ 'leadProcess', 'newProcess' ]);
     }));
 
   });

@@ -6,6 +6,13 @@ All notable changes to [cmmn-js-properties-panel-flowable](https://github.com/jy
 
 ___Note:__ Yet to be released changes appear here._
 
+* `FEAT`: process, case and decision tasks have a **Process reference**, **Case reference** or **Decision reference** as in Flowable Design ([jylups/cmmn-js-env#98](https://github.com/jylups/cmmn-js-env/issues/98)), in place of the Type and Expression fields:
+  * **Read view:** the field is required, with its label red and `<not set>` when empty. The value shows the model's icon and **Name (key)**, as a link that opens the model through the host (`referencedModels.open`).
+  * **Pop-up:** it offers to link an existing model from a list (filter by name; model, modified, where), to create a new one when the host can, or to enter an expression with the T / ⚡ switch. The info box gives Flowable Design's help for the field, and a note from the host.
+  * **Host hook:** options can carry `name`, `modified` and `where`. `fieldOptions.create(kind, { name, key, description })` creates a model and returns (a promise of) its key. `fieldOptions.note(kind, { element })` gives the info box's note.
+  * **What is stored:** the task keeps the key as its reference expression, as Flowable does. A task that refers to an element of the file (`processRef`, `caseRef`, `decisionRef`) keeps the previous fields.
+  * `entryFactory.modelReference`; a `summaryValue` can mark a field `required`, give a model's `icon`, and `open` it.
+
 ## 3.13.1
 
 * `FIX`: a field's **Open** button shows its icon and text below the field, instead of an empty box the size of the panel's icon buttons ([jylups/cmmn-js-env#90](https://github.com/jylups/cmmn-js-env/issues/90))
