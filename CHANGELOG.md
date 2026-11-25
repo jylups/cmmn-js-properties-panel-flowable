@@ -6,6 +6,8 @@ All notable changes to [cmmn-js-properties-panel-flowable](https://github.com/jy
 
 ___Note:__ Yet to be released changes appear here._
 
+## 3.14.0
+
 * `FEAT`: process, case and decision tasks have a **Process reference**, **Case reference** or **Decision reference** as in Flowable Design ([jylups/cmmn-js-env#98](https://github.com/jylups/cmmn-js-env/issues/98)), in place of the Type and Expression fields:
   * **Read view:** the field is required, with its label red and `<not set>` when empty. The value shows the model's icon and **Name (key)**, as a link that opens the model through the host (`referencedModels.open`).
   * **Pop-up:** it offers to link an existing model from a list (filter by name; model, modified, where), to create a new one when the host can, or to enter an expression with the T / ⚡ switch. The info box gives Flowable Design's help for the field, and a note from the host.
