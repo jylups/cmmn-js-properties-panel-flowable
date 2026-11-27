@@ -6,6 +6,10 @@ All notable changes to [cmmn-js-properties-panel-flowable](https://github.com/jy
 
 ___Note:__ Yet to be released changes appear here._
 
+## 3.14.2
+
+* `CHORE`: works with `@jylups/cmmn-js` 0.26 ([jylups/cmmn-lens#46](https://github.com/jylups/cmmn-lens/issues/46)): the peer range takes `^0.26.0`, and the tests run on it
+
 ## 3.14.1
 
 * `FIX`: a reference's list of models keeps to its column, beside the info box, and long file names wrap ([jylups/cmmn-js-env#98](https://github.com/jylups/cmmn-js-env/issues/98))
